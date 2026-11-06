@@ -1,0 +1,551 @@
+python3 scripts/guard.py clang++ -std=c++20 -O2 -Wall -Wextra -Werror -Iinclude src/codec.cpp src/indexed_book.cpp src/scan_book.cpp tests/probe.cpp -o <CACHE_ROOT>/build/probe
+python3 scripts/guard.py python3 -m pytest -q -p no:cacheprovider tests/test_book.py
+FFFFFFFFFFFFFF                                                           [100%]
+=================================== FAILURES ===================================
+________________ test_every_literal_lifecycle_state[0-indexed] _________________
+
+engine = 'indexed', depth = 0
+
+    @pytest.mark.parametrize('engine',['indexed','scan'])
+    @pytest.mark.parametrize('depth',[0,1,5,20])
+    def test_every_literal_lifecycle_state(engine,depth):
+     names=json.loads((ROOT/'review/lifecycle_anchors.json').read_text())['events']
+>    rows([bytes.fromhex(VECTORS[n]['hex']) for n in names],engine,depth=depth)
+
+tests/test_book.py:27: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+values = [b'S\x00\x00\x124\x01#Eg\x89\xabO', b'R\x00\x01\x124\x01#Eg\x89\xabALPHA   QN\x00\x00\x00dNC  PNN1N\x00\x00\x00\x01N',...0\x01\x86\xa0', b'F\x00\x01\x124\x01#Eg\x89\xab\xfe\xdc\xba\x98vT2\x10S\x00\x00\x00PALPHA   \x00\x01\x87\x04ABCD', ...]
+engine = 'indexed', limits = {}, depth = 0
+
+    def rows(values,engine='indexed',limits=None,depth=5):
+     limits=limits or {};book=ReferenceBook(**limits)
+     command=[str(PROBE),'book',engine,str(limits.get('max_orders',100000)),str(limits.get('max_ids',1000000)),str(limits.get('max_instruments',4096)),str(depth)]
+     # Bound correctness streams; compare one full snapshot at a time, never persist the stream.
+     with subprocess.Popen(command,stdin=subprocess.PIPE,stdout=subprocess.PIPE,stderr=subprocess.PIPE,text=True,bufsize=1) as p:
+      for data in values:
+       code=None
+       try:book.apply(decode_itch(data))
+       except ReferenceError as error:code=error.code
+       p.stdin.write(data.hex()+'\n');p.stdin.flush()
+       actual=json.loads(p.stdout.readline())
+>      assert actual=={'error':code,'book':book.snapshot(depth)},(data.hex(),actual,code,book.snapshot(depth))
+E      AssertionError: ('53000012340123456789ab4f', {'book': {'instruments': [], 'order_count': 0, 'seen_id_count': 0}, 'error': 'unimplemented'}, None, {'instruments': [], 'order_count': 0, 'seen_id_count': 0})
+E      assert {'book': {'in...nimplemented'} == {'book': {'in...'error': None}
+E        
+E        Omitting 1 identical items, use -vv to show
+E        Differing items:
+E        {'error': 'unimplemented'} != {'error': None}
+E        Use -v to get more diff
+
+tests/test_book.py:20: AssertionError
+__________________ test_every_literal_lifecycle_state[0-scan] __________________
+
+engine = 'scan', depth = 0
+
+    @pytest.mark.parametrize('engine',['indexed','scan'])
+    @pytest.mark.parametrize('depth',[0,1,5,20])
+    def test_every_literal_lifecycle_state(engine,depth):
+     names=json.loads((ROOT/'review/lifecycle_anchors.json').read_text())['events']
+>    rows([bytes.fromhex(VECTORS[n]['hex']) for n in names],engine,depth=depth)
+
+tests/test_book.py:27: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+values = [b'S\x00\x00\x124\x01#Eg\x89\xabO', b'R\x00\x01\x124\x01#Eg\x89\xabALPHA   QN\x00\x00\x00dNC  PNN1N\x00\x00\x00\x01N',...0\x01\x86\xa0', b'F\x00\x01\x124\x01#Eg\x89\xab\xfe\xdc\xba\x98vT2\x10S\x00\x00\x00PALPHA   \x00\x01\x87\x04ABCD', ...]
+engine = 'scan', limits = {}, depth = 0
+
+    def rows(values,engine='indexed',limits=None,depth=5):
+     limits=limits or {};book=ReferenceBook(**limits)
+     command=[str(PROBE),'book',engine,str(limits.get('max_orders',100000)),str(limits.get('max_ids',1000000)),str(limits.get('max_instruments',4096)),str(depth)]
+     # Bound correctness streams; compare one full snapshot at a time, never persist the stream.
+     with subprocess.Popen(command,stdin=subprocess.PIPE,stdout=subprocess.PIPE,stderr=subprocess.PIPE,text=True,bufsize=1) as p:
+      for data in values:
+       code=None
+       try:book.apply(decode_itch(data))
+       except ReferenceError as error:code=error.code
+       p.stdin.write(data.hex()+'\n');p.stdin.flush()
+       actual=json.loads(p.stdout.readline())
+>      assert actual=={'error':code,'book':book.snapshot(depth)},(data.hex(),actual,code,book.snapshot(depth))
+E      AssertionError: ('53000012340123456789ab4f', {'book': {'instruments': [], 'order_count': 0, 'seen_id_count': 0}, 'error': 'unimplemented'}, None, {'instruments': [], 'order_count': 0, 'seen_id_count': 0})
+E      assert {'book': {'in...nimplemented'} == {'book': {'in...'error': None}
+E        
+E        Omitting 1 identical items, use -vv to show
+E        Differing items:
+E        {'error': 'unimplemented'} != {'error': None}
+E        Use -v to get more diff
+
+tests/test_book.py:20: AssertionError
+________________ test_every_literal_lifecycle_state[1-indexed] _________________
+
+engine = 'indexed', depth = 1
+
+    @pytest.mark.parametrize('engine',['indexed','scan'])
+    @pytest.mark.parametrize('depth',[0,1,5,20])
+    def test_every_literal_lifecycle_state(engine,depth):
+     names=json.loads((ROOT/'review/lifecycle_anchors.json').read_text())['events']
+>    rows([bytes.fromhex(VECTORS[n]['hex']) for n in names],engine,depth=depth)
+
+tests/test_book.py:27: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+values = [b'S\x00\x00\x124\x01#Eg\x89\xabO', b'R\x00\x01\x124\x01#Eg\x89\xabALPHA   QN\x00\x00\x00dNC  PNN1N\x00\x00\x00\x01N',...0\x01\x86\xa0', b'F\x00\x01\x124\x01#Eg\x89\xab\xfe\xdc\xba\x98vT2\x10S\x00\x00\x00PALPHA   \x00\x01\x87\x04ABCD', ...]
+engine = 'indexed', limits = {}, depth = 1
+
+    def rows(values,engine='indexed',limits=None,depth=5):
+     limits=limits or {};book=ReferenceBook(**limits)
+     command=[str(PROBE),'book',engine,str(limits.get('max_orders',100000)),str(limits.get('max_ids',1000000)),str(limits.get('max_instruments',4096)),str(depth)]
+     # Bound correctness streams; compare one full snapshot at a time, never persist the stream.
+     with subprocess.Popen(command,stdin=subprocess.PIPE,stdout=subprocess.PIPE,stderr=subprocess.PIPE,text=True,bufsize=1) as p:
+      for data in values:
+       code=None
+       try:book.apply(decode_itch(data))
+       except ReferenceError as error:code=error.code
+       p.stdin.write(data.hex()+'\n');p.stdin.flush()
+       actual=json.loads(p.stdout.readline())
+>      assert actual=={'error':code,'book':book.snapshot(depth)},(data.hex(),actual,code,book.snapshot(depth))
+E      AssertionError: ('53000012340123456789ab4f', {'book': {'instruments': [], 'order_count': 0, 'seen_id_count': 0}, 'error': 'unimplemented'}, None, {'instruments': [], 'order_count': 0, 'seen_id_count': 0})
+E      assert {'book': {'in...nimplemented'} == {'book': {'in...'error': None}
+E        
+E        Omitting 1 identical items, use -vv to show
+E        Differing items:
+E        {'error': 'unimplemented'} != {'error': None}
+E        Use -v to get more diff
+
+tests/test_book.py:20: AssertionError
+__________________ test_every_literal_lifecycle_state[1-scan] __________________
+
+engine = 'scan', depth = 1
+
+    @pytest.mark.parametrize('engine',['indexed','scan'])
+    @pytest.mark.parametrize('depth',[0,1,5,20])
+    def test_every_literal_lifecycle_state(engine,depth):
+     names=json.loads((ROOT/'review/lifecycle_anchors.json').read_text())['events']
+>    rows([bytes.fromhex(VECTORS[n]['hex']) for n in names],engine,depth=depth)
+
+tests/test_book.py:27: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+values = [b'S\x00\x00\x124\x01#Eg\x89\xabO', b'R\x00\x01\x124\x01#Eg\x89\xabALPHA   QN\x00\x00\x00dNC  PNN1N\x00\x00\x00\x01N',...0\x01\x86\xa0', b'F\x00\x01\x124\x01#Eg\x89\xab\xfe\xdc\xba\x98vT2\x10S\x00\x00\x00PALPHA   \x00\x01\x87\x04ABCD', ...]
+engine = 'scan', limits = {}, depth = 1
+
+    def rows(values,engine='indexed',limits=None,depth=5):
+     limits=limits or {};book=ReferenceBook(**limits)
+     command=[str(PROBE),'book',engine,str(limits.get('max_orders',100000)),str(limits.get('max_ids',1000000)),str(limits.get('max_instruments',4096)),str(depth)]
+     # Bound correctness streams; compare one full snapshot at a time, never persist the stream.
+     with subprocess.Popen(command,stdin=subprocess.PIPE,stdout=subprocess.PIPE,stderr=subprocess.PIPE,text=True,bufsize=1) as p:
+      for data in values:
+       code=None
+       try:book.apply(decode_itch(data))
+       except ReferenceError as error:code=error.code
+       p.stdin.write(data.hex()+'\n');p.stdin.flush()
+       actual=json.loads(p.stdout.readline())
+>      assert actual=={'error':code,'book':book.snapshot(depth)},(data.hex(),actual,code,book.snapshot(depth))
+E      AssertionError: ('53000012340123456789ab4f', {'book': {'instruments': [], 'order_count': 0, 'seen_id_count': 0}, 'error': 'unimplemented'}, None, {'instruments': [], 'order_count': 0, 'seen_id_count': 0})
+E      assert {'book': {'in...nimplemented'} == {'book': {'in...'error': None}
+E        
+E        Omitting 1 identical items, use -vv to show
+E        Differing items:
+E        {'error': 'unimplemented'} != {'error': None}
+E        Use -v to get more diff
+
+tests/test_book.py:20: AssertionError
+________________ test_every_literal_lifecycle_state[5-indexed] _________________
+
+engine = 'indexed', depth = 5
+
+    @pytest.mark.parametrize('engine',['indexed','scan'])
+    @pytest.mark.parametrize('depth',[0,1,5,20])
+    def test_every_literal_lifecycle_state(engine,depth):
+     names=json.loads((ROOT/'review/lifecycle_anchors.json').read_text())['events']
+>    rows([bytes.fromhex(VECTORS[n]['hex']) for n in names],engine,depth=depth)
+
+tests/test_book.py:27: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+values = [b'S\x00\x00\x124\x01#Eg\x89\xabO', b'R\x00\x01\x124\x01#Eg\x89\xabALPHA   QN\x00\x00\x00dNC  PNN1N\x00\x00\x00\x01N',...0\x01\x86\xa0', b'F\x00\x01\x124\x01#Eg\x89\xab\xfe\xdc\xba\x98vT2\x10S\x00\x00\x00PALPHA   \x00\x01\x87\x04ABCD', ...]
+engine = 'indexed', limits = {}, depth = 5
+
+    def rows(values,engine='indexed',limits=None,depth=5):
+     limits=limits or {};book=ReferenceBook(**limits)
+     command=[str(PROBE),'book',engine,str(limits.get('max_orders',100000)),str(limits.get('max_ids',1000000)),str(limits.get('max_instruments',4096)),str(depth)]
+     # Bound correctness streams; compare one full snapshot at a time, never persist the stream.
+     with subprocess.Popen(command,stdin=subprocess.PIPE,stdout=subprocess.PIPE,stderr=subprocess.PIPE,text=True,bufsize=1) as p:
+      for data in values:
+       code=None
+       try:book.apply(decode_itch(data))
+       except ReferenceError as error:code=error.code
+       p.stdin.write(data.hex()+'\n');p.stdin.flush()
+       actual=json.loads(p.stdout.readline())
+>      assert actual=={'error':code,'book':book.snapshot(depth)},(data.hex(),actual,code,book.snapshot(depth))
+E      AssertionError: ('53000012340123456789ab4f', {'book': {'instruments': [], 'order_count': 0, 'seen_id_count': 0}, 'error': 'unimplemented'}, None, {'instruments': [], 'order_count': 0, 'seen_id_count': 0})
+E      assert {'book': {'in...nimplemented'} == {'book': {'in...'error': None}
+E        
+E        Omitting 1 identical items, use -vv to show
+E        Differing items:
+E        {'error': 'unimplemented'} != {'error': None}
+E        Use -v to get more diff
+
+tests/test_book.py:20: AssertionError
+__________________ test_every_literal_lifecycle_state[5-scan] __________________
+
+engine = 'scan', depth = 5
+
+    @pytest.mark.parametrize('engine',['indexed','scan'])
+    @pytest.mark.parametrize('depth',[0,1,5,20])
+    def test_every_literal_lifecycle_state(engine,depth):
+     names=json.loads((ROOT/'review/lifecycle_anchors.json').read_text())['events']
+>    rows([bytes.fromhex(VECTORS[n]['hex']) for n in names],engine,depth=depth)
+
+tests/test_book.py:27: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+values = [b'S\x00\x00\x124\x01#Eg\x89\xabO', b'R\x00\x01\x124\x01#Eg\x89\xabALPHA   QN\x00\x00\x00dNC  PNN1N\x00\x00\x00\x01N',...0\x01\x86\xa0', b'F\x00\x01\x124\x01#Eg\x89\xab\xfe\xdc\xba\x98vT2\x10S\x00\x00\x00PALPHA   \x00\x01\x87\x04ABCD', ...]
+engine = 'scan', limits = {}, depth = 5
+
+    def rows(values,engine='indexed',limits=None,depth=5):
+     limits=limits or {};book=ReferenceBook(**limits)
+     command=[str(PROBE),'book',engine,str(limits.get('max_orders',100000)),str(limits.get('max_ids',1000000)),str(limits.get('max_instruments',4096)),str(depth)]
+     # Bound correctness streams; compare one full snapshot at a time, never persist the stream.
+     with subprocess.Popen(command,stdin=subprocess.PIPE,stdout=subprocess.PIPE,stderr=subprocess.PIPE,text=True,bufsize=1) as p:
+      for data in values:
+       code=None
+       try:book.apply(decode_itch(data))
+       except ReferenceError as error:code=error.code
+       p.stdin.write(data.hex()+'\n');p.stdin.flush()
+       actual=json.loads(p.stdout.readline())
+>      assert actual=={'error':code,'book':book.snapshot(depth)},(data.hex(),actual,code,book.snapshot(depth))
+E      AssertionError: ('53000012340123456789ab4f', {'book': {'instruments': [], 'order_count': 0, 'seen_id_count': 0}, 'error': 'unimplemented'}, None, {'instruments': [], 'order_count': 0, 'seen_id_count': 0})
+E      assert {'book': {'in...nimplemented'} == {'book': {'in...'error': None}
+E        
+E        Omitting 1 identical items, use -vv to show
+E        Differing items:
+E        {'error': 'unimplemented'} != {'error': None}
+E        Use -v to get more diff
+
+tests/test_book.py:20: AssertionError
+________________ test_every_literal_lifecycle_state[20-indexed] ________________
+
+engine = 'indexed', depth = 20
+
+    @pytest.mark.parametrize('engine',['indexed','scan'])
+    @pytest.mark.parametrize('depth',[0,1,5,20])
+    def test_every_literal_lifecycle_state(engine,depth):
+     names=json.loads((ROOT/'review/lifecycle_anchors.json').read_text())['events']
+>    rows([bytes.fromhex(VECTORS[n]['hex']) for n in names],engine,depth=depth)
+
+tests/test_book.py:27: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+values = [b'S\x00\x00\x124\x01#Eg\x89\xabO', b'R\x00\x01\x124\x01#Eg\x89\xabALPHA   QN\x00\x00\x00dNC  PNN1N\x00\x00\x00\x01N',...0\x01\x86\xa0', b'F\x00\x01\x124\x01#Eg\x89\xab\xfe\xdc\xba\x98vT2\x10S\x00\x00\x00PALPHA   \x00\x01\x87\x04ABCD', ...]
+engine = 'indexed', limits = {}, depth = 20
+
+    def rows(values,engine='indexed',limits=None,depth=5):
+     limits=limits or {};book=ReferenceBook(**limits)
+     command=[str(PROBE),'book',engine,str(limits.get('max_orders',100000)),str(limits.get('max_ids',1000000)),str(limits.get('max_instruments',4096)),str(depth)]
+     # Bound correctness streams; compare one full snapshot at a time, never persist the stream.
+     with subprocess.Popen(command,stdin=subprocess.PIPE,stdout=subprocess.PIPE,stderr=subprocess.PIPE,text=True,bufsize=1) as p:
+      for data in values:
+       code=None
+       try:book.apply(decode_itch(data))
+       except ReferenceError as error:code=error.code
+       p.stdin.write(data.hex()+'\n');p.stdin.flush()
+       actual=json.loads(p.stdout.readline())
+>      assert actual=={'error':code,'book':book.snapshot(depth)},(data.hex(),actual,code,book.snapshot(depth))
+E      AssertionError: ('53000012340123456789ab4f', {'book': {'instruments': [], 'order_count': 0, 'seen_id_count': 0}, 'error': 'unimplemented'}, None, {'instruments': [], 'order_count': 0, 'seen_id_count': 0})
+E      assert {'book': {'in...nimplemented'} == {'book': {'in...'error': None}
+E        
+E        Omitting 1 identical items, use -vv to show
+E        Differing items:
+E        {'error': 'unimplemented'} != {'error': None}
+E        Use -v to get more diff
+
+tests/test_book.py:20: AssertionError
+_________________ test_every_literal_lifecycle_state[20-scan] __________________
+
+engine = 'scan', depth = 20
+
+    @pytest.mark.parametrize('engine',['indexed','scan'])
+    @pytest.mark.parametrize('depth',[0,1,5,20])
+    def test_every_literal_lifecycle_state(engine,depth):
+     names=json.loads((ROOT/'review/lifecycle_anchors.json').read_text())['events']
+>    rows([bytes.fromhex(VECTORS[n]['hex']) for n in names],engine,depth=depth)
+
+tests/test_book.py:27: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+values = [b'S\x00\x00\x124\x01#Eg\x89\xabO', b'R\x00\x01\x124\x01#Eg\x89\xabALPHA   QN\x00\x00\x00dNC  PNN1N\x00\x00\x00\x01N',...0\x01\x86\xa0', b'F\x00\x01\x124\x01#Eg\x89\xab\xfe\xdc\xba\x98vT2\x10S\x00\x00\x00PALPHA   \x00\x01\x87\x04ABCD', ...]
+engine = 'scan', limits = {}, depth = 20
+
+    def rows(values,engine='indexed',limits=None,depth=5):
+     limits=limits or {};book=ReferenceBook(**limits)
+     command=[str(PROBE),'book',engine,str(limits.get('max_orders',100000)),str(limits.get('max_ids',1000000)),str(limits.get('max_instruments',4096)),str(depth)]
+     # Bound correctness streams; compare one full snapshot at a time, never persist the stream.
+     with subprocess.Popen(command,stdin=subprocess.PIPE,stdout=subprocess.PIPE,stderr=subprocess.PIPE,text=True,bufsize=1) as p:
+      for data in values:
+       code=None
+       try:book.apply(decode_itch(data))
+       except ReferenceError as error:code=error.code
+       p.stdin.write(data.hex()+'\n');p.stdin.flush()
+       actual=json.loads(p.stdout.readline())
+>      assert actual=={'error':code,'book':book.snapshot(depth)},(data.hex(),actual,code,book.snapshot(depth))
+E      AssertionError: ('53000012340123456789ab4f', {'book': {'instruments': [], 'order_count': 0, 'seen_id_count': 0}, 'error': 'unimplemented'}, None, {'instruments': [], 'order_count': 0, 'seen_id_count': 0})
+E      assert {'book': {'in...nimplemented'} == {'book': {'in...'error': None}
+E        
+E        Omitting 1 identical items, use -vv to show
+E        Differing items:
+E        {'error': 'unimplemented'} != {'error': None}
+E        Use -v to get more diff
+
+tests/test_book.py:20: AssertionError
+____________ test_rejections_preserve_levels_and_seen_ids[indexed] _____________
+
+engine = 'indexed'
+
+    @pytest.mark.parametrize('engine',['indexed','scan'])
+    def test_rejections_preserve_levels_and_seen_ids(engine):
+     values=[bytes.fromhex(VECTORS['alpha']['hex']),bytes.fromhex(VECTORS['beta']['hex']),add(1,10,0),add(2,20,0),
+      add(1,3,1),change('X',1,11),change('X',1,0),change('X',999,0),change('D',1,locate=2),
+      change('U',1,5,newid=2),change('U',1,0,newid=3),add(3,7,0),change('U',1,5,newid=1),
+      change('D',1),add(1,1,0),change('U',2,1,newid=1),change('U',2,30,newid=4),add(2,1,0)]
+>    rows(values,engine)
+
+tests/test_book.py:44: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+values = [b'R\x00\x01\x124\x01#Eg\x89\xabALPHA   QN\x00\x00\x00dNC  PNN1N\x00\x00\x00\x01N', b'R\x00\x02\x124\x01#Eg\x89\xabBET...  \x00\x00\x00\x01', b'X\x00\x01\x00\x00\x00\x00\x00\x00\x00\x01\x00\x00\x00\x00\x00\x00\x00\x01\x00\x00\x00\x0b', ...]
+engine = 'indexed', limits = {}, depth = 5
+
+    def rows(values,engine='indexed',limits=None,depth=5):
+     limits=limits or {};book=ReferenceBook(**limits)
+     command=[str(PROBE),'book',engine,str(limits.get('max_orders',100000)),str(limits.get('max_ids',1000000)),str(limits.get('max_instruments',4096)),str(depth)]
+     # Bound correctness streams; compare one full snapshot at a time, never persist the stream.
+     with subprocess.Popen(command,stdin=subprocess.PIPE,stdout=subprocess.PIPE,stderr=subprocess.PIPE,text=True,bufsize=1) as p:
+      for data in values:
+       code=None
+       try:book.apply(decode_itch(data))
+       except ReferenceError as error:code=error.code
+       p.stdin.write(data.hex()+'\n');p.stdin.flush()
+       actual=json.loads(p.stdout.readline())
+>      assert actual=={'error':code,'book':book.snapshot(depth)},(data.hex(),actual,code,book.snapshot(depth))
+E      AssertionError: ('52000112340123456789ab414c504841202020514e000000644e432020504e4e314e000000014e', {'book': {'instruments': [], 'order...struments': [{'asks': [], 'best_ask': None, 'best_bid': None, 'bids': [], ...}], 'order_count': 0, 'seen_id_count': 0})
+E      assert {'book': {'in...nimplemented'} == {'book': {'in...'error': None}
+E        
+E        Differing items:
+E        {'book': {'instruments': [], 'order_count': 0, 'seen_id_count': 0}} != {'book': {'instruments': [{'asks': [], 'best_ask': None, 'best_bid': None, 'bids': [], ...}], 'order_count': 0, 'seen_id_count': 0}}
+E        {'error': 'unimplemented'} != {'error': None}
+E        Use -v to get more diff
+
+tests/test_book.py:20: AssertionError
+______________ test_rejections_preserve_levels_and_seen_ids[scan] ______________
+
+engine = 'scan'
+
+    @pytest.mark.parametrize('engine',['indexed','scan'])
+    def test_rejections_preserve_levels_and_seen_ids(engine):
+     values=[bytes.fromhex(VECTORS['alpha']['hex']),bytes.fromhex(VECTORS['beta']['hex']),add(1,10,0),add(2,20,0),
+      add(1,3,1),change('X',1,11),change('X',1,0),change('X',999,0),change('D',1,locate=2),
+      change('U',1,5,newid=2),change('U',1,0,newid=3),add(3,7,0),change('U',1,5,newid=1),
+      change('D',1),add(1,1,0),change('U',2,1,newid=1),change('U',2,30,newid=4),add(2,1,0)]
+>    rows(values,engine)
+
+tests/test_book.py:44: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+values = [b'R\x00\x01\x124\x01#Eg\x89\xabALPHA   QN\x00\x00\x00dNC  PNN1N\x00\x00\x00\x01N', b'R\x00\x02\x124\x01#Eg\x89\xabBET...  \x00\x00\x00\x01', b'X\x00\x01\x00\x00\x00\x00\x00\x00\x00\x01\x00\x00\x00\x00\x00\x00\x00\x01\x00\x00\x00\x0b', ...]
+engine = 'scan', limits = {}, depth = 5
+
+    def rows(values,engine='indexed',limits=None,depth=5):
+     limits=limits or {};book=ReferenceBook(**limits)
+     command=[str(PROBE),'book',engine,str(limits.get('max_orders',100000)),str(limits.get('max_ids',1000000)),str(limits.get('max_instruments',4096)),str(depth)]
+     # Bound correctness streams; compare one full snapshot at a time, never persist the stream.
+     with subprocess.Popen(command,stdin=subprocess.PIPE,stdout=subprocess.PIPE,stderr=subprocess.PIPE,text=True,bufsize=1) as p:
+      for data in values:
+       code=None
+       try:book.apply(decode_itch(data))
+       except ReferenceError as error:code=error.code
+       p.stdin.write(data.hex()+'\n');p.stdin.flush()
+       actual=json.loads(p.stdout.readline())
+>      assert actual=={'error':code,'book':book.snapshot(depth)},(data.hex(),actual,code,book.snapshot(depth))
+E      AssertionError: ('52000112340123456789ab414c504841202020514e000000644e432020504e4e314e000000014e', {'book': {'instruments': [], 'order...struments': [{'asks': [], 'best_ask': None, 'best_bid': None, 'bids': [], ...}], 'order_count': 0, 'seen_id_count': 0})
+E      assert {'book': {'in...nimplemented'} == {'book': {'in...'error': None}
+E        
+E        Differing items:
+E        {'book': {'instruments': [], 'order_count': 0, 'seen_id_count': 0}} != {'book': {'instruments': [{'asks': [], 'best_ask': None, 'best_bid': None, 'bids': [], ...}], 'order_count': 0, 'seen_id_count': 0}}
+E        {'error': 'unimplemented'} != {'error': None}
+E        Use -v to get more diff
+
+tests/test_book.py:20: AssertionError
+__________ test_limits_and_replacement_at_full_live_capacity[indexed] __________
+
+engine = 'indexed'
+
+    @pytest.mark.parametrize('engine',['indexed','scan'])
+    def test_limits_and_replacement_at_full_live_capacity(engine):
+     directory=bytes.fromhex(VECTORS['alpha']['hex'])
+>    rows([directory,add(1,10,0),add(2,1,0),change('U',1,20,newid=3),change('D',3),add(4,1,0),add(1,1,0)],engine,{'max_orders':1,'max_ids':2})
+
+tests/test_book.py:49: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+values = [b'R\x00\x01\x124\x01#Eg\x89\xabALPHA   QN\x00\x00\x00dNC  PNN1N\x00\x00\x00\x01N', b'A\x00\x01\x00\x00\x00\x00\x00\x0...x00\x01\x00\x00\x00\x00\x00\x00\x00\x01\x00\x00\x00\x00\x00\x00\x00\x04B\x00\x00\x00\x01ALPHA   \x00\x00\x00\x00', ...]
+engine = 'indexed', limits = {'max_ids': 2, 'max_orders': 1}, depth = 5
+
+    def rows(values,engine='indexed',limits=None,depth=5):
+     limits=limits or {};book=ReferenceBook(**limits)
+     command=[str(PROBE),'book',engine,str(limits.get('max_orders',100000)),str(limits.get('max_ids',1000000)),str(limits.get('max_instruments',4096)),str(depth)]
+     # Bound correctness streams; compare one full snapshot at a time, never persist the stream.
+     with subprocess.Popen(command,stdin=subprocess.PIPE,stdout=subprocess.PIPE,stderr=subprocess.PIPE,text=True,bufsize=1) as p:
+      for data in values:
+       code=None
+       try:book.apply(decode_itch(data))
+       except ReferenceError as error:code=error.code
+       p.stdin.write(data.hex()+'\n');p.stdin.flush()
+       actual=json.loads(p.stdout.readline())
+>      assert actual=={'error':code,'book':book.snapshot(depth)},(data.hex(),actual,code,book.snapshot(depth))
+E      AssertionError: ('52000112340123456789ab414c504841202020514e000000644e432020504e4e314e000000014e', {'book': {'instruments': [], 'order...struments': [{'asks': [], 'best_ask': None, 'best_bid': None, 'bids': [], ...}], 'order_count': 0, 'seen_id_count': 0})
+E      assert {'book': {'in...nimplemented'} == {'book': {'in...'error': None}
+E        
+E        Differing items:
+E        {'book': {'instruments': [], 'order_count': 0, 'seen_id_count': 0}} != {'book': {'instruments': [{'asks': [], 'best_ask': None, 'best_bid': None, 'bids': [], ...}], 'order_count': 0, 'seen_id_count': 0}}
+E        {'error': 'unimplemented'} != {'error': None}
+E        Use -v to get more diff
+
+tests/test_book.py:20: AssertionError
+___________ test_limits_and_replacement_at_full_live_capacity[scan] ____________
+
+engine = 'scan'
+
+    @pytest.mark.parametrize('engine',['indexed','scan'])
+    def test_limits_and_replacement_at_full_live_capacity(engine):
+     directory=bytes.fromhex(VECTORS['alpha']['hex'])
+>    rows([directory,add(1,10,0),add(2,1,0),change('U',1,20,newid=3),change('D',3),add(4,1,0),add(1,1,0)],engine,{'max_orders':1,'max_ids':2})
+
+tests/test_book.py:49: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+values = [b'R\x00\x01\x124\x01#Eg\x89\xabALPHA   QN\x00\x00\x00dNC  PNN1N\x00\x00\x00\x01N', b'A\x00\x01\x00\x00\x00\x00\x00\x0...x00\x01\x00\x00\x00\x00\x00\x00\x00\x01\x00\x00\x00\x00\x00\x00\x00\x04B\x00\x00\x00\x01ALPHA   \x00\x00\x00\x00', ...]
+engine = 'scan', limits = {'max_ids': 2, 'max_orders': 1}, depth = 5
+
+    def rows(values,engine='indexed',limits=None,depth=5):
+     limits=limits or {};book=ReferenceBook(**limits)
+     command=[str(PROBE),'book',engine,str(limits.get('max_orders',100000)),str(limits.get('max_ids',1000000)),str(limits.get('max_instruments',4096)),str(depth)]
+     # Bound correctness streams; compare one full snapshot at a time, never persist the stream.
+     with subprocess.Popen(command,stdin=subprocess.PIPE,stdout=subprocess.PIPE,stderr=subprocess.PIPE,text=True,bufsize=1) as p:
+      for data in values:
+       code=None
+       try:book.apply(decode_itch(data))
+       except ReferenceError as error:code=error.code
+       p.stdin.write(data.hex()+'\n');p.stdin.flush()
+       actual=json.loads(p.stdout.readline())
+>      assert actual=={'error':code,'book':book.snapshot(depth)},(data.hex(),actual,code,book.snapshot(depth))
+E      AssertionError: ('52000112340123456789ab414c504841202020514e000000644e432020504e4e314e000000014e', {'book': {'instruments': [], 'order...struments': [{'asks': [], 'best_ask': None, 'best_bid': None, 'bids': [], ...}], 'order_count': 0, 'seen_id_count': 0})
+E      assert {'book': {'in...nimplemented'} == {'book': {'in...'error': None}
+E        
+E        Differing items:
+E        {'book': {'instruments': [], 'order_count': 0, 'seen_id_count': 0}} != {'book': {'instruments': [{'asks': [], 'best_ask': None, 'best_bid': None, 'bids': [], ...}], 'order_count': 0, 'seen_id_count': 0}}
+E        {'error': 'unimplemented'} != {'error': None}
+E        Use -v to get more diff
+
+tests/test_book.py:20: AssertionError
+________ test_seeded_events_compare_every_state_with_reference[indexed] ________
+
+engine = 'indexed'
+
+    @pytest.mark.parametrize('engine',['indexed','scan'])
+    def test_seeded_events_compare_every_state_with_reference(engine):
+     rng=random.Random(20261023)
+     values=[bytes.fromhex(VECTORS['alpha']['hex']),bytes.fromhex(VECTORS['beta']['hex'])]
+     # Deliberate mixed-validity stream keeps at most 64 potential IDs and 1024 events.
+     for _ in range(1024):
+      oid=(1<<63)+rng.randrange(64);locate=rng.choice([1,2]);kind=rng.choice(['A','X','D','U'])
+      if kind=='A':values.append(add(oid,rng.randrange(0,101),rng.choice([0,1,100000,2000000000]),locate,rng.choice(['B','S'])))
+      else:values.append(change(kind,oid,rng.randrange(0,101),locate,(1<<63)+rng.randrange(64),rng.randrange(10)))
+>    rows(values,engine)
+
+tests/test_book.py:61: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+values = [b'R\x00\x01\x124\x01#Eg\x89\xabALPHA   QN\x00\x00\x00dNC  PNN1N\x00\x00\x00\x01N', b'R\x00\x02\x124\x01#Eg\x89\xabBET...x00\x00\x00\x00\x01\x80\x00\x00\x00\x00\x00\x00-\x80\x00\x00\x00\x00\x00\x00\x12\x00\x00\x00\x02\x00\x00\x00\x07', ...]
+engine = 'indexed', limits = {}, depth = 5
+
+    def rows(values,engine='indexed',limits=None,depth=5):
+     limits=limits or {};book=ReferenceBook(**limits)
+     command=[str(PROBE),'book',engine,str(limits.get('max_orders',100000)),str(limits.get('max_ids',1000000)),str(limits.get('max_instruments',4096)),str(depth)]
+     # Bound correctness streams; compare one full snapshot at a time, never persist the stream.
+     with subprocess.Popen(command,stdin=subprocess.PIPE,stdout=subprocess.PIPE,stderr=subprocess.PIPE,text=True,bufsize=1) as p:
+      for data in values:
+       code=None
+       try:book.apply(decode_itch(data))
+       except ReferenceError as error:code=error.code
+       p.stdin.write(data.hex()+'\n');p.stdin.flush()
+       actual=json.loads(p.stdout.readline())
+>      assert actual=={'error':code,'book':book.snapshot(depth)},(data.hex(),actual,code,book.snapshot(depth))
+E      AssertionError: ('52000112340123456789ab414c504841202020514e000000644e432020504e4e314e000000014e', {'book': {'instruments': [], 'order...struments': [{'asks': [], 'best_ask': None, 'best_bid': None, 'bids': [], ...}], 'order_count': 0, 'seen_id_count': 0})
+E      assert {'book': {'in...nimplemented'} == {'book': {'in...'error': None}
+E        
+E        Differing items:
+E        {'book': {'instruments': [], 'order_count': 0, 'seen_id_count': 0}} != {'book': {'instruments': [{'asks': [], 'best_ask': None, 'best_bid': None, 'bids': [], ...}], 'order_count': 0, 'seen_id_count': 0}}
+E        {'error': 'unimplemented'} != {'error': None}
+E        Use -v to get more diff
+
+tests/test_book.py:20: AssertionError
+_________ test_seeded_events_compare_every_state_with_reference[scan] __________
+
+engine = 'scan'
+
+    @pytest.mark.parametrize('engine',['indexed','scan'])
+    def test_seeded_events_compare_every_state_with_reference(engine):
+     rng=random.Random(20261023)
+     values=[bytes.fromhex(VECTORS['alpha']['hex']),bytes.fromhex(VECTORS['beta']['hex'])]
+     # Deliberate mixed-validity stream keeps at most 64 potential IDs and 1024 events.
+     for _ in range(1024):
+      oid=(1<<63)+rng.randrange(64);locate=rng.choice([1,2]);kind=rng.choice(['A','X','D','U'])
+      if kind=='A':values.append(add(oid,rng.randrange(0,101),rng.choice([0,1,100000,2000000000]),locate,rng.choice(['B','S'])))
+      else:values.append(change(kind,oid,rng.randrange(0,101),locate,(1<<63)+rng.randrange(64),rng.randrange(10)))
+>    rows(values,engine)
+
+tests/test_book.py:61: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+values = [b'R\x00\x01\x124\x01#Eg\x89\xabALPHA   QN\x00\x00\x00dNC  PNN1N\x00\x00\x00\x01N', b'R\x00\x02\x124\x01#Eg\x89\xabBET...x00\x00\x00\x00\x01\x80\x00\x00\x00\x00\x00\x00-\x80\x00\x00\x00\x00\x00\x00\x12\x00\x00\x00\x02\x00\x00\x00\x07', ...]
+engine = 'scan', limits = {}, depth = 5
+
+    def rows(values,engine='indexed',limits=None,depth=5):
+     limits=limits or {};book=ReferenceBook(**limits)
+     command=[str(PROBE),'book',engine,str(limits.get('max_orders',100000)),str(limits.get('max_ids',1000000)),str(limits.get('max_instruments',4096)),str(depth)]
+     # Bound correctness streams; compare one full snapshot at a time, never persist the stream.
+     with subprocess.Popen(command,stdin=subprocess.PIPE,stdout=subprocess.PIPE,stderr=subprocess.PIPE,text=True,bufsize=1) as p:
+      for data in values:
+       code=None
+       try:book.apply(decode_itch(data))
+       except ReferenceError as error:code=error.code
+       p.stdin.write(data.hex()+'\n');p.stdin.flush()
+       actual=json.loads(p.stdout.readline())
+>      assert actual=={'error':code,'book':book.snapshot(depth)},(data.hex(),actual,code,book.snapshot(depth))
+E      AssertionError: ('52000112340123456789ab414c504841202020514e000000644e432020504e4e314e000000014e', {'book': {'instruments': [], 'order...struments': [{'asks': [], 'best_ask': None, 'best_bid': None, 'bids': [], ...}], 'order_count': 0, 'seen_id_count': 0})
+E      assert {'book': {'in...nimplemented'} == {'book': {'in...'error': None}
+E        
+E        Differing items:
+E        {'book': {'instruments': [], 'order_count': 0, 'seen_id_count': 0}} != {'book': {'instruments': [{'asks': [], 'best_ask': None, 'best_bid': None, 'bids': [], ...}], 'order_count': 0, 'seen_id_count': 0}}
+E        {'error': 'unimplemented'} != {'error': None}
+E        Use -v to get more diff
+
+tests/test_book.py:20: AssertionError
+=========================== short test summary info ============================
+FAILED tests/test_book.py::test_every_literal_lifecycle_state[0-indexed] - As...
+FAILED tests/test_book.py::test_every_literal_lifecycle_state[0-scan] - Asser...
+FAILED tests/test_book.py::test_every_literal_lifecycle_state[1-indexed] - As...
+FAILED tests/test_book.py::test_every_literal_lifecycle_state[1-scan] - Asser...
+FAILED tests/test_book.py::test_every_literal_lifecycle_state[5-indexed] - As...
+FAILED tests/test_book.py::test_every_literal_lifecycle_state[5-scan] - Asser...
+FAILED tests/test_book.py::test_every_literal_lifecycle_state[20-indexed] - A...
+FAILED tests/test_book.py::test_every_literal_lifecycle_state[20-scan] - Asse...
+FAILED tests/test_book.py::test_rejections_preserve_levels_and_seen_ids[indexed]
+FAILED tests/test_book.py::test_rejections_preserve_levels_and_seen_ids[scan]
+FAILED tests/test_book.py::test_limits_and_replacement_at_full_live_capacity[indexed]
+FAILED tests/test_book.py::test_limits_and_replacement_at_full_live_capacity[scan]
+FAILED tests/test_book.py::test_seeded_events_compare_every_state_with_reference[indexed]
+FAILED tests/test_book.py::test_seeded_events_compare_every_state_with_reference[scan]
+14 failed in 0.25s
+make: *** [test-book] Error 1

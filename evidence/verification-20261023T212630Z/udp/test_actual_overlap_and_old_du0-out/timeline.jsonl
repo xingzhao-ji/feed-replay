@@ -1,0 +1,4 @@
+{"time_ns":"410583","event":"accepted","expected":"3","high_water_next":"3","count":"2"}
+{"time_ns":"429583","event":"duplicate","expected":"3","high_water_next":"3","count":"0"}
+{"time_ns":"440833","event":"accepted","expected":"4","high_water_next":"4","count":"1"}
+{"time_ns":"452666","event":"end","expected":"4","high_water_next":"4","count":"0"}

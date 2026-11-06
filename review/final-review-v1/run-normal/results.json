@@ -1,0 +1,77 @@
+[
+  {
+    "test": "evidence_integrity",
+    "passed": false,
+    "traceback": "Traceback (most recent call last):\n  File \"<PROJECT_ROOT>/review/final-review-v1/probes.py\", line 234, in main\n    try:result={'test':test.__name__,'passed':True,'details':test(args.output,binary,probe)}\n                                                             ~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"<PROJECT_ROOT>/review/final-review-v1/probes.py\", line 96, in evidence_integrity\n    assert row['indexed_median_ms']==recorded['indexed_ms']['median']\n           ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\nAssertionError\n",
+    "wall_seconds": 0.032257000013487414
+  },
+  {
+    "test": "schedule_parity",
+    "passed": true,
+    "details": {
+      "seed": 2026102307,
+      "schedules": 96,
+      "arrivals_compared": 3477
+    },
+    "wall_seconds": 0.8797285000036936
+  },
+  {
+    "test": "full_udp_tiny_recovery",
+    "passed": true,
+    "details": {
+      "requests": 7,
+      "final_expected": "18",
+      "live_orders": 3
+    },
+    "wall_seconds": 0.017121207987656817
+  },
+  {
+    "test": "invalid_future",
+    "passed": true,
+    "details": {
+      "status": "Invalid",
+      "expected": "4",
+      "high_water_next": "4"
+    },
+    "wall_seconds": 0.00753004100988619
+  },
+  {
+    "test": "zero_datagram_budget",
+    "passed": true,
+    "details": {
+      "received": 5,
+      "capture_bytes": 8
+    },
+    "wall_seconds": 0.007476333004888147
+  },
+  {
+    "test": "late_output_competitor",
+    "passed": true,
+    "details": {
+      "returncode": 2,
+      "sentinel_preserved": true,
+      "capture_bytes": 33
+    },
+    "wall_seconds": 0.008860374975483865
+  },
+  {
+    "test": "cancel_after_progress",
+    "passed": true,
+    "details": {
+      "status": "Cancelled",
+      "expected": "5",
+      "requests": 2
+    },
+    "wall_seconds": 0.007982457987964153
+  },
+  {
+    "test": "new_clock_limits",
+    "passed": true,
+    "details": {
+      "request_cap": 128,
+      "final_expected_after_cap": "129",
+      "exact_deadline_kept_prefix": "1"
+    },
+    "wall_seconds": 0.014650875004008412
+  }
+]

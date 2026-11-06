@@ -1,0 +1,16 @@
+{
+  "version": 1,
+  "author": "independent feed_protocol_review",
+  "policy": "Frozen before first execution; no product changes; no timing rerun",
+  "source_sha256": "a7674f10283988878f886b79a89fb6d7b5fd8dbb77f49b60863cf490d1a16483",
+  "planned_checks": [
+    "retained reference/source/evidence hashes and recomputed raw timing",
+    "96 seeded independent reorder-overlap-recovery schedules",
+    "full17-event actualUDP recovery in seven tiny replies and capture replay",
+    "malformed future packet structural atomicity",
+    "zero-byte foreign packet receive-count cap",
+    "late report destination competitor preserves sentinel",
+    "cancel after partial recovery",
+    "128-send cap and exact deadline priority"
+  ]
+}

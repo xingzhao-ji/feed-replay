@@ -1,0 +1,613 @@
+FFFFFFFFFFFFFFFFFF.                                                      [100%]
+=================================== FAILURES ===================================
+___________ test_actual_gap_recovery_and_partial_responses[1-future] ___________
+
+tmp_path = PosixPath('<CACHE_ROOT>/tmp/pytest-of-USER/pytest-3/test_actual_gap_recovery_and_p0')
+peers = <function peers.<locals>.make at 0x1070a7d80>, tail = 'future'
+partial = 1
+
+    @pytest.mark.parametrize('tail',['future','heartbeat','end'])
+    @pytest.mark.parametrize('partial',[1,128])
+    def test_actual_gap_recovery_and_partial_responses(tmp_path,peers,tail,partial):
+        msgs=messages();source=peers();recovery=peers(messages=[m.hex() for m in msgs],partial=partial)
+>       proc,port,out,cap=receiver(tmp_path,source,recovery)
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_udp.py:97: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tests/test_udp.py:71: in receiver
+    try:assert read_json(proc)['ready'] is True
+               ^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+proc = <Popen: returncode: 2 args: ['<USER_HOME>/.cache/job-apps-runtime/feed...>
+timeout = 3
+
+    def read_json(proc, timeout=3):
+        # Unbuffered binary stdout avoids select() missing Python text-buffered lines.
+        end = time.monotonic() + timeout
+        line = bytearray()
+        while time.monotonic() < end:
+            if select.select([proc.stdout], [], [], max(0, end-time.monotonic()))[0]:
+                byte = os.read(proc.stdout.fileno(), 1)
+                if not byte:
+>                   raise AssertionError(f'process exited {proc.poll()}: {proc.stderr.read().decode()}')
+E                   AssertionError: process exited 2: error: usage: feed_replay replay --capture FILE --session TENBYTES --output NEWDIR [--depth 0..20 --include-orders 0|1 --engine indexed|scan]
+
+tests/test_udp.py:25: AssertionError
+_________ test_actual_gap_recovery_and_partial_responses[1-heartbeat] __________
+
+tmp_path = PosixPath('<CACHE_ROOT>/tmp/pytest-of-USER/pytest-3/test_actual_gap_recovery_and_p1')
+peers = <function peers.<locals>.make at 0x10709a200>, tail = 'heartbeat'
+partial = 1
+
+    @pytest.mark.parametrize('tail',['future','heartbeat','end'])
+    @pytest.mark.parametrize('partial',[1,128])
+    def test_actual_gap_recovery_and_partial_responses(tmp_path,peers,tail,partial):
+        msgs=messages();source=peers();recovery=peers(messages=[m.hex() for m in msgs],partial=partial)
+>       proc,port,out,cap=receiver(tmp_path,source,recovery)
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_udp.py:97: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tests/test_udp.py:71: in receiver
+    try:assert read_json(proc)['ready'] is True
+               ^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+proc = <Popen: returncode: 2 args: ['<USER_HOME>/.cache/job-apps-runtime/feed...>
+timeout = 3
+
+    def read_json(proc, timeout=3):
+        # Unbuffered binary stdout avoids select() missing Python text-buffered lines.
+        end = time.monotonic() + timeout
+        line = bytearray()
+        while time.monotonic() < end:
+            if select.select([proc.stdout], [], [], max(0, end-time.monotonic()))[0]:
+                byte = os.read(proc.stdout.fileno(), 1)
+                if not byte:
+>                   raise AssertionError(f'process exited {proc.poll()}: {proc.stderr.read().decode()}')
+E                   AssertionError: process exited 2: error: usage: feed_replay replay --capture FILE --session TENBYTES --output NEWDIR [--depth 0..20 --include-orders 0|1 --engine indexed|scan]
+
+tests/test_udp.py:25: AssertionError
+____________ test_actual_gap_recovery_and_partial_responses[1-end] _____________
+
+tmp_path = PosixPath('<CACHE_ROOT>/tmp/pytest-of-USER/pytest-3/test_actual_gap_recovery_and_p2')
+peers = <function peers.<locals>.make at 0x10709a8e0>, tail = 'end', partial = 1
+
+    @pytest.mark.parametrize('tail',['future','heartbeat','end'])
+    @pytest.mark.parametrize('partial',[1,128])
+    def test_actual_gap_recovery_and_partial_responses(tmp_path,peers,tail,partial):
+        msgs=messages();source=peers();recovery=peers(messages=[m.hex() for m in msgs],partial=partial)
+>       proc,port,out,cap=receiver(tmp_path,source,recovery)
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_udp.py:97: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tests/test_udp.py:71: in receiver
+    try:assert read_json(proc)['ready'] is True
+               ^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+proc = <Popen: returncode: 2 args: ['<USER_HOME>/.cache/job-apps-runtime/feed...>
+timeout = 3
+
+    def read_json(proc, timeout=3):
+        # Unbuffered binary stdout avoids select() missing Python text-buffered lines.
+        end = time.monotonic() + timeout
+        line = bytearray()
+        while time.monotonic() < end:
+            if select.select([proc.stdout], [], [], max(0, end-time.monotonic()))[0]:
+                byte = os.read(proc.stdout.fileno(), 1)
+                if not byte:
+>                   raise AssertionError(f'process exited {proc.poll()}: {proc.stderr.read().decode()}')
+E                   AssertionError: process exited 2: error: usage: feed_replay replay --capture FILE --session TENBYTES --output NEWDIR [--depth 0..20 --include-orders 0|1 --engine indexed|scan]
+
+tests/test_udp.py:25: AssertionError
+__________ test_actual_gap_recovery_and_partial_responses[128-future] __________
+
+tmp_path = PosixPath('<CACHE_ROOT>/tmp/pytest-of-USER/pytest-3/test_actual_gap_recovery_and_p3')
+peers = <function peers.<locals>.make at 0x10709a5c0>, tail = 'future'
+partial = 128
+
+    @pytest.mark.parametrize('tail',['future','heartbeat','end'])
+    @pytest.mark.parametrize('partial',[1,128])
+    def test_actual_gap_recovery_and_partial_responses(tmp_path,peers,tail,partial):
+        msgs=messages();source=peers();recovery=peers(messages=[m.hex() for m in msgs],partial=partial)
+>       proc,port,out,cap=receiver(tmp_path,source,recovery)
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_udp.py:97: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tests/test_udp.py:71: in receiver
+    try:assert read_json(proc)['ready'] is True
+               ^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+proc = <Popen: returncode: 2 args: ['<USER_HOME>/.cache/job-apps-runtime/feed...>
+timeout = 3
+
+    def read_json(proc, timeout=3):
+        # Unbuffered binary stdout avoids select() missing Python text-buffered lines.
+        end = time.monotonic() + timeout
+        line = bytearray()
+        while time.monotonic() < end:
+            if select.select([proc.stdout], [], [], max(0, end-time.monotonic()))[0]:
+                byte = os.read(proc.stdout.fileno(), 1)
+                if not byte:
+>                   raise AssertionError(f'process exited {proc.poll()}: {proc.stderr.read().decode()}')
+E                   AssertionError: process exited 2: error: usage: feed_replay replay --capture FILE --session TENBYTES --output NEWDIR [--depth 0..20 --include-orders 0|1 --engine indexed|scan]
+
+tests/test_udp.py:25: AssertionError
+________ test_actual_gap_recovery_and_partial_responses[128-heartbeat] _________
+
+tmp_path = PosixPath('<CACHE_ROOT>/tmp/pytest-of-USER/pytest-3/test_actual_gap_recovery_and_p4')
+peers = <function peers.<locals>.make at 0x10709a980>, tail = 'heartbeat'
+partial = 128
+
+    @pytest.mark.parametrize('tail',['future','heartbeat','end'])
+    @pytest.mark.parametrize('partial',[1,128])
+    def test_actual_gap_recovery_and_partial_responses(tmp_path,peers,tail,partial):
+        msgs=messages();source=peers();recovery=peers(messages=[m.hex() for m in msgs],partial=partial)
+>       proc,port,out,cap=receiver(tmp_path,source,recovery)
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_udp.py:97: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tests/test_udp.py:71: in receiver
+    try:assert read_json(proc)['ready'] is True
+               ^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+proc = <Popen: returncode: 2 args: ['<USER_HOME>/.cache/job-apps-runtime/feed...>
+timeout = 3
+
+    def read_json(proc, timeout=3):
+        # Unbuffered binary stdout avoids select() missing Python text-buffered lines.
+        end = time.monotonic() + timeout
+        line = bytearray()
+        while time.monotonic() < end:
+            if select.select([proc.stdout], [], [], max(0, end-time.monotonic()))[0]:
+                byte = os.read(proc.stdout.fileno(), 1)
+                if not byte:
+>                   raise AssertionError(f'process exited {proc.poll()}: {proc.stderr.read().decode()}')
+E                   AssertionError: process exited 2: error: usage: feed_replay replay --capture FILE --session TENBYTES --output NEWDIR [--depth 0..20 --include-orders 0|1 --engine indexed|scan]
+
+tests/test_udp.py:25: AssertionError
+___________ test_actual_gap_recovery_and_partial_responses[128-end] ____________
+
+tmp_path = PosixPath('<CACHE_ROOT>/tmp/pytest-of-USER/pytest-3/test_actual_gap_recovery_and_p5')
+peers = <function peers.<locals>.make at 0x10709ba60>, tail = 'end'
+partial = 128
+
+    @pytest.mark.parametrize('tail',['future','heartbeat','end'])
+    @pytest.mark.parametrize('partial',[1,128])
+    def test_actual_gap_recovery_and_partial_responses(tmp_path,peers,tail,partial):
+        msgs=messages();source=peers();recovery=peers(messages=[m.hex() for m in msgs],partial=partial)
+>       proc,port,out,cap=receiver(tmp_path,source,recovery)
+                          ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_udp.py:97: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tests/test_udp.py:71: in receiver
+    try:assert read_json(proc)['ready'] is True
+               ^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+proc = <Popen: returncode: 2 args: ['<USER_HOME>/.cache/job-apps-runtime/feed...>
+timeout = 3
+
+    def read_json(proc, timeout=3):
+        # Unbuffered binary stdout avoids select() missing Python text-buffered lines.
+        end = time.monotonic() + timeout
+        line = bytearray()
+        while time.monotonic() < end:
+            if select.select([proc.stdout], [], [], max(0, end-time.monotonic()))[0]:
+                byte = os.read(proc.stdout.fileno(), 1)
+                if not byte:
+>                   raise AssertionError(f'process exited {proc.poll()}: {proc.stderr.read().decode()}')
+E                   AssertionError: process exited 2: error: usage: feed_replay replay --capture FILE --session TENBYTES --output NEWDIR [--depth 0..20 --include-orders 0|1 --engine indexed|scan]
+
+tests/test_udp.py:25: AssertionError
+____________________ test_actual_overlap_and_old_duplicate _____________________
+
+tmp_path = PosixPath('<CACHE_ROOT>/tmp/pytest-of-USER/pytest-3/test_actual_overlap_and_old_du0')
+peers = <function peers.<locals>.make at 0x107164180>
+
+    def test_actual_overlap_and_old_duplicate(tmp_path,peers):
+>       msgs=messages();s=peers();r=peers(drop=True);p,port,out,_=receiver(tmp_path,s,r)
+                                                                  ^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_udp.py:113: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tests/test_udp.py:71: in receiver
+    try:assert read_json(proc)['ready'] is True
+               ^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+proc = <Popen: returncode: 2 args: ['<USER_HOME>/.cache/job-apps-runtime/feed...>
+timeout = 3
+
+    def read_json(proc, timeout=3):
+        # Unbuffered binary stdout avoids select() missing Python text-buffered lines.
+        end = time.monotonic() + timeout
+        line = bytearray()
+        while time.monotonic() < end:
+            if select.select([proc.stdout], [], [], max(0, end-time.monotonic()))[0]:
+                byte = os.read(proc.stdout.fileno(), 1)
+                if not byte:
+>                   raise AssertionError(f'process exited {proc.poll()}: {proc.stderr.read().decode()}')
+E                   AssertionError: process exited 2: error: usage: feed_replay replay --capture FILE --session TENBYTES --output NEWDIR [--depth 0..20 --include-orders 0|1 --engine indexed|scan]
+
+tests/test_udp.py:25: AssertionError
+____________ test_flood_does_not_extend_stalled_gap_deadline[False] ____________
+
+tmp_path = PosixPath('<CACHE_ROOT>/tmp/pytest-of-USER/pytest-3/test_flood_does_not_extend_sta0')
+peers = <function peers.<locals>.make at 0x1071647c0>, foreign = False
+
+    @pytest.mark.parametrize('foreign',[False,True])
+    def test_flood_does_not_extend_stalled_gap_deadline(tmp_path,peers,foreign):
+        msgs=messages();s=peers();r=peers(drop=True);f=peers() if foreign else s
+>       p,port,out,_=receiver(tmp_path,s,r)
+                     ^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_udp.py:123: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tests/test_udp.py:71: in receiver
+    try:assert read_json(proc)['ready'] is True
+               ^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+proc = <Popen: returncode: 2 args: ['<USER_HOME>/.cache/job-apps-runtime/feed...>
+timeout = 3
+
+    def read_json(proc, timeout=3):
+        # Unbuffered binary stdout avoids select() missing Python text-buffered lines.
+        end = time.monotonic() + timeout
+        line = bytearray()
+        while time.monotonic() < end:
+            if select.select([proc.stdout], [], [], max(0, end-time.monotonic()))[0]:
+                byte = os.read(proc.stdout.fileno(), 1)
+                if not byte:
+>                   raise AssertionError(f'process exited {proc.poll()}: {proc.stderr.read().decode()}')
+E                   AssertionError: process exited 2: error: usage: feed_replay replay --capture FILE --session TENBYTES --output NEWDIR [--depth 0..20 --include-orders 0|1 --engine indexed|scan]
+
+tests/test_udp.py:25: AssertionError
+____________ test_flood_does_not_extend_stalled_gap_deadline[True] _____________
+
+tmp_path = PosixPath('<CACHE_ROOT>/tmp/pytest-of-USER/pytest-3/test_flood_does_not_extend_sta1')
+peers = <function peers.<locals>.make at 0x107164cc0>, foreign = True
+
+    @pytest.mark.parametrize('foreign',[False,True])
+    def test_flood_does_not_extend_stalled_gap_deadline(tmp_path,peers,foreign):
+        msgs=messages();s=peers();r=peers(drop=True);f=peers() if foreign else s
+>       p,port,out,_=receiver(tmp_path,s,r)
+                     ^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_udp.py:123: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tests/test_udp.py:71: in receiver
+    try:assert read_json(proc)['ready'] is True
+               ^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+proc = <Popen: returncode: 2 args: ['<USER_HOME>/.cache/job-apps-runtime/feed...>
+timeout = 3
+
+    def read_json(proc, timeout=3):
+        # Unbuffered binary stdout avoids select() missing Python text-buffered lines.
+        end = time.monotonic() + timeout
+        line = bytearray()
+        while time.monotonic() < end:
+            if select.select([proc.stdout], [], [], max(0, end-time.monotonic()))[0]:
+                byte = os.read(proc.stdout.fileno(), 1)
+                if not byte:
+>                   raise AssertionError(f'process exited {proc.poll()}: {proc.stderr.read().decode()}')
+E                   AssertionError: process exited 2: error: usage: feed_replay replay --capture FILE --session TENBYTES --output NEWDIR [--depth 0..20 --include-orders 0|1 --engine indexed|scan]
+
+tests/test_udp.py:25: AssertionError
+__________________ test_kernel_recvmsg_truncation_is_invalid ___________________
+
+tmp_path = PosixPath('<CACHE_ROOT>/tmp/pytest-of-USER/pytest-3/test_kernel_recvmsg_truncation0')
+peers = <function peers.<locals>.make at 0x107165260>
+
+    def test_kernel_recvmsg_truncation_is_invalid(tmp_path,peers):
+>       s=peers();r=peers(drop=True);p,port,out,cap=receiver(tmp_path,s,r,recv_buffer=20)
+                                                    ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_udp.py:134: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tests/test_udp.py:71: in receiver
+    try:assert read_json(proc)['ready'] is True
+               ^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+proc = <Popen: returncode: 2 args: ['<USER_HOME>/.cache/job-apps-runtime/feed...>
+timeout = 3
+
+    def read_json(proc, timeout=3):
+        # Unbuffered binary stdout avoids select() missing Python text-buffered lines.
+        end = time.monotonic() + timeout
+        line = bytearray()
+        while time.monotonic() < end:
+            if select.select([proc.stdout], [], [], max(0, end-time.monotonic()))[0]:
+                byte = os.read(proc.stdout.fileno(), 1)
+                if not byte:
+>                   raise AssertionError(f'process exited {proc.poll()}: {proc.stderr.read().decode()}')
+E                   AssertionError: process exited 2: error: usage: feed_replay replay --capture FILE --session TENBYTES --output NEWDIR [--depth 0..20 --include-orders 0|1 --engine indexed|scan]
+
+tests/test_udp.py:25: AssertionError
+_________ test_pinned_invalid_traffic_preserves_prefix[wrong_session] __________
+
+tmp_path = PosixPath('<CACHE_ROOT>/tmp/pytest-of-USER/pytest-3/test_pinned_invalid_traffic_pr0')
+peers = <function peers.<locals>.make at 0x10709ba60>, kind = 'wrong_session'
+
+    @pytest.mark.parametrize('kind',['wrong_session','terminal_conflict','malformed'])
+    def test_pinned_invalid_traffic_preserves_prefix(tmp_path,peers,kind):
+>       s=peers();r=peers(drop=True);p,port,out,_=receiver(tmp_path,s,r)
+                                                  ^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_udp.py:142: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tests/test_udp.py:71: in receiver
+    try:assert read_json(proc)['ready'] is True
+               ^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+proc = <Popen: returncode: 2 args: ['<USER_HOME>/.cache/job-apps-runtime/feed...>
+timeout = 3
+
+    def read_json(proc, timeout=3):
+        # Unbuffered binary stdout avoids select() missing Python text-buffered lines.
+        end = time.monotonic() + timeout
+        line = bytearray()
+        while time.monotonic() < end:
+            if select.select([proc.stdout], [], [], max(0, end-time.monotonic()))[0]:
+                byte = os.read(proc.stdout.fileno(), 1)
+                if not byte:
+>                   raise AssertionError(f'process exited {proc.poll()}: {proc.stderr.read().decode()}')
+E                   AssertionError: process exited 2: error: usage: feed_replay replay --capture FILE --session TENBYTES --output NEWDIR [--depth 0..20 --include-orders 0|1 --engine indexed|scan]
+
+tests/test_udp.py:25: AssertionError
+_______ test_pinned_invalid_traffic_preserves_prefix[terminal_conflict] ________
+
+tmp_path = PosixPath('<CACHE_ROOT>/tmp/pytest-of-USER/pytest-3/test_pinned_invalid_traffic_pr1')
+peers = <function peers.<locals>.make at 0x10709bc40>
+kind = 'terminal_conflict'
+
+    @pytest.mark.parametrize('kind',['wrong_session','terminal_conflict','malformed'])
+    def test_pinned_invalid_traffic_preserves_prefix(tmp_path,peers,kind):
+>       s=peers();r=peers(drop=True);p,port,out,_=receiver(tmp_path,s,r)
+                                                  ^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_udp.py:142: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tests/test_udp.py:71: in receiver
+    try:assert read_json(proc)['ready'] is True
+               ^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+proc = <Popen: returncode: 2 args: ['<USER_HOME>/.cache/job-apps-runtime/feed...>
+timeout = 3
+
+    def read_json(proc, timeout=3):
+        # Unbuffered binary stdout avoids select() missing Python text-buffered lines.
+        end = time.monotonic() + timeout
+        line = bytearray()
+        while time.monotonic() < end:
+            if select.select([proc.stdout], [], [], max(0, end-time.monotonic()))[0]:
+                byte = os.read(proc.stdout.fileno(), 1)
+                if not byte:
+>                   raise AssertionError(f'process exited {proc.poll()}: {proc.stderr.read().decode()}')
+E                   AssertionError: process exited 2: error: usage: feed_replay replay --capture FILE --session TENBYTES --output NEWDIR [--depth 0..20 --include-orders 0|1 --engine indexed|scan]
+
+tests/test_udp.py:25: AssertionError
+___________ test_pinned_invalid_traffic_preserves_prefix[malformed] ____________
+
+tmp_path = PosixPath('<CACHE_ROOT>/tmp/pytest-of-USER/pytest-3/test_pinned_invalid_traffic_pr2')
+peers = <function peers.<locals>.make at 0x10709b560>, kind = 'malformed'
+
+    @pytest.mark.parametrize('kind',['wrong_session','terminal_conflict','malformed'])
+    def test_pinned_invalid_traffic_preserves_prefix(tmp_path,peers,kind):
+>       s=peers();r=peers(drop=True);p,port,out,_=receiver(tmp_path,s,r)
+                                                  ^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_udp.py:142: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tests/test_udp.py:71: in receiver
+    try:assert read_json(proc)['ready'] is True
+               ^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+proc = <Popen: returncode: 2 args: ['<USER_HOME>/.cache/job-apps-runtime/feed...>
+timeout = 3
+
+    def read_json(proc, timeout=3):
+        # Unbuffered binary stdout avoids select() missing Python text-buffered lines.
+        end = time.monotonic() + timeout
+        line = bytearray()
+        while time.monotonic() < end:
+            if select.select([proc.stdout], [], [], max(0, end-time.monotonic()))[0]:
+                byte = os.read(proc.stdout.fileno(), 1)
+                if not byte:
+>                   raise AssertionError(f'process exited {proc.poll()}: {proc.stderr.read().decode()}')
+E                   AssertionError: process exited 2: error: usage: feed_replay replay --capture FILE --session TENBYTES --output NEWDIR [--depth 0..20 --include-orders 0|1 --engine indexed|scan]
+
+tests/test_udp.py:25: AssertionError
+___________ test_foreign_only_traffic_cannot_evade_overall_deadline ____________
+
+tmp_path = PosixPath('<CACHE_ROOT>/tmp/pytest-of-USER/pytest-3/test_foreign_only_traffic_cann0')
+peers = <function peers.<locals>.make at 0x10709a660>
+
+    def test_foreign_only_traffic_cannot_evade_overall_deadline(tmp_path,peers):
+>       s=peers();r=peers(drop=True);f=peers();p,port,out,cap=receiver(tmp_path,s,r,overall_ms=200)
+                                                              ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_udp.py:151: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tests/test_udp.py:71: in receiver
+    try:assert read_json(proc)['ready'] is True
+               ^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+proc = <Popen: returncode: 2 args: ['<USER_HOME>/.cache/job-apps-runtime/feed...>
+timeout = 3
+
+    def read_json(proc, timeout=3):
+        # Unbuffered binary stdout avoids select() missing Python text-buffered lines.
+        end = time.monotonic() + timeout
+        line = bytearray()
+        while time.monotonic() < end:
+            if select.select([proc.stdout], [], [], max(0, end-time.monotonic()))[0]:
+                byte = os.read(proc.stdout.fileno(), 1)
+                if not byte:
+>                   raise AssertionError(f'process exited {proc.poll()}: {proc.stderr.read().decode()}')
+E                   AssertionError: process exited 2: error: usage: feed_replay replay --capture FILE --session TENBYTES --output NEWDIR [--depth 0..20 --include-orders 0|1 --engine indexed|scan]
+
+tests/test_udp.py:25: AssertionError
+_________ test_foreign_traffic_charged_to_receive_caps[receive_bytes] __________
+
+tmp_path = PosixPath('<CACHE_ROOT>/tmp/pytest-of-USER/pytest-3/test_foreign_traffic_charged_t0')
+peers = <function peers.<locals>.make at 0x1070a0360>, bound = 'receive_bytes'
+
+    @pytest.mark.parametrize('bound',['receive_bytes','receive_count'])
+    def test_foreign_traffic_charged_to_receive_caps(tmp_path,peers,bound):
+>       s=peers();r=peers(drop=True);f=peers();p,port,out,_=receiver(tmp_path,s,r,**{bound:64 if bound=='receive_bytes' else 2})
+                                                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_udp.py:161: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tests/test_udp.py:71: in receiver
+    try:assert read_json(proc)['ready'] is True
+               ^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+proc = <Popen: returncode: 2 args: ['<USER_HOME>/.cache/job-apps-runtime/feed...>
+timeout = 3
+
+    def read_json(proc, timeout=3):
+        # Unbuffered binary stdout avoids select() missing Python text-buffered lines.
+        end = time.monotonic() + timeout
+        line = bytearray()
+        while time.monotonic() < end:
+            if select.select([proc.stdout], [], [], max(0, end-time.monotonic()))[0]:
+                byte = os.read(proc.stdout.fileno(), 1)
+                if not byte:
+>                   raise AssertionError(f'process exited {proc.poll()}: {proc.stderr.read().decode()}')
+E                   AssertionError: process exited 2: error: usage: feed_replay replay --capture FILE --session TENBYTES --output NEWDIR [--depth 0..20 --include-orders 0|1 --engine indexed|scan]
+
+tests/test_udp.py:25: AssertionError
+_________ test_foreign_traffic_charged_to_receive_caps[receive_count] __________
+
+tmp_path = PosixPath('<CACHE_ROOT>/tmp/pytest-of-USER/pytest-3/test_foreign_traffic_charged_t1')
+peers = <function peers.<locals>.make at 0x107165300>, bound = 'receive_count'
+
+    @pytest.mark.parametrize('bound',['receive_bytes','receive_count'])
+    def test_foreign_traffic_charged_to_receive_caps(tmp_path,peers,bound):
+>       s=peers();r=peers(drop=True);f=peers();p,port,out,_=receiver(tmp_path,s,r,**{bound:64 if bound=='receive_bytes' else 2})
+                                                            ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_udp.py:161: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tests/test_udp.py:71: in receiver
+    try:assert read_json(proc)['ready'] is True
+               ^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+proc = <Popen: returncode: 2 args: ['<USER_HOME>/.cache/job-apps-runtime/feed...>
+timeout = 3
+
+    def read_json(proc, timeout=3):
+        # Unbuffered binary stdout avoids select() missing Python text-buffered lines.
+        end = time.monotonic() + timeout
+        line = bytearray()
+        while time.monotonic() < end:
+            if select.select([proc.stdout], [], [], max(0, end-time.monotonic()))[0]:
+                byte = os.read(proc.stdout.fileno(), 1)
+                if not byte:
+>                   raise AssertionError(f'process exited {proc.poll()}: {proc.stderr.read().decode()}')
+E                   AssertionError: process exited 2: error: usage: feed_replay replay --capture FILE --session TENBYTES --output NEWDIR [--depth 0..20 --include-orders 0|1 --engine indexed|scan]
+
+tests/test_udp.py:25: AssertionError
+_____________ test_signal_cancellation_closes_and_publishes_prefix _____________
+
+tmp_path = PosixPath('<CACHE_ROOT>/tmp/pytest-of-USER/pytest-3/test_signal_cancellation_close0')
+peers = <function peers.<locals>.make at 0x107164e00>
+
+    def test_signal_cancellation_closes_and_publishes_prefix(tmp_path,peers):
+>       s=peers();r=peers(drop=True);p,port,out,cap=receiver(tmp_path,s,r)
+                                                    ^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_udp.py:167: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tests/test_udp.py:71: in receiver
+    try:assert read_json(proc)['ready'] is True
+               ^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+proc = <Popen: returncode: 2 args: ['<USER_HOME>/.cache/job-apps-runtime/feed...>
+timeout = 3
+
+    def read_json(proc, timeout=3):
+        # Unbuffered binary stdout avoids select() missing Python text-buffered lines.
+        end = time.monotonic() + timeout
+        line = bytearray()
+        while time.monotonic() < end:
+            if select.select([proc.stdout], [], [], max(0, end-time.monotonic()))[0]:
+                byte = os.read(proc.stdout.fileno(), 1)
+                if not byte:
+>                   raise AssertionError(f'process exited {proc.poll()}: {proc.stderr.read().decode()}')
+E                   AssertionError: process exited 2: error: usage: feed_replay replay --capture FILE --session TENBYTES --output NEWDIR [--depth 0..20 --include-orders 0|1 --engine indexed|scan]
+
+tests/test_udp.py:25: AssertionError
+_________________ test_terminated_recovery_peer_fails_bounded __________________
+
+tmp_path = PosixPath('<CACHE_ROOT>/tmp/pytest-of-USER/pytest-3/test_terminated_recovery_peer_0')
+peers = <function peers.<locals>.make at 0x107164040>
+
+    def test_terminated_recovery_peer_fails_bounded(tmp_path,peers):
+>       s=peers();r=peers(drop=True);p,port,out,_=receiver(tmp_path,s,r)
+                                                  ^^^^^^^^^^^^^^^^^^^^^^
+
+tests/test_udp.py:178: 
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+tests/test_udp.py:71: in receiver
+    try:assert read_json(proc)['ready'] is True
+               ^^^^^^^^^^^^^^^
+_ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ _ 
+
+proc = <Popen: returncode: 2 args: ['<USER_HOME>/.cache/job-apps-runtime/feed...>
+timeout = 3
+
+    def read_json(proc, timeout=3):
+        # Unbuffered binary stdout avoids select() missing Python text-buffered lines.
+        end = time.monotonic() + timeout
+        line = bytearray()
+        while time.monotonic() < end:
+            if select.select([proc.stdout], [], [], max(0, end-time.monotonic()))[0]:
+                byte = os.read(proc.stdout.fileno(), 1)
+                if not byte:
+>                   raise AssertionError(f'process exited {proc.poll()}: {proc.stderr.read().decode()}')
+E                   AssertionError: process exited 2: error: usage: feed_replay replay --capture FILE --session TENBYTES --output NEWDIR [--depth 0..20 --include-orders 0|1 --engine indexed|scan]
+
+tests/test_udp.py:25: AssertionError
+=========================== short test summary info ============================
+FAILED tests/test_udp.py::test_actual_gap_recovery_and_partial_responses[1-future]
+FAILED tests/test_udp.py::test_actual_gap_recovery_and_partial_responses[1-heartbeat]
+FAILED tests/test_udp.py::test_actual_gap_recovery_and_partial_responses[1-end]
+FAILED tests/test_udp.py::test_actual_gap_recovery_and_partial_responses[128-future]
+FAILED tests/test_udp.py::test_actual_gap_recovery_and_partial_responses[128-heartbeat]
+FAILED tests/test_udp.py::test_actual_gap_recovery_and_partial_responses[128-end]
+FAILED tests/test_udp.py::test_actual_overlap_and_old_duplicate - AssertionEr...
+FAILED tests/test_udp.py::test_flood_does_not_extend_stalled_gap_deadline[False]
+FAILED tests/test_udp.py::test_flood_does_not_extend_stalled_gap_deadline[True]
+FAILED tests/test_udp.py::test_kernel_recvmsg_truncation_is_invalid - Asserti...
+FAILED tests/test_udp.py::test_pinned_invalid_traffic_preserves_prefix[wrong_session]
+FAILED tests/test_udp.py::test_pinned_invalid_traffic_preserves_prefix[terminal_conflict]
+FAILED tests/test_udp.py::test_pinned_invalid_traffic_preserves_prefix[malformed]
+FAILED tests/test_udp.py::test_foreign_only_traffic_cannot_evade_overall_deadline
+FAILED tests/test_udp.py::test_foreign_traffic_charged_to_receive_caps[receive_bytes]
+FAILED tests/test_udp.py::test_foreign_traffic_charged_to_receive_caps[receive_count]
+FAILED tests/test_udp.py::test_signal_cancellation_closes_and_publishes_prefix
+FAILED tests/test_udp.py::test_terminated_recovery_peer_fails_bounded - Asser...
+18 failed, 1 passed in 1.38s

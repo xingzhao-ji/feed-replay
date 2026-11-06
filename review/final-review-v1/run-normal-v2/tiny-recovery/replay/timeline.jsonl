@@ -1,0 +1,9 @@
+{"time_ns":"0","event":"accepted","expected":"4","high_water_next":"4","count":"3"}
+{"time_ns":"0","event":"end","expected":"4","high_water_next":"18","count":"0"}
+{"time_ns":"0","event":"accepted","expected":"6","high_water_next":"18","count":"2"}
+{"time_ns":"0","event":"accepted","expected":"8","high_water_next":"18","count":"2"}
+{"time_ns":"0","event":"accepted","expected":"10","high_water_next":"18","count":"2"}
+{"time_ns":"0","event":"accepted","expected":"12","high_water_next":"18","count":"2"}
+{"time_ns":"0","event":"accepted","expected":"14","high_water_next":"18","count":"2"}
+{"time_ns":"0","event":"accepted","expected":"16","high_water_next":"18","count":"2"}
+{"time_ns":"0","event":"accepted","expected":"18","high_water_next":"18","count":"2"}

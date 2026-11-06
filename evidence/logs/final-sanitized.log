@@ -1,0 +1,7 @@
+python3 scripts/guard.py clang++ -std=c++20 -O2 -Wall -Wextra -Werror -Iinclude -O1 -g -fsanitize=address,undefined -fno-omit-frame-pointer src/codec.cpp src/indexed_book.cpp src/scan_book.cpp src/session.cpp tests/probe.cpp -o <CACHE_ROOT>/build/probe_sanitized
+python3 scripts/guard.py clang++ -std=c++20 -O2 -Wall -Wextra -Werror -Iinclude -O1 -g -fsanitize=address,undefined -fno-omit-frame-pointer src/codec.cpp src/indexed_book.cpp src/scan_book.cpp src/session.cpp src/capture.cpp src/report.cpp src/udp.cpp src/main.cpp -o <CACHE_ROOT>/build/feed_replay_sanitized
+python3 scripts/guard.py clang++ -std=c++20 -O2 -Wall -Wextra -Werror -Iinclude -O1 -g -fsanitize=address,undefined -fno-omit-frame-pointer src/codec.cpp src/indexed_book.cpp src/scan_book.cpp src/session.cpp src/capture.cpp src/report.cpp src/udp.cpp src/benchmark.cpp -o <CACHE_ROOT>/build/feed_benchmark_sanitized
+FEED_PROBE=<CACHE_ROOT>/build/probe_sanitized FEED_BINARY=<CACHE_ROOT>/build/feed_replay_sanitized FEED_BENCHMARK=<CACHE_ROOT>/build/feed_benchmark_sanitized python3 scripts/guard.py python3 -m pytest -q -p no:cacheprovider tests
+........................................................................ [ 51%]
+....................................................................     [100%]
+140 passed in 7.56s

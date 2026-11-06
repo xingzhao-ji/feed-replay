@@ -1,0 +1,19 @@
+python3 scripts/guard.py clang++ -std=c++20 -O2 -Wall -Wextra -Werror -Iinclude src/codec.cpp src/indexed_book.cpp src/scan_book.cpp src/session.cpp src/capture.cpp src/report.cpp src/udp.cpp src/benchmark.cpp -o <CACHE_ROOT>/build/feed_benchmark
+python3 scripts/guard.py python3 -m pytest -q -p no:cacheprovider tests/test_benchmark.py
+F.....                                                                   [100%]
+=================================== FAILURES ===================================
+____ test_exact_engine_queries_and_final_state_equal_independent_reference _____
+
+    def test_exact_engine_queries_and_final_state_equal_independent_reference():
+>       p=run(WORKLOAD);assert p.returncode==0,p.stderr
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+E       AssertionError: benchmark not implemented
+E         
+E       assert 1 == 0
+E        +  where 1 = CompletedProcess(args=['<CACHE_ROOT>/build/feed_benchmark', '--check', '/User...sktop/job-apps/projects/feed-replay/evidence/workload'], returncode=1, stdout='', stderr='benchmark not implemented\n').returncode
+
+tests/test_benchmark.py:16: AssertionError
+=========================== short test summary info ============================
+FAILED tests/test_benchmark.py::test_exact_engine_queries_and_final_state_equal_independent_reference
+1 failed, 5 passed in 0.20s
+make: *** [test-benchmark] Error 1

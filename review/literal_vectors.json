@@ -1,0 +1,22 @@
+{
+  "provenance": "Independently hand-transcribed ITCH 5.0 field offsets; hexadecimal octets are literals, not production-encoder output. Tracking 0x1234 and time 0x0123456789ab deliberately expose byte-order errors.",
+  "messages": {
+    "start": {"hex": "53 0000 1234 0123456789ab 4f", "length": 12, "type": "S", "locate": 0, "time": 1250999896491, "code": "O"},
+    "alpha": {"hex": "52 0001 1234 0123456789ab 414c504841202020 51 4e 00000064 4e 43 2020 50 4e 4e 31 4e 00000001 4e", "length": 39, "type": "R", "locate": 1, "time": 1250999896491, "symbol": "ALPHA   "},
+    "beta": {"hex": "52 0002 1234 0123456789ab 4245544120202020 51 4e 00000064 4e 43 2020 50 4e 4e 31 4e 00000001 4e", "length": 39, "type": "R", "locate": 2, "time": 1250999896491, "symbol": "BETA    "},
+    "add_bid": {"hex": "41 0001 1234 0123456789ab 0102030405060708 42 00000064 414c504841202020 000186a0", "length": 36, "type": "A", "locate": 1, "time": 1250999896491, "id": 72623859790382856, "side": "B", "quantity": 100, "symbol": "ALPHA   ", "price": 100000},
+    "add_zero_id": {"hex": "41 0001 1234 0123456789ab 0000000000000000 42 00000028 414c504841202020 000186a0", "length": 36, "type": "A", "locate": 1, "time": 1250999896491, "id": 0, "side": "B", "quantity": 40, "symbol": "ALPHA   ", "price": 100000},
+    "add_attributed_ask": {"hex": "46 0001 1234 0123456789ab fedcba9876543210 53 00000050 414c504841202020 00018704 41424344", "length": 40, "type": "F", "locate": 1, "time": 1250999896491, "id": 18364758544493064720, "side": "S", "quantity": 80, "symbol": "ALPHA   ", "price": 100100, "attribution": "ABCD"},
+    "add_extremes": {"hex": "41 0002 1234 4e94914effff ffffffffffffffff 42 ffffffff 4245544120202020 77359400", "length": 36, "type": "A", "locate": 2, "time": 86399999999999, "id": 18446744073709551615, "side": "B", "quantity": 4294967295, "symbol": "BETA    ", "price": 2000000000},
+    "nonprintable": {"hex": "43 0001 1234 0123456789ab fedcba9876543210 0000001e 1112131415161718 4e 0001869f", "length": 36, "type": "C", "locate": 1, "time": 1250999896491, "id": 18364758544493064720, "quantity": 30, "match": 1230066625199609624, "printable": "N", "price": 99999},
+    "break": {"hex": "42 0001 1234 0123456789ab 1112131415161718", "length": 19, "type": "B", "locate": 1, "time": 1250999896491, "match": 1230066625199609624},
+    "replace": {"hex": "55 0001 1234 0123456789ab fedcba9876543210 8000000000000001 0000003c 00018768", "length": 35, "type": "U", "locate": 1, "time": 1250999896491, "id": 18364758544493064720, "new_id": 9223372036854775809, "quantity": 60, "price": 100200},
+    "execute": {"hex": "45 0001 1234 0123456789ab 0102030405060708 00000014 2122232425262728", "length": 31, "type": "E", "locate": 1, "time": 1250999896491, "id": 72623859790382856, "quantity": 20, "match": 2387509390608836392},
+    "cancel": {"hex": "58 0001 1234 0123456789ab 0000000000000000 00000028", "length": 23, "type": "X", "locate": 1, "time": 1250999896491, "id": 0, "quantity": 40},
+    "trade": {"hex": "50 0001 1234 0123456789ab 0000000000000000 42 00000019 414c504841202020 0001869f 3132333435363738", "length": 44, "type": "P", "locate": 1, "time": 1250999896491, "id": 0, "side": "B", "quantity": 25, "symbol": "ALPHA   ", "price": 99999, "match": 3544952156018063160},
+    "zero_cross": {"hex": "51 0002 1234 0123456789ab 0000000000000000 4245544120202020 00000000 4142434445464748 4f", "length": 40, "type": "Q", "locate": 2, "time": 1250999896491, "quantity": 0, "symbol": "BETA    ", "price": 0, "match": 4702394921427289928, "cross_type": "O"},
+    "delete": {"hex": "44 0001 1234 0123456789ab 8000000000000001", "length": 19, "type": "D", "locate": 1, "time": 1250999896491, "id": 9223372036854775809},
+    "zero_price": {"hex": "41 0001 1234 0123456789ab 0000000000000042 42 00000001 414c504841202020 00000000", "length": 36, "type": "A", "locate": 1, "time": 1250999896491, "id": 66, "side": "B", "quantity": 1, "symbol": "ALPHA   ", "price": 0},
+    "end_messages": {"hex": "53 0000 1234 0123456789ab 43", "length": 12, "type": "S", "locate": 0, "time": 1250999896491, "code": "C"}
+  }
+}

@@ -1,0 +1,86 @@
+python3 scripts/guard.py clang++ -std=c++20 -O2 -Wall -Wextra -Werror -Iinclude src/codec.cpp src/indexed_book.cpp src/scan_book.cpp src/session.cpp src/main.cpp -o <CACHE_ROOT>/build/feed_replay
+python3 scripts/guard.py python3 -m pytest -q -p no:cacheprovider tests/test_cli.py
+FFF...............FF                                                     [100%]
+=================================== FAILURES ===================================
+_________ test_complete_replay_publishes_exact_book_and_offline_flags __________
+
+tmp_path = PosixPath('<CACHE_ROOT>/tmp/pytest-of-USER/pytest-0/test_complete_replay_publishes0')
+
+    def test_complete_replay_publishes_exact_book_and_offline_flags(tmp_path):
+     source,data=complete_source(tmp_path);out=tmp_path/'out';p=invoke(source,out)
+>    assert p.returncode==0,p.stderr
+E    AssertionError: CLI not implemented
+E      
+E    assert 2 == 0
+E     +  where 2 = CompletedProcess(args=['<CACHE_ROOT>/build/feed_replay', 'replay', '--capture...est_complete_replay_publishes0/out', '--include-orders', '1'], returncode=2, stdout='', stderr='CLI not implemented\n').returncode
+
+tests/test_cli.py:29: AssertionError
+_______________ test_gap_free_eof_without_terminal_is_incomplete _______________
+
+tmp_path = PosixPath('<CACHE_ROOT>/tmp/pytest-of-USER/pytest-0/test_gap_free_eof_without_term0')
+
+    def test_gap_free_eof_without_terminal_is_incomplete(tmp_path):
+     source=capture(tmp_path/'in.frcp',[bytes.fromhex(CASES[0]['packets'][0])]);out=tmp_path/'out';p=invoke(source,out)
+>    assert p.returncode==3,p.stderr
+E    AssertionError: CLI not implemented
+E      
+E    assert 2 == 3
+E     +  where 2 = CompletedProcess(args=['<CACHE_ROOT>/build/feed_replay', 'replay', '--capture...est_gap_free_eof_without_term0/out', '--include-orders', '1'], returncode=2, stdout='', stderr='CLI not implemented\n').returncode
+
+tests/test_cli.py:39: AssertionError
+_________________ test_invalid_semantics_publish_honest_prefix _________________
+
+tmp_path = PosixPath('<CACHE_ROOT>/tmp/pytest-of-USER/pytest-0/test_invalid_semantics_publish0')
+
+    def test_invalid_semantics_publish_honest_prefix(tmp_path):
+     case=next(c for c in CASES if c['name']=='semantic_error_retains_packet_prefix') if any(c['name']=='semantic_error_retains_packet_prefix' for c in CASES) else next(c for c in CASES if 'semantic' in c['name'])
+     data=[bytes.fromhex(x) for x in case['packets']];source=capture(tmp_path/'in.frcp',data);out=tmp_path/'out';p=invoke(source,out)
+>    assert p.returncode==4,p.stderr
+E    AssertionError: CLI not implemented
+E      
+E    assert 2 == 4
+E     +  where 2 = CompletedProcess(args=['<CACHE_ROOT>/build/feed_replay', 'replay', '--capture...est_invalid_semantics_publish0/out', '--include-orders', '1'], returncode=2, stdout='', stderr='CLI not implemented\n').returncode
+
+tests/test_cli.py:45: AssertionError
+_____________ test_competing_processes_publish_one_coherent_output _____________
+
+tmp_path = PosixPath('<CACHE_ROOT>/tmp/pytest-of-USER/pytest-0/test_competing_processes_publi0')
+
+    def test_competing_processes_publish_one_coherent_output(tmp_path):
+     source,data=complete_source(tmp_path);out=tmp_path/'out';barrier=threading.Barrier(2)
+     def worker():barrier.wait();return invoke(source,out)
+     with ThreadPoolExecutor(max_workers=2) as pool:results=list(pool.map(lambda _:worker(),range(2)))
+>    assert sorted(p.returncode for p in results)==[0,2],[p.stderr for p in results]
+E    AssertionError: ['CLI not implemented
+E      ', 'CLI not implemented
+E      ']
+E    assert [2, 2] == [0, 2]
+E      
+E      At index 0 diff: 2 != 0
+E      Use -v to get more diff
+
+tests/test_cli.py:75: AssertionError
+________ test_graphic_symbol_is_json_escaped_and_depth_zero_keeps_best _________
+
+tmp_path = PosixPath('<CACHE_ROOT>/tmp/pytest-of-USER/pytest-0/test_graphic_symbol_is_json_es0')
+
+    def test_graphic_symbol_is_json_escaped_and_depth_zero_keeps_best(tmp_path):
+     symbol=b'A"\\B    ';r=bytearray.fromhex(VECTORS['alpha']['hex']);r[11:19]=symbol
+     a=bytearray.fromhex(VECTORS['add_bid']['hex']);a[24:32]=symbol
+     data=[packet(1,[bytes(r),bytes(a)]),marker(3,True)]
+     source=capture(tmp_path/'in.frcp',data);out=tmp_path/'out';p=invoke(source,out,'--depth',0)
+>    assert p.returncode==0,p.stderr
+E    AssertionError: CLI not implemented
+E      
+E    assert 2 == 0
+E     +  where 2 = CompletedProcess(args=['<CACHE_ROOT>/build/feed_replay', 'replay', '--capture...ol_is_json_es0/out', '--include-orders', '1', '--depth', '0'], returncode=2, stdout='', stderr='CLI not implemented\n').returncode
+
+tests/test_cli.py:84: AssertionError
+=========================== short test summary info ============================
+FAILED tests/test_cli.py::test_complete_replay_publishes_exact_book_and_offline_flags
+FAILED tests/test_cli.py::test_gap_free_eof_without_terminal_is_incomplete - ...
+FAILED tests/test_cli.py::test_invalid_semantics_publish_honest_prefix - Asse...
+FAILED tests/test_cli.py::test_competing_processes_publish_one_coherent_output
+FAILED tests/test_cli.py::test_graphic_symbol_is_json_escaped_and_depth_zero_keeps_best
+5 failed, 15 passed in 0.26s
+make: *** [test-cli] Error 1

@@ -1,0 +1,15 @@
+test_all_literal_field_expectations (__main__.IndependentReferenceTests.test_all_literal_field_expectations) ... ok
+test_every_event_against_handchecked_lifecycle (__main__.IndependentReferenceTests.test_every_event_against_handchecked_lifecycle) ... ok
+test_every_message_truncation_boundary_and_trailing_octet (__main__.IndependentReferenceTests.test_every_message_truncation_boundary_and_trailing_octet) ... ok
+test_every_mold_truncation_boundary_is_packet_atomic (__main__.IndependentReferenceTests.test_every_mold_truncation_boundary_is_packet_atomic) ... ok
+test_handchecked_sequence_cases (__main__.IndependentReferenceTests.test_handchecked_sequence_cases) ... ok
+test_literal_multi_message_offsets_and_request (__main__.IndependentReferenceTests.test_literal_multi_message_offsets_and_request) ... ok
+test_public_normalization_exact_integer_and_metadata (__main__.IndependentReferenceTests.test_public_normalization_exact_integer_and_metadata) ... ok
+test_quantity_aggregate_wider_than_uint32 (__main__.IndependentReferenceTests.test_quantity_aggregate_wider_than_uint32) ... ok
+test_replace_consumes_old_id_forever_and_failure_is_atomic (__main__.IndependentReferenceTests.test_replace_consumes_old_id_forever_and_failure_is_atomic) ... ok
+test_zero_price_is_quote_not_absence_and_depth_is_nonmutating (__main__.IndependentReferenceTests.test_zero_price_is_quote_not_absence_and_depth_is_nonmutating) ... ok
+
+----------------------------------------------------------------------
+Ran 10 tests in 0.007s
+
+OK

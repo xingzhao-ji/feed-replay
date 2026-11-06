@@ -1,0 +1,6 @@
+{"time_ns":"806292","event":"accepted","expected":"4","high_water_next":"4","count":"3"}
+{"time_ns":"869667","event":"end","expected":"4","high_water_next":"18","count":"0"}
+{"time_ns":"869667","event":"request","expected":"4","high_water_next":"18","count":"14"}
+{"time_ns":"2034709","event":"accepted","expected":"5","high_water_next":"18","count":"1"}
+{"time_ns":"2034709","event":"request","expected":"5","high_water_next":"18","count":"13"}
+{"time_ns":"2123792","event":"cancelled","expected":"5","high_water_next":"18","count":"0"}

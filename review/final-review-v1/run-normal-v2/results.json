@@ -1,0 +1,105 @@
+[
+  {
+    "test": "evidence_integrity",
+    "passed": true,
+    "details": {
+      "frozen_files": 9,
+      "index_files": 159,
+      "verification_source_files": 29,
+      "verification_artifacts": 98,
+      "bench_rows": [
+        {
+          "frequency": 1,
+          "indexed_median_ms": 6.5767295,
+          "scan_median_ms": 256.8894375,
+          "ratio": 39.06036237312178
+        },
+        {
+          "frequency": 32,
+          "indexed_median_ms": 5.914083,
+          "scan_median_ms": 14.2752295,
+          "ratio": 2.4137688801459163
+        },
+        {
+          "frequency": 256,
+          "indexed_median_ms": 5.817396,
+          "scan_median_ms": 4.545375,
+          "ratio": 0.7813418581097109
+        }
+      ],
+      "parser_median_ms": 0.704042,
+      "binary_sha256": "fe728203bf001e9cc2ab1cf4177d213caeea3c71e4f6a88655171da17899424a",
+      "probe_sha256": "bfa8da9bed43476cbb42ccd79482413de1977a66526602d02c565eaba6851bb7"
+    },
+    "wall_seconds": 0.029714083997532725
+  },
+  {
+    "test": "schedule_parity",
+    "passed": true,
+    "details": {
+      "seed": 2026102307,
+      "schedules": 96,
+      "arrivals_compared": 3477
+    },
+    "wall_seconds": 0.5518878329894505
+  },
+  {
+    "test": "full_udp_tiny_recovery",
+    "passed": true,
+    "details": {
+      "requests": 7,
+      "final_expected": "18",
+      "live_orders": 3
+    },
+    "wall_seconds": 0.010694208991480991
+  },
+  {
+    "test": "invalid_future",
+    "passed": true,
+    "details": {
+      "status": "Invalid",
+      "expected": "4",
+      "high_water_next": "4"
+    },
+    "wall_seconds": 0.004669541987823322
+  },
+  {
+    "test": "zero_datagram_budget",
+    "passed": true,
+    "details": {
+      "received": 5,
+      "capture_bytes": 8
+    },
+    "wall_seconds": 0.004540583002381027
+  },
+  {
+    "test": "late_output_competitor",
+    "passed": true,
+    "details": {
+      "returncode": 2,
+      "sentinel_preserved": true,
+      "capture_bytes": 33
+    },
+    "wall_seconds": 0.005015083006583154
+  },
+  {
+    "test": "cancel_after_progress",
+    "passed": true,
+    "details": {
+      "status": "Cancelled",
+      "expected": "5",
+      "requests": 2
+    },
+    "wall_seconds": 0.0048918750253506005
+  },
+  {
+    "test": "new_clock_limits",
+    "passed": true,
+    "details": {
+      "request_cap": 128,
+      "final_expected_after_cap": "129",
+      "exact_deadline_kept_prefix": "1"
+    },
+    "wall_seconds": 0.008362499997019768
+  }
+]

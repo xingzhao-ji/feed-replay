@@ -1,0 +1,729 @@
+{
+  "events": [
+    "start",
+    "alpha",
+    "beta",
+    "add_bid",
+    "add_zero_id",
+    "add_attributed_ask",
+    "add_extremes",
+    "nonprintable",
+    "break",
+    "replace",
+    "execute",
+    "cancel",
+    "trade",
+    "zero_cross",
+    "delete",
+    "zero_price",
+    "end_messages"
+  ],
+  "anchors": [
+    {
+      "sequence": 1,
+      "message": "start",
+      "orders": [],
+      "seen_id_count": 0,
+      "alpha_bids": [],
+      "alpha_asks": [],
+      "beta_bids": [],
+      "itch_end_seen": false
+    },
+    {
+      "sequence": 2,
+      "message": "alpha",
+      "orders": [],
+      "seen_id_count": 0,
+      "alpha_bids": [],
+      "alpha_asks": [],
+      "beta_bids": [],
+      "itch_end_seen": false
+    },
+    {
+      "sequence": 3,
+      "message": "beta",
+      "orders": [],
+      "seen_id_count": 0,
+      "alpha_bids": [],
+      "alpha_asks": [],
+      "beta_bids": [],
+      "itch_end_seen": false
+    },
+    {
+      "sequence": 4,
+      "message": "add_bid",
+      "orders": [
+        {
+          "id": 72623859790382856,
+          "locate": 1,
+          "side": "B",
+          "quantity": 100,
+          "price": 100000,
+          "attribution": ""
+        }
+      ],
+      "seen_id_count": 1,
+      "alpha_bids": [
+        [
+          100000,
+          100
+        ]
+      ],
+      "alpha_asks": [],
+      "beta_bids": [],
+      "itch_end_seen": false
+    },
+    {
+      "sequence": 5,
+      "message": "add_zero_id",
+      "orders": [
+        {
+          "id": 0,
+          "locate": 1,
+          "side": "B",
+          "quantity": 40,
+          "price": 100000,
+          "attribution": ""
+        },
+        {
+          "id": 72623859790382856,
+          "locate": 1,
+          "side": "B",
+          "quantity": 100,
+          "price": 100000,
+          "attribution": ""
+        }
+      ],
+      "seen_id_count": 2,
+      "alpha_bids": [
+        [
+          100000,
+          140
+        ]
+      ],
+      "alpha_asks": [],
+      "beta_bids": [],
+      "itch_end_seen": false
+    },
+    {
+      "sequence": 6,
+      "message": "add_attributed_ask",
+      "orders": [
+        {
+          "id": 0,
+          "locate": 1,
+          "side": "B",
+          "quantity": 40,
+          "price": 100000,
+          "attribution": ""
+        },
+        {
+          "id": 72623859790382856,
+          "locate": 1,
+          "side": "B",
+          "quantity": 100,
+          "price": 100000,
+          "attribution": ""
+        },
+        {
+          "id": 18364758544493064720,
+          "locate": 1,
+          "side": "S",
+          "quantity": 80,
+          "price": 100100,
+          "attribution": "ABCD"
+        }
+      ],
+      "seen_id_count": 3,
+      "alpha_bids": [
+        [
+          100000,
+          140
+        ]
+      ],
+      "alpha_asks": [
+        [
+          100100,
+          80
+        ]
+      ],
+      "beta_bids": [],
+      "itch_end_seen": false
+    },
+    {
+      "sequence": 7,
+      "message": "add_extremes",
+      "orders": [
+        {
+          "id": 0,
+          "locate": 1,
+          "side": "B",
+          "quantity": 40,
+          "price": 100000,
+          "attribution": ""
+        },
+        {
+          "id": 72623859790382856,
+          "locate": 1,
+          "side": "B",
+          "quantity": 100,
+          "price": 100000,
+          "attribution": ""
+        },
+        {
+          "id": 18364758544493064720,
+          "locate": 1,
+          "side": "S",
+          "quantity": 80,
+          "price": 100100,
+          "attribution": "ABCD"
+        },
+        {
+          "id": 18446744073709551615,
+          "locate": 2,
+          "side": "B",
+          "quantity": 4294967295,
+          "price": 2000000000,
+          "attribution": ""
+        }
+      ],
+      "seen_id_count": 4,
+      "alpha_bids": [
+        [
+          100000,
+          140
+        ]
+      ],
+      "alpha_asks": [
+        [
+          100100,
+          80
+        ]
+      ],
+      "beta_bids": [
+        [
+          2000000000,
+          4294967295
+        ]
+      ],
+      "itch_end_seen": false
+    },
+    {
+      "sequence": 8,
+      "message": "nonprintable",
+      "orders": [
+        {
+          "id": 0,
+          "locate": 1,
+          "side": "B",
+          "quantity": 40,
+          "price": 100000,
+          "attribution": ""
+        },
+        {
+          "id": 72623859790382856,
+          "locate": 1,
+          "side": "B",
+          "quantity": 100,
+          "price": 100000,
+          "attribution": ""
+        },
+        {
+          "id": 18364758544493064720,
+          "locate": 1,
+          "side": "S",
+          "quantity": 50,
+          "price": 100100,
+          "attribution": "ABCD"
+        },
+        {
+          "id": 18446744073709551615,
+          "locate": 2,
+          "side": "B",
+          "quantity": 4294967295,
+          "price": 2000000000,
+          "attribution": ""
+        }
+      ],
+      "seen_id_count": 4,
+      "alpha_bids": [
+        [
+          100000,
+          140
+        ]
+      ],
+      "alpha_asks": [
+        [
+          100100,
+          50
+        ]
+      ],
+      "beta_bids": [
+        [
+          2000000000,
+          4294967295
+        ]
+      ],
+      "itch_end_seen": false
+    },
+    {
+      "sequence": 9,
+      "message": "break",
+      "orders": [
+        {
+          "id": 0,
+          "locate": 1,
+          "side": "B",
+          "quantity": 40,
+          "price": 100000,
+          "attribution": ""
+        },
+        {
+          "id": 72623859790382856,
+          "locate": 1,
+          "side": "B",
+          "quantity": 100,
+          "price": 100000,
+          "attribution": ""
+        },
+        {
+          "id": 18364758544493064720,
+          "locate": 1,
+          "side": "S",
+          "quantity": 50,
+          "price": 100100,
+          "attribution": "ABCD"
+        },
+        {
+          "id": 18446744073709551615,
+          "locate": 2,
+          "side": "B",
+          "quantity": 4294967295,
+          "price": 2000000000,
+          "attribution": ""
+        }
+      ],
+      "seen_id_count": 4,
+      "alpha_bids": [
+        [
+          100000,
+          140
+        ]
+      ],
+      "alpha_asks": [
+        [
+          100100,
+          50
+        ]
+      ],
+      "beta_bids": [
+        [
+          2000000000,
+          4294967295
+        ]
+      ],
+      "itch_end_seen": false
+    },
+    {
+      "sequence": 10,
+      "message": "replace",
+      "orders": [
+        {
+          "id": 0,
+          "locate": 1,
+          "side": "B",
+          "quantity": 40,
+          "price": 100000,
+          "attribution": ""
+        },
+        {
+          "id": 72623859790382856,
+          "locate": 1,
+          "side": "B",
+          "quantity": 100,
+          "price": 100000,
+          "attribution": ""
+        },
+        {
+          "id": 9223372036854775809,
+          "locate": 1,
+          "side": "S",
+          "quantity": 60,
+          "price": 100200,
+          "attribution": "ABCD"
+        },
+        {
+          "id": 18446744073709551615,
+          "locate": 2,
+          "side": "B",
+          "quantity": 4294967295,
+          "price": 2000000000,
+          "attribution": ""
+        }
+      ],
+      "seen_id_count": 5,
+      "alpha_bids": [
+        [
+          100000,
+          140
+        ]
+      ],
+      "alpha_asks": [
+        [
+          100200,
+          60
+        ]
+      ],
+      "beta_bids": [
+        [
+          2000000000,
+          4294967295
+        ]
+      ],
+      "itch_end_seen": false
+    },
+    {
+      "sequence": 11,
+      "message": "execute",
+      "orders": [
+        {
+          "id": 0,
+          "locate": 1,
+          "side": "B",
+          "quantity": 40,
+          "price": 100000,
+          "attribution": ""
+        },
+        {
+          "id": 72623859790382856,
+          "locate": 1,
+          "side": "B",
+          "quantity": 80,
+          "price": 100000,
+          "attribution": ""
+        },
+        {
+          "id": 9223372036854775809,
+          "locate": 1,
+          "side": "S",
+          "quantity": 60,
+          "price": 100200,
+          "attribution": "ABCD"
+        },
+        {
+          "id": 18446744073709551615,
+          "locate": 2,
+          "side": "B",
+          "quantity": 4294967295,
+          "price": 2000000000,
+          "attribution": ""
+        }
+      ],
+      "seen_id_count": 5,
+      "alpha_bids": [
+        [
+          100000,
+          120
+        ]
+      ],
+      "alpha_asks": [
+        [
+          100200,
+          60
+        ]
+      ],
+      "beta_bids": [
+        [
+          2000000000,
+          4294967295
+        ]
+      ],
+      "itch_end_seen": false
+    },
+    {
+      "sequence": 12,
+      "message": "cancel",
+      "orders": [
+        {
+          "id": 72623859790382856,
+          "locate": 1,
+          "side": "B",
+          "quantity": 80,
+          "price": 100000,
+          "attribution": ""
+        },
+        {
+          "id": 9223372036854775809,
+          "locate": 1,
+          "side": "S",
+          "quantity": 60,
+          "price": 100200,
+          "attribution": "ABCD"
+        },
+        {
+          "id": 18446744073709551615,
+          "locate": 2,
+          "side": "B",
+          "quantity": 4294967295,
+          "price": 2000000000,
+          "attribution": ""
+        }
+      ],
+      "seen_id_count": 5,
+      "alpha_bids": [
+        [
+          100000,
+          80
+        ]
+      ],
+      "alpha_asks": [
+        [
+          100200,
+          60
+        ]
+      ],
+      "beta_bids": [
+        [
+          2000000000,
+          4294967295
+        ]
+      ],
+      "itch_end_seen": false
+    },
+    {
+      "sequence": 13,
+      "message": "trade",
+      "orders": [
+        {
+          "id": 72623859790382856,
+          "locate": 1,
+          "side": "B",
+          "quantity": 80,
+          "price": 100000,
+          "attribution": ""
+        },
+        {
+          "id": 9223372036854775809,
+          "locate": 1,
+          "side": "S",
+          "quantity": 60,
+          "price": 100200,
+          "attribution": "ABCD"
+        },
+        {
+          "id": 18446744073709551615,
+          "locate": 2,
+          "side": "B",
+          "quantity": 4294967295,
+          "price": 2000000000,
+          "attribution": ""
+        }
+      ],
+      "seen_id_count": 5,
+      "alpha_bids": [
+        [
+          100000,
+          80
+        ]
+      ],
+      "alpha_asks": [
+        [
+          100200,
+          60
+        ]
+      ],
+      "beta_bids": [
+        [
+          2000000000,
+          4294967295
+        ]
+      ],
+      "itch_end_seen": false
+    },
+    {
+      "sequence": 14,
+      "message": "zero_cross",
+      "orders": [
+        {
+          "id": 72623859790382856,
+          "locate": 1,
+          "side": "B",
+          "quantity": 80,
+          "price": 100000,
+          "attribution": ""
+        },
+        {
+          "id": 9223372036854775809,
+          "locate": 1,
+          "side": "S",
+          "quantity": 60,
+          "price": 100200,
+          "attribution": "ABCD"
+        },
+        {
+          "id": 18446744073709551615,
+          "locate": 2,
+          "side": "B",
+          "quantity": 4294967295,
+          "price": 2000000000,
+          "attribution": ""
+        }
+      ],
+      "seen_id_count": 5,
+      "alpha_bids": [
+        [
+          100000,
+          80
+        ]
+      ],
+      "alpha_asks": [
+        [
+          100200,
+          60
+        ]
+      ],
+      "beta_bids": [
+        [
+          2000000000,
+          4294967295
+        ]
+      ],
+      "itch_end_seen": false
+    },
+    {
+      "sequence": 15,
+      "message": "delete",
+      "orders": [
+        {
+          "id": 72623859790382856,
+          "locate": 1,
+          "side": "B",
+          "quantity": 80,
+          "price": 100000,
+          "attribution": ""
+        },
+        {
+          "id": 18446744073709551615,
+          "locate": 2,
+          "side": "B",
+          "quantity": 4294967295,
+          "price": 2000000000,
+          "attribution": ""
+        }
+      ],
+      "seen_id_count": 5,
+      "alpha_bids": [
+        [
+          100000,
+          80
+        ]
+      ],
+      "alpha_asks": [],
+      "beta_bids": [
+        [
+          2000000000,
+          4294967295
+        ]
+      ],
+      "itch_end_seen": false
+    },
+    {
+      "sequence": 16,
+      "message": "zero_price",
+      "orders": [
+        {
+          "id": 66,
+          "locate": 1,
+          "side": "B",
+          "quantity": 1,
+          "price": 0,
+          "attribution": ""
+        },
+        {
+          "id": 72623859790382856,
+          "locate": 1,
+          "side": "B",
+          "quantity": 80,
+          "price": 100000,
+          "attribution": ""
+        },
+        {
+          "id": 18446744073709551615,
+          "locate": 2,
+          "side": "B",
+          "quantity": 4294967295,
+          "price": 2000000000,
+          "attribution": ""
+        }
+      ],
+      "seen_id_count": 6,
+      "alpha_bids": [
+        [
+          100000,
+          80
+        ],
+        [
+          0,
+          1
+        ]
+      ],
+      "alpha_asks": [],
+      "beta_bids": [
+        [
+          2000000000,
+          4294967295
+        ]
+      ],
+      "itch_end_seen": false
+    },
+    {
+      "sequence": 17,
+      "message": "end_messages",
+      "orders": [
+        {
+          "id": 66,
+          "locate": 1,
+          "side": "B",
+          "quantity": 1,
+          "price": 0,
+          "attribution": ""
+        },
+        {
+          "id": 72623859790382856,
+          "locate": 1,
+          "side": "B",
+          "quantity": 80,
+          "price": 100000,
+          "attribution": ""
+        },
+        {
+          "id": 18446744073709551615,
+          "locate": 2,
+          "side": "B",
+          "quantity": 4294967295,
+          "price": 2000000000,
+          "attribution": ""
+        }
+      ],
+      "seen_id_count": 6,
+      "alpha_bids": [
+        [
+          100000,
+          80
+        ],
+        [
+          0,
+          1
+        ]
+      ],
+      "alpha_asks": [],
+      "beta_bids": [
+        [
+          2000000000,
+          4294967295
+        ]
+      ],
+      "itch_end_seen": true
+    }
+  ]
+}

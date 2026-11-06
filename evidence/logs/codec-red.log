@@ -1,0 +1,146 @@
+python3 scripts/guard.py clang++ -std=c++20 -O2 -Wall -Wextra -Werror -Iinclude src/codec.cpp tests/probe.cpp -o <CACHE_ROOT>/build/probe
+python3 scripts/guard.py python3 -m pytest -q -p no:cacheprovider tests/test_codec.py
+.FFFFFFFFF                                                               [100%]
+=================================== FAILURES ===================================
+_____________ test_every_literal_field_matches_independent_oracle ______________
+
+    def test_every_literal_field_matches_independent_oracle():
+     values=[bytes.fromhex(v['hex']) for v in VECTORS.values()]
+>    assert probe('itch',values)==[decode_itch(v) for v in values]
+E    AssertionError: assert [{'error': 'u...mented'}, ...] == [{'event': 'O...00, ...}, ...]
+E      
+E      At index 0 diff: {'error': 'unimplemented'} != {'type': 'S', 'locate': 0, 'tracking': 4660, 'timestamp_ns': '1250999896491', 'event': 'O'}
+E      Use -v to get more diff
+
+tests/test_codec.py:33: AssertionError
+_____________ test_all_itch_truncations_and_extra_octets_rejected ______________
+
+    def test_all_itch_truncations_and_extra_octets_rejected():
+     values=[data[:n] for v in VECTORS.values() for data in [bytes.fromhex(v['hex'])] for n in range(len(data))]
+     values += [bytes.fromhex(v['hex'])+b'\0' for v in VECTORS.values()]
+>    assert probe('itch',values)==[expected(decode_itch,v) for v in values]
+E    AssertionError: assert [{'error': 'u...mented'}, ...] == [{'error': 'i...length'}, ...]
+E      
+E      At index 0 diff: {'error': 'unimplemented'} != {'error': 'itch_length'}
+E      Use -v to get more diff
+
+tests/test_codec.py:38: AssertionError
+_________________ test_literal_mold_and_all_truncated_prefixes _________________
+
+    def test_literal_mold_and_all_truncated_prefixes():
+     data=bytes.fromhex(ANCHORS['multi_message']['hex'])
+     values=[data,bytes.fromhex(ANCHORS['heartbeat']['hex']),bytes.fromhex(ANCHORS['end']['hex'])]+[data[:n] for n in range(len(data))]
+>    assert probe('mold',values)==[expected(decode_mold,v) for v in values]
+E    AssertionError: assert [{'error': 'u...mented'}, ...] == [{'first_sequ...header'}, ...]
+E      
+E      At index 0 diff: {'error': 'unimplemented'} != {'session_hex': '52455649455730303031', 'first_sequence': '1', 'kind': 'data', 'messages': [{'offset': 22, 'length': 12, 'hex': '53000012340123456789ab4f'}, {'offset': 36, 'length': 39, 'hex': '52000112340123456789ab414c504841202020514e000000644e432020504e4e314e000000014e'}, {'offset': 77, 'length': 39, 'hex': '52000212340123456789ab4245544120202020514e000000644e432020504e4e314e000000014e'}]}
+E      Use -v to get more diff
+
+tests/test_codec.py:43: AssertionError
+___________________ test_request_matches_handwritten_octets ____________________
+
+    def test_request_matches_handwritten_octets():
+     p=subprocess.run([str(PROBE),'request','REVIEW0001','4','128'],capture_output=True,text=True,timeout=5)
+     assert p.returncode==0,p.stderr
+>    assert json.loads(p.stdout)==ANCHORS['request']['hex']
+E    assert {'error': 'unimplemented'} == '5245564945573030303100000000000000040080'
+E     +  where {'error': 'unimplemented'} = <function loads at 0x10a346f20>('{"error":"unimplemented"}\n')
+E     +    where <function loads at 0x10a346f20> = json.loads
+E     +    and   '{"error":"unimplemented"}\n' = CompletedProcess(args=['<CACHE_ROOT>/build/probe', 'request', 'REVIEW0001', '4', '128'], returncode=0, stdout='{"error":"unimplemented"}\n', stderr='').stdout
+
+tests/test_codec.py:48: AssertionError
+__________ test_seeded_decoder_mutations_are_bounded_and_differential __________
+
+    def test_seeded_decoder_mutations_are_bounded_and_differential():
+     rng=random.Random(20261023);values=[];base=bytes.fromhex(ANCHORS['multi_message']['hex'])
+     for _ in range(1000):
+      data=bytearray(base)
+      for _ in range(rng.randrange(1,5)):data[rng.randrange(len(data))]=rng.randrange(256)
+      values.append(bytes(data))
+>    assert probe('mold',values)==[expected(decode_mold,v) for v in values]
+E    AssertionError: assert [{'error': 'u...mented'}, ...] == [{'first_sequ...303031'}, ...]
+E      
+E      At index 0 diff: {'error': 'unimplemented'} != {'session_hex': '52455649455730303031', 'first_sequence': '1', 'kind': 'data', 'messages': [{'offset': 22, 'length': 12, 'hex': '5300001234012345b489ab4f'}, {'offset': 36, 'length': 39, 'hex': '52000112340123456789ab414c504841202020514e000000644e432020504e4e674e000000014e'}, {'offset': 77, 'length': 39, 'hex': '52000212340123456789ab4245544120202020514e008700644e432020504e4e314e000000014e'}]}
+E      Use -v to get more diff
+
+tests/test_codec.py:56: AssertionError
+_______ test_field_boundary_mutations_match_independent_decoder[add_bid] _______
+
+name = 'add_bid'
+
+    @pytest.mark.parametrize('name',['add_bid','nonprintable','replace','zero_cross'])
+    def test_field_boundary_mutations_match_independent_decoder(name):
+     b=bytes.fromhex(VECTORS[name]['hex']);values=[]
+     for n in range(len(b)):
+      for value in (0,32,255):
+       v=bytearray(b);v[n]=value;values.append(bytes(v))
+>    assert probe('itch',values)==[expected(decode_itch,v) for v in values]
+E    AssertionError: assert [{'error': 'u...mented'}, ...] == [{'error': 'u...00, ...}, ...]
+E      
+E      At index 0 diff: {'error': 'unimplemented'} != {'error': 'unsupported_type'}
+E      Use -v to get more diff
+
+tests/test_codec.py:64: AssertionError
+____ test_field_boundary_mutations_match_independent_decoder[nonprintable] _____
+
+name = 'nonprintable'
+
+    @pytest.mark.parametrize('name',['add_bid','nonprintable','replace','zero_cross'])
+    def test_field_boundary_mutations_match_independent_decoder(name):
+     b=bytes.fromhex(VECTORS[name]['hex']);values=[]
+     for n in range(len(b)):
+      for value in (0,32,255):
+       v=bytearray(b);v[n]=value;values.append(bytes(v))
+>    assert probe('itch',values)==[expected(decode_itch,v) for v in values]
+E    AssertionError: assert [{'error': 'u...mented'}, ...] == [{'error': 'u...0', ...}, ...]
+E      
+E      At index 0 diff: {'error': 'unimplemented'} != {'error': 'unsupported_type'}
+E      Use -v to get more diff
+
+tests/test_codec.py:64: AssertionError
+_______ test_field_boundary_mutations_match_independent_decoder[replace] _______
+
+name = 'replace'
+
+    @pytest.mark.parametrize('name',['add_bid','nonprintable','replace','zero_cross'])
+    def test_field_boundary_mutations_match_independent_decoder(name):
+     b=bytes.fromhex(VECTORS[name]['hex']);values=[]
+     for n in range(len(b)):
+      for value in (0,32,255):
+       v=bytearray(b);v[n]=value;values.append(bytes(v))
+>    assert probe('itch',values)==[expected(decode_itch,v) for v in values]
+E    AssertionError: assert [{'error': 'u...mented'}, ...] == [{'error': 'u...00, ...}, ...]
+E      
+E      At index 0 diff: {'error': 'unimplemented'} != {'error': 'unsupported_type'}
+E      Use -v to get more diff
+
+tests/test_codec.py:64: AssertionError
+_____ test_field_boundary_mutations_match_independent_decoder[zero_cross] ______
+
+name = 'zero_cross'
+
+    @pytest.mark.parametrize('name',['add_bid','nonprintable','replace','zero_cross'])
+    def test_field_boundary_mutations_match_independent_decoder(name):
+     b=bytes.fromhex(VECTORS[name]['hex']);values=[]
+     for n in range(len(b)):
+      for value in (0,32,255):
+       v=bytearray(b);v[n]=value;values.append(bytes(v))
+>    assert probe('itch',values)==[expected(decode_itch,v) for v in values]
+E    AssertionError: assert [{'error': 'u...mented'}, ...] == [{'error': 'u... 0, ...}, ...]
+E      
+E      At index 0 diff: {'error': 'unimplemented'} != {'error': 'unsupported_type'}
+E      Use -v to get more diff
+
+tests/test_codec.py:64: AssertionError
+=========================== short test summary info ============================
+FAILED tests/test_codec.py::test_every_literal_field_matches_independent_oracle
+FAILED tests/test_codec.py::test_all_itch_truncations_and_extra_octets_rejected
+FAILED tests/test_codec.py::test_literal_mold_and_all_truncated_prefixes - As...
+FAILED tests/test_codec.py::test_request_matches_handwritten_octets - assert ...
+FAILED tests/test_codec.py::test_seeded_decoder_mutations_are_bounded_and_differential
+FAILED tests/test_codec.py::test_field_boundary_mutations_match_independent_decoder[add_bid]
+FAILED tests/test_codec.py::test_field_boundary_mutations_match_independent_decoder[nonprintable]
+FAILED tests/test_codec.py::test_field_boundary_mutations_match_independent_decoder[replace]
+FAILED tests/test_codec.py::test_field_boundary_mutations_match_independent_decoder[zero_cross]
+9 failed, 1 passed in 0.28s
+make: *** [test-codec] Error 1

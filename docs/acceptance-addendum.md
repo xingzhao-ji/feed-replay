@@ -1,0 +1,13 @@
+# Accepted scope — 2026-10-23
+
+The [final independent review](../review/final-independent-review.md) accepts the declared ITCH subset, displayed-order-book reconstruction, bounded local UDP recovery and synthetic measurement artifact. The original private README and evidence index remain preserved as the reviewed implementation checkpoint. This public export updates README setup/status and normalizes private paths; their earlier pending-review wording is superseded by this addendum. See [publication provenance](../PUBLICATION.md).
+
+The reviewer freshly passed 140 normal tests, 140 ASan/UBSan tests, ten pre-product reference tests and eight new probe groups on each build. The new schedule corpus covers 96 schedules and 3,477 arrival states per build. A real UDP drill reconstructed all 17 reference lifecycle events through seven recovery requests, and its captured arrival replay matched. All 159 owner-index files, nine frozen reference files, 99 reviewer-manifest files and retained binary hashes were verified during root integration.
+
+The workload-dependent result remains visible: indexed versus scan medians are 6.577 versus 256.889 ms at query interval 1, 5.914 versus 14.275 ms at interval 32, and 5.817 versus 4.545 ms at interval 256. Sparse queries favor scanning. Sparse schedules query instrument 1, whereas interval 1 cycles all eight instruments, so cross-interval comparisons mix frequency and instrument selection. These are warm synthetic book timings, not network latency, exchange throughput or production trading performance.
+
+Two nonblocking review observations qualify future use. The benchmark harness records expected compiler flags literally; a differently configured future build must generate or verify its actual build metadata before relying on that label. Also, CLI exit 2 is not an exhaustive operational-error category: some live capture/socket failures latch Invalid and return 4 after diagnostic publication. Both are non-success outcomes; consumers must read the returned status and diagnostics rather than infer a detailed error taxonomy from the numeric exit code alone. No post-review source change or retiming was made.
+
+The static HTML report was not visually accepted in this integration: the computer-use tool reported no available in-app browser and returned an empty browser inventory. Its content and retained data were reviewed as files. This does not change the accepted CLI/UDP execution scope.
+
+The accepted scope remains a local, synthetic reconstruction artifact. Full exchange simulation, production operations, low-latency expertise and personal mastery remain unestablished. Private application comparisons are omitted from this public export.

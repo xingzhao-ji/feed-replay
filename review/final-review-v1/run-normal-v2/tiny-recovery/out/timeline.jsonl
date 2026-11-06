@@ -1,0 +1,16 @@
+{"time_ns":"290542","event":"accepted","expected":"4","high_water_next":"4","count":"3"}
+{"time_ns":"307792","event":"end","expected":"4","high_water_next":"18","count":"0"}
+{"time_ns":"307792","event":"request","expected":"4","high_water_next":"18","count":"14"}
+{"time_ns":"453000","event":"accepted","expected":"6","high_water_next":"18","count":"2"}
+{"time_ns":"453000","event":"request","expected":"6","high_water_next":"18","count":"12"}
+{"time_ns":"563333","event":"accepted","expected":"8","high_water_next":"18","count":"2"}
+{"time_ns":"563333","event":"request","expected":"8","high_water_next":"18","count":"10"}
+{"time_ns":"668917","event":"accepted","expected":"10","high_water_next":"18","count":"2"}
+{"time_ns":"668917","event":"request","expected":"10","high_water_next":"18","count":"8"}
+{"time_ns":"771875","event":"accepted","expected":"12","high_water_next":"18","count":"2"}
+{"time_ns":"771875","event":"request","expected":"12","high_water_next":"18","count":"6"}
+{"time_ns":"871000","event":"accepted","expected":"14","high_water_next":"18","count":"2"}
+{"time_ns":"871000","event":"request","expected":"14","high_water_next":"18","count":"4"}
+{"time_ns":"970125","event":"accepted","expected":"16","high_water_next":"18","count":"2"}
+{"time_ns":"970125","event":"request","expected":"16","high_water_next":"18","count":"2"}
+{"time_ns":"1083417","event":"accepted","expected":"18","high_water_next":"18","count":"2"}

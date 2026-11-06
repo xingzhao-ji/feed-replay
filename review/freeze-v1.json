@@ -1,0 +1,55 @@
+{
+  "version": 1,
+  "created_date": "2026-10-23",
+  "author": "independent /root/feed_protocol_review",
+  "product_implementation_present": false,
+  "test_command": "PYTHONDONTWRITEBYTECODE=1 python3 projects/feed-replay/review/test_reference.py",
+  "test_result": "10 tests passed; 48 packet cases; 17 literal vectors; 17 every-event anchors; 533 ITCH truncation boundaries; 116 Mold truncation boundaries",
+  "files": [
+    {
+      "path": "README.md",
+      "bytes": 5273,
+      "sha256": "52fdd9433118421894b02b34805efdc576a6112a0373b22ba588bde921ff1973"
+    },
+    {
+      "path": "author_fixtures.py",
+      "bytes": 14279,
+      "sha256": "2f55d179a2632b1e3141699efafeae46de6ebe22ae9f890d9efe3f4bb65c7b7e"
+    },
+    {
+      "path": "lifecycle_anchors.json",
+      "bytes": 14117,
+      "sha256": "dc1d031591b11ad9f61f657ba665e7a64ce7732a06bd708b5c985830528279c8"
+    },
+    {
+      "path": "literal_fixtures.json",
+      "bytes": 54861,
+      "sha256": "aaca9ac14c838546fe19a0a7861950ec706429b0640a32050c6d7f94996e884a"
+    },
+    {
+      "path": "literal_vectors.json",
+      "bytes": 4108,
+      "sha256": "a06bb2ea90cb246bff1bd39701cf0f86c38ba42950959f89a392a835c2531d89"
+    },
+    {
+      "path": "mold_anchors.json",
+      "bytes": 828,
+      "sha256": "bc8ed98d824485839f6f93d826d14c1e458a2569dcde2e4c7c63bbdf4935e2ae"
+    },
+    {
+      "path": "protocol-design-review.md",
+      "bytes": 4808,
+      "sha256": "d95afeeb795cc146c71adb2564ad26c2582c152eaa56f212203a8050763b3372"
+    },
+    {
+      "path": "reference.py",
+      "bytes": 21263,
+      "sha256": "d831cb7f89876b0b3d596609dea1d5ba31a9e36e12dda01c394ab66ffa91c94e"
+    },
+    {
+      "path": "test_reference.py",
+      "bytes": 8590,
+      "sha256": "56e3a88c9425b8a5050b29c48e98b7d29bf57c3b4bf098b32b1f3bcbcdac6614"
+    }
+  ]
+}

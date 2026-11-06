@@ -1,0 +1,996 @@
+python3 scripts/guard.py clang++ -std=c++20 -O2 -Wall -Wextra -Werror -Iinclude src/codec.cpp src/indexed_book.cpp src/scan_book.cpp src/session.cpp tests/probe.cpp -o <CACHE_ROOT>/build/probe
+python3 scripts/guard.py python3 -m pytest -q -p no:cacheprovider tests/test_session.py
+FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF                  [100%]
+=================================== FAILURES ===================================
+_ test_frozen_sequence_cases_match_independent_prefix_oracle[complete_lifecycle] _
+
+case = {'expected': [{'book': {'order_count': 0}, 'error_code': None, 'error_sequence': None, 'high_water': 4, ...}, {'book':...00000000424200000001414c50484120202000000000000c53000012340123456789ab43', '524556494557303030310000000000000012ffff']}
+
+    @pytest.mark.parametrize('case',CASES,ids=lambda c:c['name'])
+    def test_frozen_sequence_cases_match_independent_prefix_oracle(case):
+     data=[bytes.fromhex(x) for x in case['packets']]
+     expected=reference_sequence(data,**case.get('limits',{}))['states']
+     actual=run(data,limits=case.get('limits',{}))
+     for state in actual:assert state.pop('requests')==[]
+>    assert actual==expected
+E    AssertionError: assert [{'book': {'i...': None, ...}] == [{'book': {'i...': None, ...}]
+E      
+E      At index 0 diff: {'expected': '1', 'high_water_next': '1', 'end_next': None, 'status': 'unimplemented', 'live_fresh': False, 'quote_usable': False, 'error': 'unimplemented', 'error_sequence': None, 'book': {'order_count': 0, 'seen_id_count': 0, 'instruments': []}, 'itch_end_seen': False} != {'expected': '4', 'high_water_next': '4', 'end_next': None, 'status': 'ReplayPrefix', 'live_fresh': False, 'quote_usable': False, 'error': None, 'error_sequence': None, 'book': {'order_count': 0, 'seen_id_count': 0, 'instruments': [{'locate': 1, 'symbol': 'ALPHA', 'orders': [], 'bids...
+E      
+E      ...Full output truncated (2 lines hidden), use '-vv' to show
+
+tests/test_session.py:21: AssertionError
+_ test_frozen_sequence_cases_match_independent_prefix_oracle[future_discard_pending_end_partial_recovery] _
+
+case = {'expected': [{'error_code': None, 'error_sequence': None, 'high_water': 4, 'next_sequence': 4, ...}, {'error_code': N...2000112340123456789ab1112131415161718002355000112340123456789abfedcba987654321080000000000000010000003c00018768', ...]}
+
+    @pytest.mark.parametrize('case',CASES,ids=lambda c:c['name'])
+    def test_frozen_sequence_cases_match_independent_prefix_oracle(case):
+     data=[bytes.fromhex(x) for x in case['packets']]
+     expected=reference_sequence(data,**case.get('limits',{}))['states']
+     actual=run(data,limits=case.get('limits',{}))
+     for state in actual:assert state.pop('requests')==[]
+>    assert actual==expected
+E    AssertionError: assert [{'book': {'i...ne, ...}, ...] == [{'book': {'i...ne, ...}, ...]
+E      
+E      At index 0 diff: {'expected': '1', 'high_water_next': '1', 'end_next': None, 'status': 'unimplemented', 'live_fresh': False, 'quote_usable': False, 'error': 'unimplemented', 'error_sequence': None, 'book': {'order_count': 0, 'seen_id_count': 0, 'instruments': []}, 'itch_end_seen': False} != {'expected': '4', 'high_water_next': '4', 'end_next': None, 'status': 'ReplayPrefix', 'live_fresh': False, 'quote_usable': False, 'error': None, 'error_sequence': None, 'book': {'order_count': 0, 'seen_id_count': 0, 'instruments': [{'locate': 1, 'symbol': 'ALPHA', 'orders': [], 'bids...
+E      
+E      ...Full output truncated (2 lines hidden), use '-vv' to show
+
+tests/test_session.py:21: AssertionError
+_ test_frozen_sequence_cases_match_independent_prefix_oracle[overlap_unseen_suffix] _
+
+case = {'expected': [{'book': {'order_count': 0}, 'error_code': None, 'error_sequence': None, 'high_water': 4, ...}, {'book':...514e000000644e432020504e4e314e000000014e002441000112340123456789ab01020304050607084200000064414c504841202020000186a0']}
+
+    @pytest.mark.parametrize('case',CASES,ids=lambda c:c['name'])
+    def test_frozen_sequence_cases_match_independent_prefix_oracle(case):
+     data=[bytes.fromhex(x) for x in case['packets']]
+     expected=reference_sequence(data,**case.get('limits',{}))['states']
+     actual=run(data,limits=case.get('limits',{}))
+     for state in actual:assert state.pop('requests')==[]
+>    assert actual==expected
+E    AssertionError: assert [{'book': {'i...': None, ...}] == [{'book': {'i...': None, ...}]
+E      
+E      At index 0 diff: {'expected': '1', 'high_water_next': '1', 'end_next': None, 'status': 'unimplemented', 'live_fresh': False, 'quote_usable': False, 'error': 'unimplemented', 'error_sequence': None, 'book': {'order_count': 0, 'seen_id_count': 0, 'instruments': []}, 'itch_end_seen': False} != {'expected': '4', 'high_water_next': '4', 'end_next': None, 'status': 'ReplayPrefix', 'live_fresh': False, 'quote_usable': False, 'error': None, 'error_sequence': None, 'book': {'order_count': 0, 'seen_id_count': 0, 'instruments': [{'locate': 1, 'symbol': 'ALPHA', 'orders': [], 'bids...
+E      
+E      ...Full output truncated (2 lines hidden), use '-vv' to show
+
+tests/test_session.py:21: AssertionError
+_ test_frozen_sequence_cases_match_independent_prefix_oracle[trailing_heartbeat_gap] _
+
+case = {'expected': [{'error_code': None, 'error_sequence': None, 'high_water': 4, 'next_sequence': 4, ...}, {'error_code': N...5245564945573030303100000000000000040001002441000112340123456789ab01020304050607084200000064414c504841202020000186a0']}
+
+    @pytest.mark.parametrize('case',CASES,ids=lambda c:c['name'])
+    def test_frozen_sequence_cases_match_independent_prefix_oracle(case):
+     data=[bytes.fromhex(x) for x in case['packets']]
+     expected=reference_sequence(data,**case.get('limits',{}))['states']
+     actual=run(data,limits=case.get('limits',{}))
+     for state in actual:assert state.pop('requests')==[]
+>    assert actual==expected
+E    AssertionError: assert [{'book': {'i...': None, ...}] == [{'book': {'i...': None, ...}]
+E      
+E      At index 0 diff: {'expected': '1', 'high_water_next': '1', 'end_next': None, 'status': 'unimplemented', 'live_fresh': False, 'quote_usable': False, 'error': 'unimplemented', 'error_sequence': None, 'book': {'order_count': 0, 'seen_id_count': 0, 'instruments': []}, 'itch_end_seen': False} != {'expected': '4', 'high_water_next': '4', 'end_next': None, 'status': 'ReplayPrefix', 'live_fresh': False, 'quote_usable': False, 'error': None, 'error_sequence': None, 'book': {'order_count': 0, 'seen_id_count': 0, 'instruments': [{'locate': 1, 'symbol': 'ALPHA', 'orders': [], 'bids...
+E      
+E      ...Full output truncated (2 lines hidden), use '-vv' to show
+
+tests/test_session.py:21: AssertionError
+_ test_frozen_sequence_cases_match_independent_prefix_oracle[stale_heartbeat_does_not_regress] _
+
+case = {'expected': [{'error_code': None, 'error_sequence': None, 'high_water': 4, 'next_sequence': 4, ...}, {'error_code': N...12340123456789ab4245544120202020514e000000644e432020504e4e314e000000014e', '5245564945573030303100000000000000020000']}
+
+    @pytest.mark.parametrize('case',CASES,ids=lambda c:c['name'])
+    def test_frozen_sequence_cases_match_independent_prefix_oracle(case):
+     data=[bytes.fromhex(x) for x in case['packets']]
+     expected=reference_sequence(data,**case.get('limits',{}))['states']
+     actual=run(data,limits=case.get('limits',{}))
+     for state in actual:assert state.pop('requests')==[]
+>    assert actual==expected
+E    AssertionError: assert [{'book': {'i...': None, ...}] == [{'book': {'i...': None, ...}]
+E      
+E      At index 0 diff: {'expected': '1', 'high_water_next': '1', 'end_next': None, 'status': 'unimplemented', 'live_fresh': False, 'quote_usable': False, 'error': 'unimplemented', 'error_sequence': None, 'book': {'order_count': 0, 'seen_id_count': 0, 'instruments': []}, 'itch_end_seen': False} != {'expected': '4', 'high_water_next': '4', 'end_next': None, 'status': 'ReplayPrefix', 'live_fresh': False, 'quote_usable': False, 'error': None, 'error_sequence': None, 'book': {'order_count': 0, 'seen_id_count': 0, 'instruments': [{'locate': 1, 'symbol': 'ALPHA', 'orders': [], 'bids...
+E      
+E      ...Full output truncated (2 lines hidden), use '-vv' to show
+
+tests/test_session.py:21: AssertionError
+_ test_frozen_sequence_cases_match_independent_prefix_oracle[terminal_before_highwater] _
+
+case = {'expected': [{'error_code': None, 'error_sequence': None, 'high_water': 4, 'next_sequence': 4, ...}, {'error_code': N...2355000112340123456789abfedcba987654321080000000000000010000003c00018768', '52455649455730303031000000000000000affff']}
+
+    @pytest.mark.parametrize('case',CASES,ids=lambda c:c['name'])
+    def test_frozen_sequence_cases_match_independent_prefix_oracle(case):
+     data=[bytes.fromhex(x) for x in case['packets']]
+     expected=reference_sequence(data,**case.get('limits',{}))['states']
+     actual=run(data,limits=case.get('limits',{}))
+     for state in actual:assert state.pop('requests')==[]
+>    assert actual==expected
+E    AssertionError: assert [{'book': {'i...': None, ...}] == [{'book': {'i...': '10', ...}]
+E      
+E      At index 0 diff: {'expected': '1', 'high_water_next': '1', 'end_next': None, 'status': 'unimplemented', 'live_fresh': False, 'quote_usable': False, 'error': 'unimplemented', 'error_sequence': None, 'book': {'order_count': 0, 'seen_id_count': 0, 'instruments': []}, 'itch_end_seen': False} != {'expected': '4', 'high_water_next': '4', 'end_next': None, 'status': 'ReplayPrefix', 'live_fresh': False, 'quote_usable': False, 'error': None, 'error_sequence': None, 'book': {'order_count': 0, 'seen_id_count': 0, 'instruments': [{'locate': 1, 'symbol': 'ALPHA', 'orders': [], 'bids...
+E      
+E      ...Full output truncated (2 lines hidden), use '-vv' to show
+
+tests/test_session.py:21: AssertionError
+_ test_frozen_sequence_cases_match_independent_prefix_oracle[terminal_before_accepted] _
+
+case = {'expected': [{'error_code': None, 'error_sequence': None, 'high_water': 4, 'next_sequence': 4, ...}, {'error_code': '...12340123456789ab4245544120202020514e000000644e432020504e4e314e000000014e', '524556494557303030310000000000000003ffff']}
+
+    @pytest.mark.parametrize('case',CASES,ids=lambda c:c['name'])
+    def test_frozen_sequence_cases_match_independent_prefix_oracle(case):
+     data=[bytes.fromhex(x) for x in case['packets']]
+     expected=reference_sequence(data,**case.get('limits',{}))['states']
+     actual=run(data,limits=case.get('limits',{}))
+     for state in actual:assert state.pop('requests')==[]
+>    assert actual==expected
+E    AssertionError: assert [{'book': {'i...': None, ...}] == [{'book': {'i...e': '3', ...}]
+E      
+E      At index 0 diff: {'expected': '1', 'high_water_next': '1', 'end_next': None, 'status': 'unimplemented', 'live_fresh': False, 'quote_usable': False, 'error': 'unimplemented', 'error_sequence': None, 'book': {'order_count': 0, 'seen_id_count': 0, 'instruments': []}, 'itch_end_seen': False} != {'expected': '4', 'high_water_next': '4', 'end_next': None, 'status': 'ReplayPrefix', 'live_fresh': False, 'quote_usable': False, 'error': None, 'error_sequence': None, 'book': {'order_count': 0, 'seen_id_count': 0, 'instruments': [{'locate': 1, 'symbol': 'ALPHA', 'orders': [], 'bids...
+E      
+E      ...Full output truncated (2 lines hidden), use '-vv' to show
+
+tests/test_session.py:21: AssertionError
+_ test_frozen_sequence_cases_match_independent_prefix_oracle[conflicting_terminal] _
+
+case = {'expected': [{'error_code': None, 'error_sequence': None, 'high_water': 4, 'next_sequence': 4, ...}, {'error_code': N...4e432020504e4e314e000000014e', '524556494557303030310000000000000012ffff', '524556494557303030310000000000000011ffff']}
+
+    @pytest.mark.parametrize('case',CASES,ids=lambda c:c['name'])
+    def test_frozen_sequence_cases_match_independent_prefix_oracle(case):
+     data=[bytes.fromhex(x) for x in case['packets']]
+     expected=reference_sequence(data,**case.get('limits',{}))['states']
+     actual=run(data,limits=case.get('limits',{}))
+     for state in actual:assert state.pop('requests')==[]
+>    assert actual==expected
+E    AssertionError: assert [{'book': {'i...': None, ...}] == [{'book': {'i...': '17', ...}]
+E      
+E      At index 0 diff: {'expected': '1', 'high_water_next': '1', 'end_next': None, 'status': 'unimplemented', 'live_fresh': False, 'quote_usable': False, 'error': 'unimplemented', 'error_sequence': None, 'book': {'order_count': 0, 'seen_id_count': 0, 'instruments': []}, 'itch_end_seen': False} != {'expected': '4', 'high_water_next': '4', 'end_next': None, 'status': 'ReplayPrefix', 'live_fresh': False, 'quote_usable': False, 'error': None, 'error_sequence': None, 'book': {'order_count': 0, 'seen_id_count': 0, 'instruments': [{'locate': 1, 'symbol': 'ALPHA', 'orders': [], 'bids...
+E      
+E      ...Full output truncated (2 lines hidden), use '-vv' to show
+
+tests/test_session.py:21: AssertionError
+_ test_frozen_sequence_cases_match_independent_prefix_oracle[data_beyond_pending_terminal] _
+
+case = {'expected': [{'error_code': None, 'error_sequence': None, 'high_water': 4, 'next_sequence': 4, ...}, {'error_code': N...00000050414c5048412020200001870441424344002441000212344e94914effffffffffffffffffff42ffffffff424554412020202077359400']}
+
+    @pytest.mark.parametrize('case',CASES,ids=lambda c:c['name'])
+    def test_frozen_sequence_cases_match_independent_prefix_oracle(case):
+     data=[bytes.fromhex(x) for x in case['packets']]
+     expected=reference_sequence(data,**case.get('limits',{}))['states']
+     actual=run(data,limits=case.get('limits',{}))
+     for state in actual:assert state.pop('requests')==[]
+>    assert actual==expected
+E    AssertionError: assert [{'book': {'i...': None, ...}] == [{'book': {'i...e': '4', ...}]
+E      
+E      At index 0 diff: {'expected': '1', 'high_water_next': '1', 'end_next': None, 'status': 'unimplemented', 'live_fresh': False, 'quote_usable': False, 'error': 'unimplemented', 'error_sequence': None, 'book': {'order_count': 0, 'seen_id_count': 0, 'instruments': []}, 'itch_end_seen': False} != {'expected': '4', 'high_water_next': '4', 'end_next': None, 'status': 'ReplayPrefix', 'live_fresh': False, 'quote_usable': False, 'error': None, 'error_sequence': None, 'book': {'order_count': 0, 'seen_id_count': 0, 'instruments': [{'locate': 1, 'symbol': 'ALPHA', 'orders': [], 'bids...
+E      
+E      ...Full output truncated (2 lines hidden), use '-vv' to show
+
+tests/test_session.py:21: AssertionError
+_ test_frozen_sequence_cases_match_independent_prefix_oracle[heartbeat_beyond_terminal] _
+
+case = {'expected': [{'error_code': None, 'error_sequence': None, 'high_water': 4, 'next_sequence': 4, ...}, {'error_code': N...4e432020504e4e314e000000014e', '524556494557303030310000000000000004ffff', '5245564945573030303100000000000000050000']}
+
+    @pytest.mark.parametrize('case',CASES,ids=lambda c:c['name'])
+    def test_frozen_sequence_cases_match_independent_prefix_oracle(case):
+     data=[bytes.fromhex(x) for x in case['packets']]
+     expected=reference_sequence(data,**case.get('limits',{}))['states']
+     actual=run(data,limits=case.get('limits',{}))
+     for state in actual:assert state.pop('requests')==[]
+>    assert actual==expected
+E    AssertionError: assert [{'book': {'i...': None, ...}] == [{'book': {'i...e': '5', ...}]
+E      
+E      At index 0 diff: {'expected': '1', 'high_water_next': '1', 'end_next': None, 'status': 'unimplemented', 'live_fresh': False, 'quote_usable': False, 'error': 'unimplemented', 'error_sequence': None, 'book': {'order_count': 0, 'seen_id_count': 0, 'instruments': []}, 'itch_end_seen': False} != {'expected': '4', 'high_water_next': '4', 'end_next': None, 'status': 'ReplayPrefix', 'live_fresh': False, 'quote_usable': False, 'error': None, 'error_sequence': None, 'book': {'order_count': 0, 'seen_id_count': 0, 'instruments': [{'locate': 1, 'symbol': 'ALPHA', 'orders': [], 'bids...
+E      
+E      ...Full output truncated (2 lines hidden), use '-vv' to show
+
+tests/test_session.py:21: AssertionError
+_ test_frozen_sequence_cases_match_independent_prefix_oracle[unrepresentable_exclusive_bound] _
+
+case = {'expected': [{'error_code': None, 'error_sequence': None, 'high_water': 4, 'next_sequence': 4, ...}, {'error_code': '...2020514e000000644e432020504e4e314e000000014e', '52455649455730303031ffffffffffffffff0001000c53000012340123456789ab4f']}
+
+    @pytest.mark.parametrize('case',CASES,ids=lambda c:c['name'])
+    def test_frozen_sequence_cases_match_independent_prefix_oracle(case):
+     data=[bytes.fromhex(x) for x in case['packets']]
+     expected=reference_sequence(data,**case.get('limits',{}))['states']
+     actual=run(data,limits=case.get('limits',{}))
+     for state in actual:assert state.pop('requests')==[]
+>    assert actual==expected
+E    AssertionError: assert [{'book': {'i...': None, ...}] == [{'book': {'i...551615', ...}]
+E      
+E      At index 0 diff: {'expected': '1', 'high_water_next': '1', 'end_next': None, 'status': 'unimplemented', 'live_fresh': False, 'quote_usable': False, 'error': 'unimplemented', 'error_sequence': None, 'book': {'order_count': 0, 'seen_id_count': 0, 'instruments': []}, 'itch_end_seen': False} != {'expected': '4', 'high_water_next': '4', 'end_next': None, 'status': 'ReplayPrefix', 'live_fresh': False, 'quote_usable': False, 'error': None, 'error_sequence': None, 'book': {'order_count': 0, 'seen_id_count': 0, 'instruments': [{'locate': 1, 'symbol': 'ALPHA', 'orders': [], 'bids...
+E      
+E      ...Full output truncated (2 lines hidden), use '-vv' to show
+
+tests/test_session.py:21: AssertionError
+_ test_frozen_sequence_cases_match_independent_prefix_oracle[largest_representable_marker] _
+
+case = {'expected': [{'error_code': None, 'error_sequence': None, 'high_water': 18446744073709551615, 'next_sequence': 1, ...}], 'name': 'largest_representable_marker', 'packets': ['52455649455730303031ffffffffffffffff0000']}
+
+    @pytest.mark.parametrize('case',CASES,ids=lambda c:c['name'])
+    def test_frozen_sequence_cases_match_independent_prefix_oracle(case):
+     data=[bytes.fromhex(x) for x in case['packets']]
+     expected=reference_sequence(data,**case.get('limits',{}))['states']
+     actual=run(data,limits=case.get('limits',{}))
+     for state in actual:assert state.pop('requests')==[]
+>    assert actual==expected
+E    AssertionError: assert [{'book': {'i...': None, ...}] == [{'book': {'i...': None, ...}]
+E      
+E      At index 0 diff: {'expected': '1', 'high_water_next': '1', 'end_next': None, 'status': 'unimplemented', 'live_fresh': False, 'quote_usable': False, 'error': 'unimplemented', 'error_sequence': None, 'book': {'order_count': 0, 'seen_id_count': 0, 'instruments': []}, 'itch_end_seen': False} != {'expected': '1', 'high_water_next': '18446744073709551615', 'end_next': None, 'status': 'Gap', 'live_fresh': False, 'quote_usable': False, 'error': None, 'error_sequence': None, 'book': {'order_count': 0, 'seen_id_count': 0, 'instruments': []}, 'itch_end_seen': False}
+E      Use -v to get more diff
+
+tests/test_session.py:21: AssertionError
+__ test_frozen_sequence_cases_match_independent_prefix_oracle[sequence_zero] ___
+
+case = {'expected': [{'error_code': 'mold_header', 'error_sequence': 0, 'high_water': 1, 'next_sequence': 1, ...}], 'name': 'sequence_zero', 'packets': ['5245564945573030303100000000000000000000']}
+
+    @pytest.mark.parametrize('case',CASES,ids=lambda c:c['name'])
+    def test_frozen_sequence_cases_match_independent_prefix_oracle(case):
+     data=[bytes.fromhex(x) for x in case['packets']]
+     expected=reference_sequence(data,**case.get('limits',{}))['states']
+     actual=run(data,limits=case.get('limits',{}))
+     for state in actual:assert state.pop('requests')==[]
+>    assert actual==expected
+E    AssertionError: assert [{'book': {'i...': None, ...}] == [{'book': {'i...e': '0', ...}]
+E      
+E      At index 0 diff: {'expected': '1', 'high_water_next': '1', 'end_next': None, 'status': 'unimplemented', 'live_fresh': False, 'quote_usable': False, 'error': 'unimplemented', 'error_sequence': None, 'book': {'order_count': 0, 'seen_id_count': 0, 'instruments': []}, 'itch_end_seen': False} != {'expected': '1', 'high_water_next': '1', 'end_next': None, 'status': 'Invalid', 'live_fresh': False, 'quote_usable': False, 'error': 'mold_header', 'error_sequence': '0', 'book': {'order_count': 0, 'seen_id_count': 0, 'instruments': []}, 'itch_end_seen': False}
+E      Use -v to get more diff
+
+tests/test_session.py:21: AssertionError
+__ test_frozen_sequence_cases_match_independent_prefix_oracle[wrong_session] ___
+
+case = {'expected': [{'error_code': 'session_mismatch', 'error_sequence': 1, 'high_water': 1, 'next_sequence': 1, ...}], 'nam...0000644e432020504e4e314e000000014e002752000212340123456789ab4245544120202020514e000000644e432020504e4e314e000000014e']}
+
+    @pytest.mark.parametrize('case',CASES,ids=lambda c:c['name'])
+    def test_frozen_sequence_cases_match_independent_prefix_oracle(case):
+     data=[bytes.fromhex(x) for x in case['packets']]
+     expected=reference_sequence(data,**case.get('limits',{}))['states']
+     actual=run(data,limits=case.get('limits',{}))
+     for state in actual:assert state.pop('requests')==[]
+>    assert actual==expected
+E    AssertionError: assert [{'book': {'i...': None, ...}] == [{'book': {'i...e': '1', ...}]
+E      
+E      At index 0 diff: {'expected': '1', 'high_water_next': '1', 'end_next': None, 'status': 'unimplemented', 'live_fresh': False, 'quote_usable': False, 'error': 'unimplemented', 'error_sequence': None, 'book': {'order_count': 0, 'seen_id_count': 0, 'instruments': []}, 'itch_end_seen': False} != {'expected': '1', 'high_water_next': '1', 'end_next': None, 'status': 'Invalid', 'live_fresh': False, 'quote_usable': False, 'error': 'session_mismatch', 'error_sequence': '1', 'book': {'order_count': 0, 'seen_id_count': 0, 'instruments': []}, 'itch_end_seen': False}
+E      Use -v to get more diff
+
+tests/test_session.py:21: AssertionError
+_ test_frozen_sequence_cases_match_independent_prefix_oracle[framing_failure_whole_packet_atomic] _
+
+case = {'expected': [{'error_code': None, 'error_sequence': None, 'high_water': 4, 'next_sequence': 4, ...}, {'book': {'order...050607084200000064414c504841202020000186a0002441000112340123456789ab00000000000000004200000028414c504841202020000186']}
+
+    @pytest.mark.parametrize('case',CASES,ids=lambda c:c['name'])
+    def test_frozen_sequence_cases_match_independent_prefix_oracle(case):
+     data=[bytes.fromhex(x) for x in case['packets']]
+     expected=reference_sequence(data,**case.get('limits',{}))['states']
+     actual=run(data,limits=case.get('limits',{}))
+     for state in actual:assert state.pop('requests')==[]
+>    assert actual==expected
+E    AssertionError: assert [{'book': {'i...': None, ...}] == [{'book': {'i...e': '4', ...}]
+E      
+E      At index 0 diff: {'expected': '1', 'high_water_next': '1', 'end_next': None, 'status': 'unimplemented', 'live_fresh': False, 'quote_usable': False, 'error': 'unimplemented', 'error_sequence': None, 'book': {'order_count': 0, 'seen_id_count': 0, 'instruments': []}, 'itch_end_seen': False} != {'expected': '4', 'high_water_next': '4', 'end_next': None, 'status': 'ReplayPrefix', 'live_fresh': False, 'quote_usable': False, 'error': None, 'error_sequence': None, 'book': {'order_count': 0, 'seen_id_count': 0, 'instruments': [{'locate': 1, 'symbol': 'ALPHA', 'orders': [], 'bids...
+E      
+E      ...Full output truncated (2 lines hidden), use '-vv' to show
+
+tests/test_session.py:21: AssertionError
+_ test_frozen_sequence_cases_match_independent_prefix_oracle[unknown_final_type_whole_packet_atomic] _
+
+case = {'expected': [{'error_code': None, 'error_sequence': None, 'high_water': 4, 'next_sequence': 4, ...}, {'book': {'order...4945573030303100000000000000040002002441000112340123456789ab01020304050607084200000064414c504841202020000186a000015a']}
+
+    @pytest.mark.parametrize('case',CASES,ids=lambda c:c['name'])
+    def test_frozen_sequence_cases_match_independent_prefix_oracle(case):
+     data=[bytes.fromhex(x) for x in case['packets']]
+     expected=reference_sequence(data,**case.get('limits',{}))['states']
+     actual=run(data,limits=case.get('limits',{}))
+     for state in actual:assert state.pop('requests')==[]
+>    assert actual==expected
+E    AssertionError: assert [{'book': {'i...': None, ...}] == [{'book': {'i...e': '4', ...}]
+E      
+E      At index 0 diff: {'expected': '1', 'high_water_next': '1', 'end_next': None, 'status': 'unimplemented', 'live_fresh': False, 'quote_usable': False, 'error': 'unimplemented', 'error_sequence': None, 'book': {'order_count': 0, 'seen_id_count': 0, 'instruments': []}, 'itch_end_seen': False} != {'expected': '4', 'high_water_next': '4', 'end_next': None, 'status': 'ReplayPrefix', 'live_fresh': False, 'quote_usable': False, 'error': None, 'error_sequence': None, 'book': {'order_count': 0, 'seen_id_count': 0, 'instruments': [{'locate': 1, 'symbol': 'ALPHA', 'orders': [], 'bids...
+E      
+E      ...Full output truncated (2 lines hidden), use '-vv' to show
+
+tests/test_session.py:21: AssertionError
+_ test_frozen_sequence_cases_match_independent_prefix_oracle[wrong_final_type_length_whole_packet_atomic] _
+
+case = {'expected': [{'error_code': None, 'error_sequence': None, 'high_water': 4, 'next_sequence': 4, ...}, {'book': {'order...4945573030303100000000000000040002002441000112340123456789ab01020304050607084200000064414c504841202020000186a0000141']}
+
+    @pytest.mark.parametrize('case',CASES,ids=lambda c:c['name'])
+    def test_frozen_sequence_cases_match_independent_prefix_oracle(case):
+     data=[bytes.fromhex(x) for x in case['packets']]
+     expected=reference_sequence(data,**case.get('limits',{}))['states']
+     actual=run(data,limits=case.get('limits',{}))
+     for state in actual:assert state.pop('requests')==[]
+>    assert actual==expected
+E    AssertionError: assert [{'book': {'i...': None, ...}] == [{'book': {'i...e': '4', ...}]
+E      
+E      At index 0 diff: {'expected': '1', 'high_water_next': '1', 'end_next': None, 'status': 'unimplemented', 'live_fresh': False, 'quote_usable': False, 'error': 'unimplemented', 'error_sequence': None, 'book': {'order_count': 0, 'seen_id_count': 0, 'instruments': []}, 'itch_end_seen': False} != {'expected': '4', 'high_water_next': '4', 'end_next': None, 'status': 'ReplayPrefix', 'live_fresh': False, 'quote_usable': False, 'error': None, 'error_sequence': None, 'book': {'order_count': 0, 'seen_id_count': 0, 'instruments': [{'locate': 1, 'symbol': 'ALPHA', 'orders': [], 'bids...
+E      
+E      ...Full output truncated (2 lines hidden), use '-vv' to show
+
+tests/test_session.py:21: AssertionError
+_ test_frozen_sequence_cases_match_independent_prefix_oracle[semantic_failure_preserves_same_packet_prefix] _
+
+case = {'expected': [{'error_code': None, 'error_sequence': None, 'high_water': 4, 'next_sequence': 4, ...}, {'book': {'order...00000050414c5048412020200001870441424344002441000212344e94914effffffffffffffffffff42ffffffff424554412020202077359400']}
+
+    @pytest.mark.parametrize('case',CASES,ids=lambda c:c['name'])
+    def test_frozen_sequence_cases_match_independent_prefix_oracle(case):
+     data=[bytes.fromhex(x) for x in case['packets']]
+     expected=reference_sequence(data,**case.get('limits',{}))['states']
+     actual=run(data,limits=case.get('limits',{}))
+     for state in actual:assert state.pop('requests')==[]
+>    assert actual==expected
+E    AssertionError: assert [{'book': {'i...': None, ...}] == [{'book': {'i...e': '5', ...}]
+E      
+E      At index 0 diff: {'expected': '1', 'high_water_next': '1', 'end_next': None, 'status': 'unimplemented', 'live_fresh': False, 'quote_usable': False, 'error': 'unimplemented', 'error_sequence': None, 'book': {'order_count': 0, 'seen_id_count': 0, 'instruments': []}, 'itch_end_seen': False} != {'expected': '4', 'high_water_next': '4', 'end_next': None, 'status': 'ReplayPrefix', 'live_fresh': False, 'quote_usable': False, 'error': None, 'error_sequence': None, 'book': {'order_count': 0, 'seen_id_count': 0, 'instruments': [{'locate': 1, 'symbol': 'ALPHA', 'orders': [], 'bids...
+E      
+E      ...Full output truncated (2 lines hidden), use '-vv' to show
+
+tests/test_session.py:21: AssertionError
+_ test_frozen_sequence_cases_match_independent_prefix_oracle[old_semantically_invalid_payload_not_rechecked] _
+
+case = {'expected': [{'error_code': None, 'error_sequence': None, 'high_water': 4, 'next_sequence': 4, ...}, {'error_code': N...2020514e000000644e432020504e4e314e000000014e', '5245564945573030303100000000000000010001000c5300001234ffffffffffff4f']}
+
+    @pytest.mark.parametrize('case',CASES,ids=lambda c:c['name'])
+    def test_frozen_sequence_cases_match_independent_prefix_oracle(case):
+     data=[bytes.fromhex(x) for x in case['packets']]
+     expected=reference_sequence(data,**case.get('limits',{}))['states']
+     actual=run(data,limits=case.get('limits',{}))
+     for state in actual:assert state.pop('requests')==[]
+>    assert actual==expected
+E    AssertionError: assert [{'book': {'i...': None, ...}] == [{'book': {'i...': None, ...}]
+E      
+E      At index 0 diff: {'expected': '1', 'high_water_next': '1', 'end_next': None, 'status': 'unimplemented', 'live_fresh': False, 'quote_usable': False, 'error': 'unimplemented', 'error_sequence': None, 'book': {'order_count': 0, 'seen_id_count': 0, 'instruments': []}, 'itch_end_seen': False} != {'expected': '4', 'high_water_next': '4', 'end_next': None, 'status': 'ReplayPrefix', 'live_fresh': False, 'quote_usable': False, 'error': None, 'error_sequence': None, 'book': {'order_count': 0, 'seen_id_count': 0, 'instruments': [{'locate': 1, 'symbol': 'ALPHA', 'orders': [], 'bids...
+E      
+E      ...Full output truncated (2 lines hidden), use '-vv' to show
+
+tests/test_session.py:21: AssertionError
+_ test_frozen_sequence_cases_match_independent_prefix_oracle[old_unknown_type_still_rejected] _
+
+case = {'expected': [{'error_code': None, 'error_sequence': None, 'high_water': 4, 'next_sequence': 4, ...}, {'error_code': '...23456789ab4245544120202020514e000000644e432020504e4e314e000000014e', '524556494557303030310000000000000001000100015a']}
+
+    @pytest.mark.parametrize('case',CASES,ids=lambda c:c['name'])
+    def test_frozen_sequence_cases_match_independent_prefix_oracle(case):
+     data=[bytes.fromhex(x) for x in case['packets']]
+     expected=reference_sequence(data,**case.get('limits',{}))['states']
+     actual=run(data,limits=case.get('limits',{}))
+     for state in actual:assert state.pop('requests')==[]
+>    assert actual==expected
+E    AssertionError: assert [{'book': {'i...': None, ...}] == [{'book': {'i...e': '1', ...}]
+E      
+E      At index 0 diff: {'expected': '1', 'high_water_next': '1', 'end_next': None, 'status': 'unimplemented', 'live_fresh': False, 'quote_usable': False, 'error': 'unimplemented', 'error_sequence': None, 'book': {'order_count': 0, 'seen_id_count': 0, 'instruments': []}, 'itch_end_seen': False} != {'expected': '4', 'high_water_next': '4', 'end_next': None, 'status': 'ReplayPrefix', 'live_fresh': False, 'quote_usable': False, 'error': None, 'error_sequence': None, 'book': {'order_count': 0, 'seen_id_count': 0, 'instruments': [{'locate': 1, 'symbol': 'ALPHA', 'orders': [], 'bids...
+E      
+E      ...Full output truncated (2 lines hidden), use '-vv' to show
+
+tests/test_session.py:21: AssertionError
+_____ test_frozen_sequence_cases_match_independent_prefix_oracle[zero_add] _____
+
+case = {'expected': [{'error_code': None, 'error_sequence': None, 'high_water': 4, 'next_sequence': 4, ...}, {'book': {'order...5245564945573030303100000000000000040001002441000112340123456789ab01020304050607084200000000414c504841202020000186a0']}
+
+    @pytest.mark.parametrize('case',CASES,ids=lambda c:c['name'])
+    def test_frozen_sequence_cases_match_independent_prefix_oracle(case):
+     data=[bytes.fromhex(x) for x in case['packets']]
+     expected=reference_sequence(data,**case.get('limits',{}))['states']
+     actual=run(data,limits=case.get('limits',{}))
+     for state in actual:assert state.pop('requests')==[]
+>    assert actual==expected
+E    AssertionError: assert [{'book': {'i...': None, ...}] == [{'book': {'i...e': '4', ...}]
+E      
+E      At index 0 diff: {'expected': '1', 'high_water_next': '1', 'end_next': None, 'status': 'unimplemented', 'live_fresh': False, 'quote_usable': False, 'error': 'unimplemented', 'error_sequence': None, 'book': {'order_count': 0, 'seen_id_count': 0, 'instruments': []}, 'itch_end_seen': False} != {'expected': '4', 'high_water_next': '4', 'end_next': None, 'status': 'ReplayPrefix', 'live_fresh': False, 'quote_usable': False, 'error': None, 'error_sequence': None, 'book': {'order_count': 0, 'seen_id_count': 0, 'instruments': [{'locate': 1, 'symbol': 'ALPHA', 'orders': [], 'bids...
+E      
+E      ...Full output truncated (2 lines hidden), use '-vv' to show
+
+tests/test_session.py:21: AssertionError
+_____ test_frozen_sequence_cases_match_independent_prefix_oracle[bad_side] _____
+
+case = {'expected': [{'error_code': None, 'error_sequence': None, 'high_water': 4, 'next_sequence': 4, ...}, {'book': {'order...5245564945573030303100000000000000040001002441000112340123456789ab01020304050607085800000064414c504841202020000186a0']}
+
+    @pytest.mark.parametrize('case',CASES,ids=lambda c:c['name'])
+    def test_frozen_sequence_cases_match_independent_prefix_oracle(case):
+     data=[bytes.fromhex(x) for x in case['packets']]
+     expected=reference_sequence(data,**case.get('limits',{}))['states']
+     actual=run(data,limits=case.get('limits',{}))
+     for state in actual:assert state.pop('requests')==[]
+>    assert actual==expected
+E    AssertionError: assert [{'book': {'i...': None, ...}] == [{'book': {'i...e': '4', ...}]
+E      
+E      At index 0 diff: {'expected': '1', 'high_water_next': '1', 'end_next': None, 'status': 'unimplemented', 'live_fresh': False, 'quote_usable': False, 'error': 'unimplemented', 'error_sequence': None, 'book': {'order_count': 0, 'seen_id_count': 0, 'instruments': []}, 'itch_end_seen': False} != {'expected': '4', 'high_water_next': '4', 'end_next': None, 'status': 'ReplayPrefix', 'live_fresh': False, 'quote_usable': False, 'error': None, 'error_sequence': None, 'book': {'order_count': 0, 'seen_id_count': 0, 'instruments': [{'locate': 1, 'symbol': 'ALPHA', 'orders': [], 'bids...
+E      
+E      ...Full output truncated (2 lines hidden), use '-vv' to show
+
+tests/test_session.py:21: AssertionError
+_ test_frozen_sequence_cases_match_independent_prefix_oracle[price_above_max] __
+
+case = {'expected': [{'error_code': None, 'error_sequence': None, 'high_water': 4, 'next_sequence': 4, ...}, {'book': {'order...5245564945573030303100000000000000040001002441000112340123456789ab01020304050607084200000064414c50484120202077359401']}
+
+    @pytest.mark.parametrize('case',CASES,ids=lambda c:c['name'])
+    def test_frozen_sequence_cases_match_independent_prefix_oracle(case):
+     data=[bytes.fromhex(x) for x in case['packets']]
+     expected=reference_sequence(data,**case.get('limits',{}))['states']
+     actual=run(data,limits=case.get('limits',{}))
+     for state in actual:assert state.pop('requests')==[]
+>    assert actual==expected
+E    AssertionError: assert [{'book': {'i...': None, ...}] == [{'book': {'i...e': '4', ...}]
+E      
+E      At index 0 diff: {'expected': '1', 'high_water_next': '1', 'end_next': None, 'status': 'unimplemented', 'live_fresh': False, 'quote_usable': False, 'error': 'unimplemented', 'error_sequence': None, 'book': {'order_count': 0, 'seen_id_count': 0, 'instruments': []}, 'itch_end_seen': False} != {'expected': '4', 'high_water_next': '4', 'end_next': None, 'status': 'ReplayPrefix', 'live_fresh': False, 'quote_usable': False, 'error': None, 'error_sequence': None, 'book': {'order_count': 0, 'seen_id_count': 0, 'instruments': [{'locate': 1, 'symbol': 'ALPHA', 'orders': [], 'bids...
+E      
+E      ...Full output truncated (2 lines hidden), use '-vv' to show
+
+tests/test_session.py:21: AssertionError
+_ test_frozen_sequence_cases_match_independent_prefix_oracle[timestamp_at_day_boundary] _
+
+case = {'expected': [{'error_code': None, 'error_sequence': None, 'high_water': 4, 'next_sequence': 4, ...}, {'book': {'order...5245564945573030303100000000000000040001002441000112344e94914f000001020304050607084200000064414c504841202020000186a0']}
+
+    @pytest.mark.parametrize('case',CASES,ids=lambda c:c['name'])
+    def test_frozen_sequence_cases_match_independent_prefix_oracle(case):
+     data=[bytes.fromhex(x) for x in case['packets']]
+     expected=reference_sequence(data,**case.get('limits',{}))['states']
+     actual=run(data,limits=case.get('limits',{}))
+     for state in actual:assert state.pop('requests')==[]
+>    assert actual==expected
+E    AssertionError: assert [{'book': {'i...': None, ...}] == [{'book': {'i...e': '4', ...}]
+E      
+E      At index 0 diff: {'expected': '1', 'high_water_next': '1', 'end_next': None, 'status': 'unimplemented', 'live_fresh': False, 'quote_usable': False, 'error': 'unimplemented', 'error_sequence': None, 'book': {'order_count': 0, 'seen_id_count': 0, 'instruments': []}, 'itch_end_seen': False} != {'expected': '4', 'high_water_next': '4', 'end_next': None, 'status': 'ReplayPrefix', 'live_fresh': False, 'quote_usable': False, 'error': None, 'error_sequence': None, 'book': {'order_count': 0, 'seen_id_count': 0, 'instruments': [{'locate': 1, 'symbol': 'ALPHA', 'orders': [], 'bids...
+E      
+E      ...Full output truncated (2 lines hidden), use '-vv' to show
+
+tests/test_session.py:21: AssertionError
+__ test_frozen_sequence_cases_match_independent_prefix_oracle[unknown_locate] __
+
+case = {'expected': [{'error_code': None, 'error_sequence': None, 'high_water': 4, 'next_sequence': 4, ...}, {'book': {'order...5245564945573030303100000000000000040001002441000312340123456789ab01020304050607084200000064414c504841202020000186a0']}
+
+    @pytest.mark.parametrize('case',CASES,ids=lambda c:c['name'])
+    def test_frozen_sequence_cases_match_independent_prefix_oracle(case):
+     data=[bytes.fromhex(x) for x in case['packets']]
+     expected=reference_sequence(data,**case.get('limits',{}))['states']
+     actual=run(data,limits=case.get('limits',{}))
+     for state in actual:assert state.pop('requests')==[]
+>    assert actual==expected
+E    AssertionError: assert [{'book': {'i...': None, ...}] == [{'book': {'i...e': '4', ...}]
+E      
+E      At index 0 diff: {'expected': '1', 'high_water_next': '1', 'end_next': None, 'status': 'unimplemented', 'live_fresh': False, 'quote_usable': False, 'error': 'unimplemented', 'error_sequence': None, 'book': {'order_count': 0, 'seen_id_count': 0, 'instruments': []}, 'itch_end_seen': False} != {'expected': '4', 'high_water_next': '4', 'end_next': None, 'status': 'ReplayPrefix', 'live_fresh': False, 'quote_usable': False, 'error': None, 'error_sequence': None, 'book': {'order_count': 0, 'seen_id_count': 0, 'instruments': [{'locate': 1, 'symbol': 'ALPHA', 'orders': [], 'bids...
+E      
+E      ...Full output truncated (2 lines hidden), use '-vv' to show
+
+tests/test_session.py:21: AssertionError
+_ test_frozen_sequence_cases_match_independent_prefix_oracle[symbol_mismatch] __
+
+case = {'expected': [{'error_code': None, 'error_sequence': None, 'high_water': 4, 'next_sequence': 4, ...}, {'book': {'order...5245564945573030303100000000000000040001002441000112340123456789ab010203040506070842000000644245544120202020000186a0']}
+
+    @pytest.mark.parametrize('case',CASES,ids=lambda c:c['name'])
+    def test_frozen_sequence_cases_match_independent_prefix_oracle(case):
+     data=[bytes.fromhex(x) for x in case['packets']]
+     expected=reference_sequence(data,**case.get('limits',{}))['states']
+     actual=run(data,limits=case.get('limits',{}))
+     for state in actual:assert state.pop('requests')==[]
+>    assert actual==expected
+E    AssertionError: assert [{'book': {'i...': None, ...}] == [{'book': {'i...e': '4', ...}]
+E      
+E      At index 0 diff: {'expected': '1', 'high_water_next': '1', 'end_next': None, 'status': 'unimplemented', 'live_fresh': False, 'quote_usable': False, 'error': 'unimplemented', 'error_sequence': None, 'book': {'order_count': 0, 'seen_id_count': 0, 'instruments': []}, 'itch_end_seen': False} != {'expected': '4', 'high_water_next': '4', 'end_next': None, 'status': 'ReplayPrefix', 'live_fresh': False, 'quote_usable': False, 'error': None, 'error_sequence': None, 'book': {'order_count': 0, 'seen_id_count': 0, 'instruments': [{'locate': 1, 'symbol': 'ALPHA', 'orders': [], 'bids...
+E      
+E      ...Full output truncated (2 lines hidden), use '-vv' to show
+
+tests/test_session.py:21: AssertionError
+_ test_frozen_sequence_cases_match_independent_prefix_oracle[zero_price_best_bid] _
+
+case = {'expected': [{'error_code': None, 'error_sequence': None, 'high_water': 4, 'next_sequence': 4, ...}, {'book': {'order...5245564945573030303100000000000000040001002441000112340123456789ab00000000000000424200000001414c50484120202000000000']}
+
+    @pytest.mark.parametrize('case',CASES,ids=lambda c:c['name'])
+    def test_frozen_sequence_cases_match_independent_prefix_oracle(case):
+     data=[bytes.fromhex(x) for x in case['packets']]
+     expected=reference_sequence(data,**case.get('limits',{}))['states']
+     actual=run(data,limits=case.get('limits',{}))
+     for state in actual:assert state.pop('requests')==[]
+>    assert actual==expected
+E    AssertionError: assert [{'book': {'i...': None, ...}] == [{'book': {'i...': None, ...}]
+E      
+E      At index 0 diff: {'expected': '1', 'high_water_next': '1', 'end_next': None, 'status': 'unimplemented', 'live_fresh': False, 'quote_usable': False, 'error': 'unimplemented', 'error_sequence': None, 'book': {'order_count': 0, 'seen_id_count': 0, 'instruments': []}, 'itch_end_seen': False} != {'expected': '4', 'high_water_next': '4', 'end_next': None, 'status': 'ReplayPrefix', 'live_fresh': False, 'quote_usable': False, 'error': None, 'error_sequence': None, 'book': {'order_count': 0, 'seen_id_count': 0, 'instruments': [{'locate': 1, 'symbol': 'ALPHA', 'orders': [], 'bids...
+E      
+E      ...Full output truncated (2 lines hidden), use '-vv' to show
+
+tests/test_session.py:21: AssertionError
+_ test_frozen_sequence_cases_match_independent_prefix_oracle[directory_idempotent] _
+
+case = {'expected': [{'error_code': None, 'error_sequence': None, 'high_water': 4, 'next_sequence': 4, ...}, {'book': {'order...4945573030303100000000000000040001002752000112340123456789ab414c504841202020514e000000644e432020504e4e314e000000014e']}
+
+    @pytest.mark.parametrize('case',CASES,ids=lambda c:c['name'])
+    def test_frozen_sequence_cases_match_independent_prefix_oracle(case):
+     data=[bytes.fromhex(x) for x in case['packets']]
+     expected=reference_sequence(data,**case.get('limits',{}))['states']
+     actual=run(data,limits=case.get('limits',{}))
+     for state in actual:assert state.pop('requests')==[]
+>    assert actual==expected
+E    AssertionError: assert [{'book': {'i...': None, ...}] == [{'book': {'i...': None, ...}]
+E      
+E      At index 0 diff: {'expected': '1', 'high_water_next': '1', 'end_next': None, 'status': 'unimplemented', 'live_fresh': False, 'quote_usable': False, 'error': 'unimplemented', 'error_sequence': None, 'book': {'order_count': 0, 'seen_id_count': 0, 'instruments': []}, 'itch_end_seen': False} != {'expected': '4', 'high_water_next': '4', 'end_next': None, 'status': 'ReplayPrefix', 'live_fresh': False, 'quote_usable': False, 'error': None, 'error_sequence': None, 'book': {'order_count': 0, 'seen_id_count': 0, 'instruments': [{'locate': 1, 'symbol': 'ALPHA', 'orders': [], 'bids...
+E      
+E      ...Full output truncated (2 lines hidden), use '-vv' to show
+
+tests/test_session.py:21: AssertionError
+_ test_frozen_sequence_cases_match_independent_prefix_oracle[directory_locate_conflict] _
+
+case = {'expected': [{'error_code': None, 'error_sequence': None, 'high_water': 4, 'next_sequence': 4, ...}, {'error_code': '...4945573030303100000000000000040001002752000112340123456789ab4245544120202020514e000000644e432020504e4e314e000000014e']}
+
+    @pytest.mark.parametrize('case',CASES,ids=lambda c:c['name'])
+    def test_frozen_sequence_cases_match_independent_prefix_oracle(case):
+     data=[bytes.fromhex(x) for x in case['packets']]
+     expected=reference_sequence(data,**case.get('limits',{}))['states']
+     actual=run(data,limits=case.get('limits',{}))
+     for state in actual:assert state.pop('requests')==[]
+>    assert actual==expected
+E    AssertionError: assert [{'book': {'i...': None, ...}] == [{'book': {'i...e': '4', ...}]
+E      
+E      At index 0 diff: {'expected': '1', 'high_water_next': '1', 'end_next': None, 'status': 'unimplemented', 'live_fresh': False, 'quote_usable': False, 'error': 'unimplemented', 'error_sequence': None, 'book': {'order_count': 0, 'seen_id_count': 0, 'instruments': []}, 'itch_end_seen': False} != {'expected': '4', 'high_water_next': '4', 'end_next': None, 'status': 'ReplayPrefix', 'live_fresh': False, 'quote_usable': False, 'error': None, 'error_sequence': None, 'book': {'order_count': 0, 'seen_id_count': 0, 'instruments': [{'locate': 1, 'symbol': 'ALPHA', 'orders': [], 'bids...
+E      
+E      ...Full output truncated (2 lines hidden), use '-vv' to show
+
+tests/test_session.py:21: AssertionError
+_ test_frozen_sequence_cases_match_independent_prefix_oracle[directory_symbol_conflict] _
+
+case = {'expected': [{'error_code': None, 'error_sequence': None, 'high_water': 4, 'next_sequence': 4, ...}, {'error_code': '...4945573030303100000000000000040001002752000312340123456789ab414c504841202020514e000000644e432020504e4e314e000000014e']}
+
+    @pytest.mark.parametrize('case',CASES,ids=lambda c:c['name'])
+    def test_frozen_sequence_cases_match_independent_prefix_oracle(case):
+     data=[bytes.fromhex(x) for x in case['packets']]
+     expected=reference_sequence(data,**case.get('limits',{}))['states']
+     actual=run(data,limits=case.get('limits',{}))
+     for state in actual:assert state.pop('requests')==[]
+>    assert actual==expected
+E    AssertionError: assert [{'book': {'i...': None, ...}] == [{'book': {'i...e': '4', ...}]
+E      
+E      At index 0 diff: {'expected': '1', 'high_water_next': '1', 'end_next': None, 'status': 'unimplemented', 'live_fresh': False, 'quote_usable': False, 'error': 'unimplemented', 'error_sequence': None, 'book': {'order_count': 0, 'seen_id_count': 0, 'instruments': []}, 'itch_end_seen': False} != {'expected': '4', 'high_water_next': '4', 'end_next': None, 'status': 'ReplayPrefix', 'live_fresh': False, 'quote_usable': False, 'error': None, 'error_sequence': None, 'book': {'order_count': 0, 'seen_id_count': 0, 'instruments': [{'locate': 1, 'symbol': 'ALPHA', 'orders': [], 'bids...
+E      
+E      ...Full output truncated (2 lines hidden), use '-vv' to show
+
+tests/test_session.py:21: AssertionError
+_ test_frozen_sequence_cases_match_independent_prefix_oracle[wrong_instrument_reduction] _
+
+case = {'expected': [{'error_code': None, 'error_sequence': None, 'high_water': 4, 'next_sequence': 4, ...}, {'error_code': N...359400', '5245564945573030303100000000000000080001001f45000212340123456789ab0102030405060708000000142122232425262728']}
+
+    @pytest.mark.parametrize('case',CASES,ids=lambda c:c['name'])
+    def test_frozen_sequence_cases_match_independent_prefix_oracle(case):
+     data=[bytes.fromhex(x) for x in case['packets']]
+     expected=reference_sequence(data,**case.get('limits',{}))['states']
+     actual=run(data,limits=case.get('limits',{}))
+     for state in actual:assert state.pop('requests')==[]
+>    assert actual==expected
+E    AssertionError: assert [{'book': {'i...': None, ...}] == [{'book': {'i...e': '8', ...}]
+E      
+E      At index 0 diff: {'expected': '1', 'high_water_next': '1', 'end_next': None, 'status': 'unimplemented', 'live_fresh': False, 'quote_usable': False, 'error': 'unimplemented', 'error_sequence': None, 'book': {'order_count': 0, 'seen_id_count': 0, 'instruments': []}, 'itch_end_seen': False} != {'expected': '4', 'high_water_next': '4', 'end_next': None, 'status': 'ReplayPrefix', 'live_fresh': False, 'quote_usable': False, 'error': None, 'error_sequence': None, 'book': {'order_count': 0, 'seen_id_count': 0, 'instruments': [{'locate': 1, 'symbol': 'ALPHA', 'orders': [], 'bids...
+E      
+E      ...Full output truncated (2 lines hidden), use '-vv' to show
+
+tests/test_session.py:21: AssertionError
+_ test_frozen_sequence_cases_match_independent_prefix_oracle[zero_reduction_execute] _
+
+case = {'expected': [{'error_code': None, 'error_sequence': None, 'high_water': 4, 'next_sequence': 4, ...}, {'error_code': N...359400', '5245564945573030303100000000000000080001001f45000112340123456789ab0102030405060708000000002122232425262728']}
+
+    @pytest.mark.parametrize('case',CASES,ids=lambda c:c['name'])
+    def test_frozen_sequence_cases_match_independent_prefix_oracle(case):
+     data=[bytes.fromhex(x) for x in case['packets']]
+     expected=reference_sequence(data,**case.get('limits',{}))['states']
+     actual=run(data,limits=case.get('limits',{}))
+     for state in actual:assert state.pop('requests')==[]
+>    assert actual==expected
+E    AssertionError: assert [{'book': {'i...': None, ...}] == [{'book': {'i...': None, ...}]
+E      
+E      At index 0 diff: {'expected': '1', 'high_water_next': '1', 'end_next': None, 'status': 'unimplemented', 'live_fresh': False, 'quote_usable': False, 'error': 'unimplemented', 'error_sequence': None, 'book': {'order_count': 0, 'seen_id_count': 0, 'instruments': []}, 'itch_end_seen': False} != {'expected': '4', 'high_water_next': '4', 'end_next': None, 'status': 'ReplayPrefix', 'live_fresh': False, 'quote_usable': False, 'error': None, 'error_sequence': None, 'book': {'order_count': 0, 'seen_id_count': 0, 'instruments': [{'locate': 1, 'symbol': 'ALPHA', 'orders': [], 'bids...
+E      
+E      ...Full output truncated (2 lines hidden), use '-vv' to show
+
+tests/test_session.py:21: AssertionError
+_ test_frozen_sequence_cases_match_independent_prefix_oracle[zero_reduction_nonprintable] _
+
+case = {'expected': [{'error_code': None, 'error_sequence': None, 'high_water': 4, 'next_sequence': 4, ...}, {'error_code': N...5245564945573030303100000000000000080001002443000112340123456789abfedcba98765432100000000011121314151617184e0001869f']}
+
+    @pytest.mark.parametrize('case',CASES,ids=lambda c:c['name'])
+    def test_frozen_sequence_cases_match_independent_prefix_oracle(case):
+     data=[bytes.fromhex(x) for x in case['packets']]
+     expected=reference_sequence(data,**case.get('limits',{}))['states']
+     actual=run(data,limits=case.get('limits',{}))
+     for state in actual:assert state.pop('requests')==[]
+>    assert actual==expected
+E    AssertionError: assert [{'book': {'i...': None, ...}] == [{'book': {'i...': None, ...}]
+E      
+E      At index 0 diff: {'expected': '1', 'high_water_next': '1', 'end_next': None, 'status': 'unimplemented', 'live_fresh': False, 'quote_usable': False, 'error': 'unimplemented', 'error_sequence': None, 'book': {'order_count': 0, 'seen_id_count': 0, 'instruments': []}, 'itch_end_seen': False} != {'expected': '4', 'high_water_next': '4', 'end_next': None, 'status': 'ReplayPrefix', 'live_fresh': False, 'quote_usable': False, 'error': None, 'error_sequence': None, 'book': {'order_count': 0, 'seen_id_count': 0, 'instruments': [{'locate': 1, 'symbol': 'ALPHA', 'orders': [], 'bids...
+E      
+E      ...Full output truncated (2 lines hidden), use '-vv' to show
+
+tests/test_session.py:21: AssertionError
+_ test_frozen_sequence_cases_match_independent_prefix_oracle[zero_reduction_cancel] _
+
+case = {'expected': [{'error_code': None, 'error_sequence': None, 'high_water': 4, 'next_sequence': 4, ...}, {'error_code': N...4554412020202077359400', '5245564945573030303100000000000000080001001758000112340123456789ab000000000000000000000000']}
+
+    @pytest.mark.parametrize('case',CASES,ids=lambda c:c['name'])
+    def test_frozen_sequence_cases_match_independent_prefix_oracle(case):
+     data=[bytes.fromhex(x) for x in case['packets']]
+     expected=reference_sequence(data,**case.get('limits',{}))['states']
+     actual=run(data,limits=case.get('limits',{}))
+     for state in actual:assert state.pop('requests')==[]
+>    assert actual==expected
+E    AssertionError: assert [{'book': {'i...': None, ...}] == [{'book': {'i...': None, ...}]
+E      
+E      At index 0 diff: {'expected': '1', 'high_water_next': '1', 'end_next': None, 'status': 'unimplemented', 'live_fresh': False, 'quote_usable': False, 'error': 'unimplemented', 'error_sequence': None, 'book': {'order_count': 0, 'seen_id_count': 0, 'instruments': []}, 'itch_end_seen': False} != {'expected': '4', 'high_water_next': '4', 'end_next': None, 'status': 'ReplayPrefix', 'live_fresh': False, 'quote_usable': False, 'error': None, 'error_sequence': None, 'book': {'order_count': 0, 'seen_id_count': 0, 'instruments': [{'locate': 1, 'symbol': 'ALPHA', 'orders': [], 'bids...
+E      
+E      ...Full output truncated (2 lines hidden), use '-vv' to show
+
+tests/test_session.py:21: AssertionError
+_ test_frozen_sequence_cases_match_independent_prefix_oracle[zero_reduction_missing_reference] _
+
+case = {'expected': [{'error_code': None, 'error_sequence': None, 'high_water': 4, 'next_sequence': 4, ...}, {'book': {'order...00014e', '5245564945573030303100000000000000040001001f45000112340123456789ab0102030405060708000000002122232425262728']}
+
+    @pytest.mark.parametrize('case',CASES,ids=lambda c:c['name'])
+    def test_frozen_sequence_cases_match_independent_prefix_oracle(case):
+     data=[bytes.fromhex(x) for x in case['packets']]
+     expected=reference_sequence(data,**case.get('limits',{}))['states']
+     actual=run(data,limits=case.get('limits',{}))
+     for state in actual:assert state.pop('requests')==[]
+>    assert actual==expected
+E    AssertionError: assert [{'book': {'i...': None, ...}] == [{'book': {'i...e': '4', ...}]
+E      
+E      At index 0 diff: {'expected': '1', 'high_water_next': '1', 'end_next': None, 'status': 'unimplemented', 'live_fresh': False, 'quote_usable': False, 'error': 'unimplemented', 'error_sequence': None, 'book': {'order_count': 0, 'seen_id_count': 0, 'instruments': []}, 'itch_end_seen': False} != {'expected': '4', 'high_water_next': '4', 'end_next': None, 'status': 'ReplayPrefix', 'live_fresh': False, 'quote_usable': False, 'error': None, 'error_sequence': None, 'book': {'order_count': 0, 'seen_id_count': 0, 'instruments': [{'locate': 1, 'symbol': 'ALPHA', 'orders': [], 'bids...
+E      
+E      ...Full output truncated (2 lines hidden), use '-vv' to show
+
+tests/test_session.py:21: AssertionError
+_ test_frozen_sequence_cases_match_independent_prefix_oracle[fill_then_retired_id_reuse] _
+
+case = {'expected': [{'error_code': None, 'error_sequence': None, 'high_water': 4, 'next_sequence': 4, ...}, {'book': {'order...5245564945573030303100000000000000060001002441000112340123456789ab01020304050607084200000064414c504841202020000186a0']}
+
+    @pytest.mark.parametrize('case',CASES,ids=lambda c:c['name'])
+    def test_frozen_sequence_cases_match_independent_prefix_oracle(case):
+     data=[bytes.fromhex(x) for x in case['packets']]
+     expected=reference_sequence(data,**case.get('limits',{}))['states']
+     actual=run(data,limits=case.get('limits',{}))
+     for state in actual:assert state.pop('requests')==[]
+>    assert actual==expected
+E    AssertionError: assert [{'book': {'i...': None, ...}] == [{'book': {'i...e': '6', ...}]
+E      
+E      At index 0 diff: {'expected': '1', 'high_water_next': '1', 'end_next': None, 'status': 'unimplemented', 'live_fresh': False, 'quote_usable': False, 'error': 'unimplemented', 'error_sequence': None, 'book': {'order_count': 0, 'seen_id_count': 0, 'instruments': []}, 'itch_end_seen': False} != {'expected': '4', 'high_water_next': '4', 'end_next': None, 'status': 'ReplayPrefix', 'live_fresh': False, 'quote_usable': False, 'error': None, 'error_sequence': None, 'book': {'order_count': 0, 'seen_id_count': 0, 'instruments': [{'locate': 1, 'symbol': 'ALPHA', 'orders': [], 'bids...
+E      
+E      ...Full output truncated (2 lines hidden), use '-vv' to show
+
+tests/test_session.py:21: AssertionError
+___ test_frozen_sequence_cases_match_independent_prefix_oracle[replace_self] ___
+
+case = {'expected': [{'error_code': None, 'error_sequence': None, 'high_water': 4, 'next_sequence': 4, ...}, {'error_code': N... '5245564945573030303100000000000000080001002355000112340123456789abfedcba9876543210fedcba98765432100000003c00018768']}
+
+    @pytest.mark.parametrize('case',CASES,ids=lambda c:c['name'])
+    def test_frozen_sequence_cases_match_independent_prefix_oracle(case):
+     data=[bytes.fromhex(x) for x in case['packets']]
+     expected=reference_sequence(data,**case.get('limits',{}))['states']
+     actual=run(data,limits=case.get('limits',{}))
+     for state in actual:assert state.pop('requests')==[]
+>    assert actual==expected
+E    AssertionError: assert [{'book': {'i...': None, ...}] == [{'book': {'i...e': '8', ...}]
+E      
+E      At index 0 diff: {'expected': '1', 'high_water_next': '1', 'end_next': None, 'status': 'unimplemented', 'live_fresh': False, 'quote_usable': False, 'error': 'unimplemented', 'error_sequence': None, 'book': {'order_count': 0, 'seen_id_count': 0, 'instruments': []}, 'itch_end_seen': False} != {'expected': '4', 'high_water_next': '4', 'end_next': None, 'status': 'ReplayPrefix', 'live_fresh': False, 'quote_usable': False, 'error': None, 'error_sequence': None, 'book': {'order_count': 0, 'seen_id_count': 0, 'instruments': [{'locate': 1, 'symbol': 'ALPHA', 'orders': [], 'bids...
+E      
+E      ...Full output truncated (2 lines hidden), use '-vv' to show
+
+tests/test_session.py:21: AssertionError
+_ test_frozen_sequence_cases_match_independent_prefix_oracle[replace_live_collision] _
+
+case = {'expected': [{'error_code': None, 'error_sequence': None, 'high_water': 4, 'next_sequence': 4, ...}, {'error_code': N... '5245564945573030303100000000000000080001002355000112340123456789abfedcba987654321001020304050607080000003c00018768']}
+
+    @pytest.mark.parametrize('case',CASES,ids=lambda c:c['name'])
+    def test_frozen_sequence_cases_match_independent_prefix_oracle(case):
+     data=[bytes.fromhex(x) for x in case['packets']]
+     expected=reference_sequence(data,**case.get('limits',{}))['states']
+     actual=run(data,limits=case.get('limits',{}))
+     for state in actual:assert state.pop('requests')==[]
+>    assert actual==expected
+E    AssertionError: assert [{'book': {'i...': None, ...}] == [{'book': {'i...e': '8', ...}]
+E      
+E      At index 0 diff: {'expected': '1', 'high_water_next': '1', 'end_next': None, 'status': 'unimplemented', 'live_fresh': False, 'quote_usable': False, 'error': 'unimplemented', 'error_sequence': None, 'book': {'order_count': 0, 'seen_id_count': 0, 'instruments': []}, 'itch_end_seen': False} != {'expected': '4', 'high_water_next': '4', 'end_next': None, 'status': 'ReplayPrefix', 'live_fresh': False, 'quote_usable': False, 'error': None, 'error_sequence': None, 'book': {'order_count': 0, 'seen_id_count': 0, 'instruments': [{'locate': 1, 'symbol': 'ALPHA', 'orders': [], 'bids...
+E      
+E      ...Full output truncated (2 lines hidden), use '-vv' to show
+
+tests/test_session.py:21: AssertionError
+_ test_frozen_sequence_cases_match_independent_prefix_oracle[zero_replace_preserves_old] _
+
+case = {'expected': [{'error_code': None, 'error_sequence': None, 'high_water': 4, 'next_sequence': 4, ...}, {'error_code': N... '5245564945573030303100000000000000080001002355000112340123456789abfedcba987654321080000000000000010000000000018768']}
+
+    @pytest.mark.parametrize('case',CASES,ids=lambda c:c['name'])
+    def test_frozen_sequence_cases_match_independent_prefix_oracle(case):
+     data=[bytes.fromhex(x) for x in case['packets']]
+     expected=reference_sequence(data,**case.get('limits',{}))['states']
+     actual=run(data,limits=case.get('limits',{}))
+     for state in actual:assert state.pop('requests')==[]
+>    assert actual==expected
+E    AssertionError: assert [{'book': {'i...': None, ...}] == [{'book': {'i...e': '8', ...}]
+E      
+E      At index 0 diff: {'expected': '1', 'high_water_next': '1', 'end_next': None, 'status': 'unimplemented', 'live_fresh': False, 'quote_usable': False, 'error': 'unimplemented', 'error_sequence': None, 'book': {'order_count': 0, 'seen_id_count': 0, 'instruments': []}, 'itch_end_seen': False} != {'expected': '4', 'high_water_next': '4', 'end_next': None, 'status': 'ReplayPrefix', 'live_fresh': False, 'quote_usable': False, 'error': None, 'error_sequence': None, 'book': {'order_count': 0, 'seen_id_count': 0, 'instruments': [{'locate': 1, 'symbol': 'ALPHA', 'orders': [], 'bids...
+E      
+E      ...Full output truncated (2 lines hidden), use '-vv' to show
+
+tests/test_session.py:21: AssertionError
+_ test_frozen_sequence_cases_match_independent_prefix_oracle[itch_end_then_new_message] _
+
+case = {'expected': [{'error_code': None, 'error_sequence': None, 'high_water': 4, 'next_sequence': 4, ...}, {'error_code': N...01000c53000012340123456789ab43', '5245564945573030303100000000000000050001001342000112340123456789ab1112131415161718']}
+
+    @pytest.mark.parametrize('case',CASES,ids=lambda c:c['name'])
+    def test_frozen_sequence_cases_match_independent_prefix_oracle(case):
+     data=[bytes.fromhex(x) for x in case['packets']]
+     expected=reference_sequence(data,**case.get('limits',{}))['states']
+     actual=run(data,limits=case.get('limits',{}))
+     for state in actual:assert state.pop('requests')==[]
+>    assert actual==expected
+E    AssertionError: assert [{'book': {'i...': None, ...}] == [{'book': {'i...e': '5', ...}]
+E      
+E      At index 0 diff: {'expected': '1', 'high_water_next': '1', 'end_next': None, 'status': 'unimplemented', 'live_fresh': False, 'quote_usable': False, 'error': 'unimplemented', 'error_sequence': None, 'book': {'order_count': 0, 'seen_id_count': 0, 'instruments': []}, 'itch_end_seen': False} != {'expected': '4', 'high_water_next': '4', 'end_next': None, 'status': 'ReplayPrefix', 'live_fresh': False, 'quote_usable': False, 'error': None, 'error_sequence': None, 'book': {'order_count': 0, 'seen_id_count': 0, 'instruments': [{'locate': 1, 'symbol': 'ALPHA', 'orders': [], 'bids...
+E      
+E      ...Full output truncated (2 lines hidden), use '-vv' to show
+
+tests/test_session.py:21: AssertionError
+__ test_frozen_sequence_cases_match_independent_prefix_oracle[live_order_cap] __
+
+case = {'expected': [{'error_code': None, 'error_sequence': None, 'high_water': 4, 'next_sequence': 4, ...}, {'book': {'order...00000050414c5048412020200001870441424344002441000212344e94914effffffffffffffffffff42ffffffff424554412020202077359400']}
+
+    @pytest.mark.parametrize('case',CASES,ids=lambda c:c['name'])
+    def test_frozen_sequence_cases_match_independent_prefix_oracle(case):
+     data=[bytes.fromhex(x) for x in case['packets']]
+     expected=reference_sequence(data,**case.get('limits',{}))['states']
+     actual=run(data,limits=case.get('limits',{}))
+     for state in actual:assert state.pop('requests')==[]
+>    assert actual==expected
+E    AssertionError: assert [{'book': {'i...': None, ...}] == [{'book': {'i...e': '5', ...}]
+E      
+E      At index 0 diff: {'expected': '1', 'high_water_next': '1', 'end_next': None, 'status': 'unimplemented', 'live_fresh': False, 'quote_usable': False, 'error': 'unimplemented', 'error_sequence': None, 'book': {'order_count': 0, 'seen_id_count': 0, 'instruments': []}, 'itch_end_seen': False} != {'expected': '4', 'high_water_next': '4', 'end_next': None, 'status': 'ReplayPrefix', 'live_fresh': False, 'quote_usable': False, 'error': None, 'error_sequence': None, 'book': {'order_count': 0, 'seen_id_count': 0, 'instruments': [{'locate': 1, 'symbol': 'ALPHA', 'orders': [], 'bids...
+E      
+E      ...Full output truncated (2 lines hidden), use '-vv' to show
+
+tests/test_session.py:21: AssertionError
+_ test_frozen_sequence_cases_match_independent_prefix_oracle[seen_id_cap_retains_history] _
+
+case = {'expected': [{'error_code': None, 'error_sequence': None, 'high_water': 4, 'next_sequence': 4, ...}, {'error_code': N...5245564945573030303100000000000000060001002441000112340123456789ab00000000000000004200000028414c504841202020000186a0']}
+
+    @pytest.mark.parametrize('case',CASES,ids=lambda c:c['name'])
+    def test_frozen_sequence_cases_match_independent_prefix_oracle(case):
+     data=[bytes.fromhex(x) for x in case['packets']]
+     expected=reference_sequence(data,**case.get('limits',{}))['states']
+     actual=run(data,limits=case.get('limits',{}))
+     for state in actual:assert state.pop('requests')==[]
+>    assert actual==expected
+E    AssertionError: assert [{'book': {'i...': None, ...}] == [{'book': {'i...e': '6', ...}]
+E      
+E      At index 0 diff: {'expected': '1', 'high_water_next': '1', 'end_next': None, 'status': 'unimplemented', 'live_fresh': False, 'quote_usable': False, 'error': 'unimplemented', 'error_sequence': None, 'book': {'order_count': 0, 'seen_id_count': 0, 'instruments': []}, 'itch_end_seen': False} != {'expected': '4', 'high_water_next': '4', 'end_next': None, 'status': 'ReplayPrefix', 'live_fresh': False, 'quote_usable': False, 'error': None, 'error_sequence': None, 'book': {'order_count': 0, 'seen_id_count': 0, 'instruments': [{'locate': 1, 'symbol': 'ALPHA', 'orders': [], 'bids...
+E      
+E      ...Full output truncated (2 lines hidden), use '-vv' to show
+
+tests/test_session.py:21: AssertionError
+__ test_frozen_sequence_cases_match_independent_prefix_oracle[instrument_cap] __
+
+case = {'expected': [{'book': {'order_count': 0}, 'error_code': 'resource_limit', 'error_sequence': 3, 'high_water': 4, ...}]...0000644e432020504e4e314e000000014e002752000212340123456789ab4245544120202020514e000000644e432020504e4e314e000000014e']}
+
+    @pytest.mark.parametrize('case',CASES,ids=lambda c:c['name'])
+    def test_frozen_sequence_cases_match_independent_prefix_oracle(case):
+     data=[bytes.fromhex(x) for x in case['packets']]
+     expected=reference_sequence(data,**case.get('limits',{}))['states']
+     actual=run(data,limits=case.get('limits',{}))
+     for state in actual:assert state.pop('requests')==[]
+>    assert actual==expected
+E    AssertionError: assert [{'book': {'i...': None, ...}] == [{'book': {'i...e': '3', ...}]
+E      
+E      At index 0 diff: {'expected': '1', 'high_water_next': '1', 'end_next': None, 'status': 'unimplemented', 'live_fresh': False, 'quote_usable': False, 'error': 'unimplemented', 'error_sequence': None, 'book': {'order_count': 0, 'seen_id_count': 0, 'instruments': []}, 'itch_end_seen': False} != {'expected': '3', 'high_water_next': '4', 'end_next': None, 'status': 'Invalid', 'live_fresh': False, 'quote_usable': False, 'error': 'resource_limit', 'error_sequence': '3', 'book': {'order_count': 0, 'seen_id_count': 0, 'instruments': [{'locate': 1, 'symbol': 'ALPHA', 'orders': [],...
+E      
+E      ...Full output truncated (2 lines hidden), use '-vv' to show
+
+tests/test_session.py:21: AssertionError
+_ test_frozen_sequence_cases_match_independent_prefix_oracle[replacement_at_live_cap] _
+
+case = {'expected': [{'error_code': None, 'error_sequence': None, 'high_water': 4, 'next_sequence': 4, ...}, {'book': {'order... '5245564945573030303100000000000000050001002355000112340123456789abfedcba987654321080000000000000010000003c00018768']}
+
+    @pytest.mark.parametrize('case',CASES,ids=lambda c:c['name'])
+    def test_frozen_sequence_cases_match_independent_prefix_oracle(case):
+     data=[bytes.fromhex(x) for x in case['packets']]
+     expected=reference_sequence(data,**case.get('limits',{}))['states']
+     actual=run(data,limits=case.get('limits',{}))
+     for state in actual:assert state.pop('requests')==[]
+>    assert actual==expected
+E    AssertionError: assert [{'book': {'i...': None, ...}] == [{'book': {'i...': None, ...}]
+E      
+E      At index 0 diff: {'expected': '1', 'high_water_next': '1', 'end_next': None, 'status': 'unimplemented', 'live_fresh': False, 'quote_usable': False, 'error': 'unimplemented', 'error_sequence': None, 'book': {'order_count': 0, 'seen_id_count': 0, 'instruments': []}, 'itch_end_seen': False} != {'expected': '4', 'high_water_next': '4', 'end_next': None, 'status': 'ReplayPrefix', 'live_fresh': False, 'quote_usable': False, 'error': None, 'error_sequence': None, 'book': {'order_count': 0, 'seen_id_count': 0, 'instruments': [{'locate': 1, 'symbol': 'ALPHA', 'orders': [], 'bids...
+E      
+E      ...Full output truncated (2 lines hidden), use '-vv' to show
+
+tests/test_session.py:21: AssertionError
+__ test_frozen_sequence_cases_match_independent_prefix_oracle[empty_message] ___
+
+case = {'expected': [{'error_code': 'itch_length', 'error_sequence': 1, 'high_water': 1, 'next_sequence': 1, ...}], 'name': 'empty_message', 'packets': ['52455649455730303031000000000000000100010000']}
+
+    @pytest.mark.parametrize('case',CASES,ids=lambda c:c['name'])
+    def test_frozen_sequence_cases_match_independent_prefix_oracle(case):
+     data=[bytes.fromhex(x) for x in case['packets']]
+     expected=reference_sequence(data,**case.get('limits',{}))['states']
+     actual=run(data,limits=case.get('limits',{}))
+     for state in actual:assert state.pop('requests')==[]
+>    assert actual==expected
+E    AssertionError: assert [{'book': {'i...': None, ...}] == [{'book': {'i...e': '1', ...}]
+E      
+E      At index 0 diff: {'expected': '1', 'high_water_next': '1', 'end_next': None, 'status': 'unimplemented', 'live_fresh': False, 'quote_usable': False, 'error': 'unimplemented', 'error_sequence': None, 'book': {'order_count': 0, 'seen_id_count': 0, 'instruments': []}, 'itch_end_seen': False} != {'expected': '1', 'high_water_next': '1', 'end_next': None, 'status': 'Invalid', 'live_fresh': False, 'quote_usable': False, 'error': 'itch_length', 'error_sequence': '1', 'book': {'order_count': 0, 'seen_id_count': 0, 'instruments': []}, 'itch_end_seen': False}
+E      Use -v to get more diff
+
+tests/test_session.py:21: AssertionError
+__ test_frozen_sequence_cases_match_independent_prefix_oracle[trailing_bytes] __
+
+case = {'expected': [{'error_code': 'mold_trailing', 'error_sequence': 1, 'high_water': 1, 'next_sequence': 1, ...}], 'name':...00644e432020504e4e314e000000014e002752000212340123456789ab4245544120202020514e000000644e432020504e4e314e000000014e00']}
+
+    @pytest.mark.parametrize('case',CASES,ids=lambda c:c['name'])
+    def test_frozen_sequence_cases_match_independent_prefix_oracle(case):
+     data=[bytes.fromhex(x) for x in case['packets']]
+     expected=reference_sequence(data,**case.get('limits',{}))['states']
+     actual=run(data,limits=case.get('limits',{}))
+     for state in actual:assert state.pop('requests')==[]
+>    assert actual==expected
+E    AssertionError: assert [{'book': {'i...': None, ...}] == [{'book': {'i...e': '1', ...}]
+E      
+E      At index 0 diff: {'expected': '1', 'high_water_next': '1', 'end_next': None, 'status': 'unimplemented', 'live_fresh': False, 'quote_usable': False, 'error': 'unimplemented', 'error_sequence': None, 'book': {'order_count': 0, 'seen_id_count': 0, 'instruments': []}, 'itch_end_seen': False} != {'expected': '1', 'high_water_next': '1', 'end_next': None, 'status': 'Invalid', 'live_fresh': False, 'quote_usable': False, 'error': 'mold_trailing', 'error_sequence': '1', 'book': {'order_count': 0, 'seen_id_count': 0, 'instruments': []}, 'itch_end_seen': False}
+E      Use -v to get more diff
+
+tests/test_session.py:21: AssertionError
+_ test_frozen_sequence_cases_match_independent_prefix_oracle[heartbeat_has_bytes] _
+
+case = {'expected': [{'error_code': 'mold_trailing', 'error_sequence': 1, 'high_water': 1, 'next_sequence': 1, ...}], 'name': 'heartbeat_has_bytes', 'packets': ['524556494557303030310000000000000001000000']}
+
+    @pytest.mark.parametrize('case',CASES,ids=lambda c:c['name'])
+    def test_frozen_sequence_cases_match_independent_prefix_oracle(case):
+     data=[bytes.fromhex(x) for x in case['packets']]
+     expected=reference_sequence(data,**case.get('limits',{}))['states']
+     actual=run(data,limits=case.get('limits',{}))
+     for state in actual:assert state.pop('requests')==[]
+>    assert actual==expected
+E    AssertionError: assert [{'book': {'i...': None, ...}] == [{'book': {'i...e': '1', ...}]
+E      
+E      At index 0 diff: {'expected': '1', 'high_water_next': '1', 'end_next': None, 'status': 'unimplemented', 'live_fresh': False, 'quote_usable': False, 'error': 'unimplemented', 'error_sequence': None, 'book': {'order_count': 0, 'seen_id_count': 0, 'instruments': []}, 'itch_end_seen': False} != {'expected': '1', 'high_water_next': '1', 'end_next': None, 'status': 'Invalid', 'live_fresh': False, 'quote_usable': False, 'error': 'mold_trailing', 'error_sequence': '1', 'book': {'order_count': 0, 'seen_id_count': 0, 'instruments': []}, 'itch_end_seen': False}
+E      Use -v to get more diff
+
+tests/test_session.py:21: AssertionError
+___ test_frozen_sequence_cases_match_independent_prefix_oracle[short_header] ___
+
+case = {'expected': [{'error_code': 'mold_header', 'error_sequence': None, 'high_water': 1, 'next_sequence': 1, ...}], 'name': 'short_header', 'packets': ['52455649455730303031']}
+
+    @pytest.mark.parametrize('case',CASES,ids=lambda c:c['name'])
+    def test_frozen_sequence_cases_match_independent_prefix_oracle(case):
+     data=[bytes.fromhex(x) for x in case['packets']]
+     expected=reference_sequence(data,**case.get('limits',{}))['states']
+     actual=run(data,limits=case.get('limits',{}))
+     for state in actual:assert state.pop('requests')==[]
+>    assert actual==expected
+E    AssertionError: assert [{'book': {'i...': None, ...}] == [{'book': {'i...': None, ...}]
+E      
+E      At index 0 diff: {'expected': '1', 'high_water_next': '1', 'end_next': None, 'status': 'unimplemented', 'live_fresh': False, 'quote_usable': False, 'error': 'unimplemented', 'error_sequence': None, 'book': {'order_count': 0, 'seen_id_count': 0, 'instruments': []}, 'itch_end_seen': False} != {'expected': '1', 'high_water_next': '1', 'end_next': None, 'status': 'Invalid', 'live_fresh': False, 'quote_usable': False, 'error': 'mold_header', 'error_sequence': None, 'book': {'order_count': 0, 'seen_id_count': 0, 'instruments': []}, 'itch_end_seen': False}
+E      Use -v to get more diff
+
+tests/test_session.py:21: AssertionError
+__________ test_recovery_requests_and_retry_exhaustion_at_exact_times __________
+
+    def test_recovery_requests_and_retry_exhaustion_at_exact_times():
+     states=run([marker(200),'@49999999','@50000000','@100000000','@150000000'],True)
+>    assert [len(s['requests']) for s in states]==[1,0,1,1,0]
+E    assert [0, 0, 0, 0, 0] == [1, 0, 1, 1, 0]
+E      
+E      At index 0 diff: 0 != 1
+E      Use -v to get more diff
+
+tests/test_session.py:29: AssertionError
+_________ test_progress_moves_request_cursor_without_losing_high_water _________
+
+    def test_progress_moves_request_cursor_without_losing_high_water():
+     start=bytes.fromhex(VECTORS['start']['hex'])
+     s=run([marker(4),packet(1,[start]),'@50000000'],True)
+>    assert s[1]['expected']=='2' and s[1]['high_water_next']=='4'
+E    AssertionError: assert ('1' == '2'
+E      
+E      - 2
+E      + 1)
+
+tests/test_session.py:37: AssertionError
+________ test_old_duplicate_does_not_refresh_silence_but_heartbeat_does ________
+
+    def test_old_duplicate_does_not_refresh_silence_but_heartbeat_does():
+     p=bytes.fromhex(ANCHORS['multi_message']['hex'])
+     s=run([p,'@1499999999',p,'@1500000000',marker(4)],True)
+>    assert s[1]['status']=='CurrentObserved' and s[2]['status']=='CurrentObserved'
+E    AssertionError: assert ('unimplemented' == 'CurrentObserved'
+E      
+E      - CurrentObserved
+E      + unimplemented)
+
+tests/test_session.py:44: AssertionError
+____________ test_duplicate_traffic_cannot_extend_recovery_deadline ____________
+
+    def test_duplicate_traffic_cannot_extend_recovery_deadline():
+     p=bytes.fromhex(ANCHORS['multi_message']['hex'])
+     s=run([p,marker(10),'@50000000',p,'@100000000',p,'@150000000',p],True)
+>    assert s[-1]['status']=='RecoveryFailed' and s[-1]['expected']=='4'
+E    AssertionError: assert ('unimplemented' == 'RecoveryFailed'
+E      
+E      - RecoveryFailed
+E      + unimplemented)
+
+tests/test_session.py:51: AssertionError
+__________ test_completion_not_silence_or_itch_end_controls_transport __________
+
+    def test_completion_not_silence_or_itch_end_controls_transport():
+     p=bytes.fromhex(ANCHORS['multi_message']['hex'])
+     s=run([p,marker(4,True),'@2000000000'],True)
+>    assert s[-1]['status']=='Complete' and not s[-1]['live_fresh']
+E    AssertionError: assert ('unimplemented' == 'Complete'
+E      
+E      - Complete
+E      + unimplemented)
+
+tests/test_session.py:56: AssertionError
+___________________ test_invalid_latches_and_stops_recovery ____________________
+
+    def test_invalid_latches_and_stops_recovery():
+     s=run([marker(5),b'bad','@50000000',marker(8)],True)
+>    assert s[-1]['status']=='Invalid' and all(not x['requests'] for x in s[1:])
+E    AssertionError: assert ('unimplemented' == 'Invalid'
+E      
+E      - Invalid
+E      + unimplemented)
+
+tests/test_session.py:61: AssertionError
+____________________ test_overall_deadline_and_cancellation ____________________
+
+    def test_overall_deadline_and_cancellation():
+>    assert run(['@10000000000'],True)[0]['error']=='deadline'
+E    AssertionError: assert None == 'deadline'
+
+tests/test_session.py:64: AssertionError
+=========================== short test summary info ============================
+FAILED tests/test_session.py::test_frozen_sequence_cases_match_independent_prefix_oracle[complete_lifecycle]
+FAILED tests/test_session.py::test_frozen_sequence_cases_match_independent_prefix_oracle[future_discard_pending_end_partial_recovery]
+FAILED tests/test_session.py::test_frozen_sequence_cases_match_independent_prefix_oracle[overlap_unseen_suffix]
+FAILED tests/test_session.py::test_frozen_sequence_cases_match_independent_prefix_oracle[trailing_heartbeat_gap]
+FAILED tests/test_session.py::test_frozen_sequence_cases_match_independent_prefix_oracle[stale_heartbeat_does_not_regress]
+FAILED tests/test_session.py::test_frozen_sequence_cases_match_independent_prefix_oracle[terminal_before_highwater]
+FAILED tests/test_session.py::test_frozen_sequence_cases_match_independent_prefix_oracle[terminal_before_accepted]
+FAILED tests/test_session.py::test_frozen_sequence_cases_match_independent_prefix_oracle[conflicting_terminal]
+FAILED tests/test_session.py::test_frozen_sequence_cases_match_independent_prefix_oracle[data_beyond_pending_terminal]
+FAILED tests/test_session.py::test_frozen_sequence_cases_match_independent_prefix_oracle[heartbeat_beyond_terminal]
+FAILED tests/test_session.py::test_frozen_sequence_cases_match_independent_prefix_oracle[unrepresentable_exclusive_bound]
+FAILED tests/test_session.py::test_frozen_sequence_cases_match_independent_prefix_oracle[largest_representable_marker]
+FAILED tests/test_session.py::test_frozen_sequence_cases_match_independent_prefix_oracle[sequence_zero]
+FAILED tests/test_session.py::test_frozen_sequence_cases_match_independent_prefix_oracle[wrong_session]
+FAILED tests/test_session.py::test_frozen_sequence_cases_match_independent_prefix_oracle[framing_failure_whole_packet_atomic]
+FAILED tests/test_session.py::test_frozen_sequence_cases_match_independent_prefix_oracle[unknown_final_type_whole_packet_atomic]
+FAILED tests/test_session.py::test_frozen_sequence_cases_match_independent_prefix_oracle[wrong_final_type_length_whole_packet_atomic]
+FAILED tests/test_session.py::test_frozen_sequence_cases_match_independent_prefix_oracle[semantic_failure_preserves_same_packet_prefix]
+FAILED tests/test_session.py::test_frozen_sequence_cases_match_independent_prefix_oracle[old_semantically_invalid_payload_not_rechecked]
+FAILED tests/test_session.py::test_frozen_sequence_cases_match_independent_prefix_oracle[old_unknown_type_still_rejected]
+FAILED tests/test_session.py::test_frozen_sequence_cases_match_independent_prefix_oracle[zero_add]
+FAILED tests/test_session.py::test_frozen_sequence_cases_match_independent_prefix_oracle[bad_side]
+FAILED tests/test_session.py::test_frozen_sequence_cases_match_independent_prefix_oracle[price_above_max]
+FAILED tests/test_session.py::test_frozen_sequence_cases_match_independent_prefix_oracle[timestamp_at_day_boundary]
+FAILED tests/test_session.py::test_frozen_sequence_cases_match_independent_prefix_oracle[unknown_locate]
+FAILED tests/test_session.py::test_frozen_sequence_cases_match_independent_prefix_oracle[symbol_mismatch]
+FAILED tests/test_session.py::test_frozen_sequence_cases_match_independent_prefix_oracle[zero_price_best_bid]
+FAILED tests/test_session.py::test_frozen_sequence_cases_match_independent_prefix_oracle[directory_idempotent]
+FAILED tests/test_session.py::test_frozen_sequence_cases_match_independent_prefix_oracle[directory_locate_conflict]
+FAILED tests/test_session.py::test_frozen_sequence_cases_match_independent_prefix_oracle[directory_symbol_conflict]
+FAILED tests/test_session.py::test_frozen_sequence_cases_match_independent_prefix_oracle[wrong_instrument_reduction]
+FAILED tests/test_session.py::test_frozen_sequence_cases_match_independent_prefix_oracle[zero_reduction_execute]
+FAILED tests/test_session.py::test_frozen_sequence_cases_match_independent_prefix_oracle[zero_reduction_nonprintable]
+FAILED tests/test_session.py::test_frozen_sequence_cases_match_independent_prefix_oracle[zero_reduction_cancel]
+FAILED tests/test_session.py::test_frozen_sequence_cases_match_independent_prefix_oracle[zero_reduction_missing_reference]
+FAILED tests/test_session.py::test_frozen_sequence_cases_match_independent_prefix_oracle[fill_then_retired_id_reuse]
+FAILED tests/test_session.py::test_frozen_sequence_cases_match_independent_prefix_oracle[replace_self]
+FAILED tests/test_session.py::test_frozen_sequence_cases_match_independent_prefix_oracle[replace_live_collision]
+FAILED tests/test_session.py::test_frozen_sequence_cases_match_independent_prefix_oracle[zero_replace_preserves_old]
+FAILED tests/test_session.py::test_frozen_sequence_cases_match_independent_prefix_oracle[itch_end_then_new_message]
+FAILED tests/test_session.py::test_frozen_sequence_cases_match_independent_prefix_oracle[live_order_cap]
+FAILED tests/test_session.py::test_frozen_sequence_cases_match_independent_prefix_oracle[seen_id_cap_retains_history]
+FAILED tests/test_session.py::test_frozen_sequence_cases_match_independent_prefix_oracle[instrument_cap]
+FAILED tests/test_session.py::test_frozen_sequence_cases_match_independent_prefix_oracle[replacement_at_live_cap]
+FAILED tests/test_session.py::test_frozen_sequence_cases_match_independent_prefix_oracle[empty_message]
+FAILED tests/test_session.py::test_frozen_sequence_cases_match_independent_prefix_oracle[trailing_bytes]
+FAILED tests/test_session.py::test_frozen_sequence_cases_match_independent_prefix_oracle[heartbeat_has_bytes]
+FAILED tests/test_session.py::test_frozen_sequence_cases_match_independent_prefix_oracle[short_header]
+FAILED tests/test_session.py::test_recovery_requests_and_retry_exhaustion_at_exact_times
+FAILED tests/test_session.py::test_progress_moves_request_cursor_without_losing_high_water
+FAILED tests/test_session.py::test_old_duplicate_does_not_refresh_silence_but_heartbeat_does
+FAILED tests/test_session.py::test_duplicate_traffic_cannot_extend_recovery_deadline
+FAILED tests/test_session.py::test_completion_not_silence_or_itch_end_controls_transport
+FAILED tests/test_session.py::test_invalid_latches_and_stops_recovery - Asser...
+FAILED tests/test_session.py::test_overall_deadline_and_cancellation - Assert...
+55 failed in 0.57s
+make: *** [test-session] Error 1

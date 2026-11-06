@@ -1,0 +1,9 @@
+{
+  "version": 2,
+  "source_sha256": "ae44da2ddcb5b624d0e988438b84335a20d3bc64f4956cfca977bc4315c605bc",
+  "original_v1_preserved": true,
+  "change": "Only median comparison tolerance: 1e-12 ms instead of exact float equality. No expected protocol/result behavior changed.",
+  "counterexample": "Median integer nanoseconds divided by 1e6 versus median of converted floats differ by up to 8.881784197001252e-16 ms in retained frequency1 indexed data; all seven other v1 probes passed.",
+  "prior_evidence": "run-normal/results.json",
+  "policy": "Frozen before v2 execution; no product edits or timing rerun"
+}

@@ -1,0 +1,39 @@
+# SDD ledger — plan: projects/feed-replay/docs/implementation-plan.md
+
+Execution: parent-approved inline implementation, fresh independent protocol/reference author and final reviewer. Task 0 complete: root approved design/plan and independently checked freeze-v1.json SHA `84ccec126a652758f05218775c27dee66ddf505e1890a315cf8b0519e90064c9`, all nine bound files, ten passing independent tests and absence of C++ before GO.
+
+Ruling: this shared workspace has no Git repository; use approved project-directory isolation and this ledger/source hashes instead of Git-dependent skill scripts. Do not create unrelated version-control state. review/ is read-only to the implementer; report suspected oracle mismatches.
+
+Preflight shared interfaces: Task1 Event/Frame feeds Task2 IBook and Task3 Session; byte spans reference caller-owned datagrams only during ingest. Task2 IBook feeds Task3/4 and Task6 both engines. Task3 Effects/View feeds Task4 socket and Task5 report; live-only clocks remain outside offline reference. Task5 capture provides Task6 predecoded workload; per-experiment benchmark limits differ from live counters. No incompatible interface found. Ruling: test-only normalized probe supplies JSON oracle adapters early; production report/CLI remains Task5, avoiding a third-party JSON dependency.
+
+Task1 in progress: independent literal/boundary/mutation differential tests written against unimplemented codec stubs, before implementation. Current tests use frozen review adapters, not a product encoder roundtrip.
+
+
+Task 1 complete: codec stub RED was 9 failed / 1 frozen-hash check passed. Implementation GREEN plus request-range coverage: 14 codec tests pass, covering 17 independent literals, all truncations, exact request bytes, 1,000 seeded Mold mutations and field-boundary differential cases. No frozen file changed.
+
+Task 2 complete: book stubs produced 14 behavior failures. Both engines now pass all 14 book cases, including 1,024-event bounded mixed-validity streams compared one full snapshot at a time against the independent oracle, four depths, exact lifecycle anchors, retired IDs, zero prices, zero reductions, caps and replacement at full live capacity. Combined 28 tests pass under normal and ASan/UBSan builds.
+
+Task 2 ruling: IndexedBook and ScanBook share stateful order admission/lifecycle code so validation work is identical; ScanBook independently scans orders for quotes and reconstructs depth, never reads the indexed level map. The separately authored Python reference remains the independent semantic oracle. This narrows the plan's 'independent ScanBook' wording to independent query/aggregation, not a second independent lifecycle oracle; avoids comparing engines with different admission work.
+
+Task 1 operational note: first RED log was initially redirected to a uniquely owned file in the parent runtime directory so its output parent existed before guard setup, then moved into feed-replay/ immediately. All subsequent runtime logs/builds use the scoped project cache.
+
+
+Task 3 complete: stubs failed all 55 initial sequence/clock behavior tests. Implemented core passes 48 frozen offline packet scenarios plus nine clock/recovery/currentness checks (57 session tests). Combined codec/book/session suite: 85 tests, normal and ASan/UBSan. Added continuous-gap budget under small cursor progress and reverse-clock rejection. Exact semantic prefix and whole-packet framing behavior match the independent model; live clocks remain separately tested.
+
+Task 4/5 dependency ruling: implement bounded capture/JSON/replay CLI infrastructure from Task 5 before the actual UDP shell so Task 4 can be exercised through the real product process and publish reviewable artifacts. Then implement live transport/drills and complete publication/race verification. This changes implementation order, not scope or approval.
+
+Task 5 initial RED: replay CLI stub failed five positive behavior tests while 15 rejection tests passed. Implemented capture/report/replay passed all 20; a later 100,000-order fixture verified a real full-book JSON output exceeding 8 MiB is refused before publication (21 CLI cases). Existing/dangling-symlink and simultaneous output publication preserve prior files. No golden data changed.
+
+Task 4 RED: 18 UDP behavior cases failed while the existing-capture rejection passed against the replay-only CLI. Initial test setup had an incorrect local vector name, corrected before the retained RED run; initial GREEN had one local expected error label (`framing` instead of the already documented/frozen `mold_trailing`), corrected without production/oracle changes. Actual transport now passes 28 subprocess cases, including separate bound sender/recovery processes, partial responses, future/tail recovery, overlap, exact outgoing 20-byte request, wrong peers/session, MSG_TRUNC, deadlines under continuous traffic, terminated recovery, cancellation and capture-creation races.
+
+Task 4 bounds amendment: lower-only CLI switches `--overall-ms`, `--receive-bytes`, `--receive-count` exercise real deadline/cap behavior without large traffic. Defaults/hard maxima remain unchanged. All-peer counters are separate from Session's pinned-peer counters. Kernel-truncated foreign datagrams are charged the maximum 65,507 bytes conservatively; capture bytes record only the copied pinned payload plus a truncation flag. A budget-crossing datagram is counted and then rejected before capture/processing.
+
+Task 6 input freeze preceded timing: `evidence/workload/manifest.json` pins seed 20261023, 52,056 independently decoded/applied events, all 50,000 map-reference quotes and the full final state. Reference quotes scan the independent author's admitted order map; 65 sampled checks compare the quote helper with the author's full normalized snapshot. No production levels are used to create expected data. Every-event output comparison retains only compact quote rows, not full-book snapshots.
+
+Task 6 RED: the deliberate benchmark stub failed the full positive contract test; five deliberately altered oracle cases rejected. GREEN: all six benchmark-contract cases pass, including quantity, currentness flag, schedule, missing/extra row mutations. Each engine's entire query sequence equals the independent oracle; both full final books and outputs match exactly outside the timer.
+
+Readability pass: applied the existing Xcode clang-format binary with a checked-in style, expanded compressed branches, named byte-reader locals and documented offset/domain boundaries. No new formatting dependency installed. All 140 product cases passed after formatting.
+
+Measured study: first and only fixed study ran 2026-10-23 21:26:44–21:26:46 UTC on Apple M4 Pro/macOS 27.0.1/Clang 21, host logical CPUs 14, load averages retained. One warmup pair plus eight alternating measured pairs per frequency, all observations retained. Indexed median versus scan: query interval 1 6.577/256.889ms; interval 32 5.914/14.275ms; interval 256 5.817/4.545ms. The sparse scan win is retained; no tuning/resampling. Sparse schedules happen to query instrument 1 because the frozen locate formula is index%8+1; cross-frequency results are not a clean isolation of frequency alone. Parser-only timings are separate, excluding file I/O. Live drill event timelines are reported separately without throughput extrapolation.
+
+Final executed owner checks: `make verify` passed ten independent reference tests and all 140 product tests, retaining 98 verification/UDP files. `make sanitize` compiled core probe, actual receiver/CLI and benchmark with ASan/UBSan; all 140 tests passed in 7.56 s. Source/input hashes and every warmup/measured sample are retained. Final independent protocol/code/execution review remains required; artifact acceptance is not personal skill certification.

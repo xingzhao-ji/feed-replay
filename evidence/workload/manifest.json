@@ -1,0 +1,26 @@
+{
+  "schema_version": 1,
+  "seed": 20261023,
+  "preload_events": 2056,
+  "initial_live_orders": 2048,
+  "instruments": 8,
+  "updates": 50000,
+  "query_frequencies": [
+    1,
+    32,
+    256
+  ],
+  "query_locate": "update_index modulo 8 plus 1",
+  "query_depth": 0,
+  "timing_policy": "one warmup pair, eight measured pairs per frequency, alternating indexed/scan order; no tuning after timing",
+  "reference_freeze_sha256": "84ccec126a652758f05218775c27dee66ddf505e1890a315cf8b0519e90064c9",
+  "generator_sha256": "7180eb23b96619d8be2336a003a037c6c83d8d04711bbc27dd9f7ef38d4c49bb",
+  "files": {
+    "workload.frcp": "ecde79e60413b8c47f0489ac76e5b3edec868a15575be27877c7230f27ef6bb4",
+    "oracle-quotes.tsv": "dde086055347ee5f05b8d35acb43b603750dc8d400a277cede515973a47040e6",
+    "oracle-final.json": "e579b11f4f0bdf6b573225fe17c50f5a5b29ad43cb72033d73e3a4a6ad8f75d0"
+  },
+  "reference_every_event_applied": 52056,
+  "reference_quotes_checked": 50000,
+  "scope": "synthetic displayed-book workload; no exchange traffic"
+}

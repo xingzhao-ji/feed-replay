@@ -1,0 +1,427 @@
+{
+  "review_version": 1,
+  "verdict": "accept bounded artifact; no material blocker",
+  "reviewer": "independent feed_protocol_review",
+  "product_modified": false,
+  "original_reference_modified": false,
+  "new_timing_study_run": false,
+  "normal_product_tests": 140,
+  "sanitized_product_tests": 140,
+  "frozen_reference_tests": 10,
+  "fresh_probe_groups_per_build": 8,
+  "fresh_random_schedule_arrivals_per_build": 3477,
+  "source_hashes": {
+    "include/feed/book.hpp": "db69a540ce16bbc4558dbb0037fd3be6a1c49375307f3b0949a9ee0754c79524",
+    "include/feed/codec.hpp": "11c54a77c431e44c47fd59e7b50d632c593babc892b09a70b2070e76316cac94",
+    "include/feed/io.hpp": "6ed834a620a9e230040a51bf2360ce670283d179db673f47f18044434afe985b",
+    "include/feed/session.hpp": "d4e28561738a2b08634112fa599c1a491f700872a76185454df2dc83086d126c",
+    "include/feed/types.hpp": "da631c719ff55913140cfb0deb1d56fe34d1b91bee75ad9f3befe4c487927771",
+    "src/benchmark.cpp": "7712943567ae9c203c3a92a7ff995f4eb389bc06d6b9cc6580ce50c7c5f3f2fd",
+    "src/capture.cpp": "76f05a223820f908e5fcc146dc5d841e79246358298e2f5a8ead6a3380641d72",
+    "src/codec.cpp": "1377452a5b069daef390eeae46a9c030ba712d669a9585e185fc1a933744ca0f",
+    "src/indexed_book.cpp": "e2bcac563f3dedda0b2b02e9175c3f68d67325f8a62fb3eb1c7bf3e2890b775d",
+    "src/main.cpp": "bb04faa36944ed7d19b4db050264cbd2fc34d0f575cc8896897bb97802337dbc",
+    "src/report.cpp": "f60de6e8d06b30f613ff79ff3f39c0cd7c580effd5df8b1e205dbd10508abf9b",
+    "src/scan_book.cpp": "91cf1e8c24c7f9c36c802b201b6757d14e3666ac114c5fbd142061a468630bdb",
+    "src/session.cpp": "cd3b99a56ab10d716d318db9564fd9a4e2c71e95fceef249a96989599aa09475",
+    "src/udp.cpp": "12382ee57f07003e0ec36c7fddd0faafe4e4a50de092dec996414610d08c5b2f"
+  },
+  "files": {
+    "review/final-independent-review.md": {
+      "bytes": 13768,
+      "sha256": "c79140da60a85544abf80fb8ae063344a0a6f6ba82ceb0b88092740a99a35aeb"
+    },
+    "review/final-review-v1/probe-freeze-v1.json": {
+      "bytes": 729,
+      "sha256": "8e72342252f2b08d13cfd0127e8fc1111f08eb70f67c78957b25663c1dbaed26"
+    },
+    "review/final-review-v1/probe-freeze-v2.json": {
+      "bytes": 610,
+      "sha256": "fa2d6d6ed015e74050dc6c3c9f5cf94f2d34d13470fa9a6edb723af8714c7c61"
+    },
+    "review/final-review-v1/probes-v2.py": {
+      "bytes": 15109,
+      "sha256": "ae44da2ddcb5b624d0e988438b84335a20d3bc64f4956cfca977bc4315c605bc"
+    },
+    "review/final-review-v1/probes.py": {
+      "bytes": 15089,
+      "sha256": "a7674f10283988878f886b79a89fb6d7b5fd8dbb77f49b60863cf490d1a16483"
+    },
+    "review/final-review-v1/product-normal.log": {
+      "bytes": 181,
+      "sha256": "df3f664e15cbc78f74d9f5b325b7a620388f30f2c625dce6ae45604d36d5ff66"
+    },
+    "review/final-review-v1/product-sanitized.log": {
+      "bytes": 181,
+      "sha256": "42ff710cfaa4b9e0a69838602007a3a350acf9e22a3b7f1e4307bc33c90e8b8b"
+    },
+    "review/final-review-v1/reference.log": {
+      "bytes": 1517,
+      "sha256": "da3c8858395ea7708e09e2aa7f29cb06b69b7aa550c1d2603821f8bede1ba6c8"
+    },
+    "review/final-review-v1/reviewed-owner-index.json": {
+      "bytes": 30429,
+      "sha256": "6a5cab68d7ad6be27ac79b8b4e8cca35e76535184eb1133a8504260536e3f257"
+    },
+    "review/final-review-v1/run-normal/cancel-progress/out/book.json": {
+      "bytes": 391,
+      "sha256": "ac9bc41fc57d32ca91d178d5ec5fb2abac6a54f22b7bf66bcc1b239019bc4afb"
+    },
+    "review/final-review-v1/run-normal/cancel-progress/out/summary.json": {
+      "bytes": 643,
+      "sha256": "db62e8398a7f26d6fd6a77b66b67ad426fe08f4d5832347ac1366f1306ef3dda"
+    },
+    "review/final-review-v1/run-normal/cancel-progress/out/timeline.jsonl": {
+      "bytes": 535,
+      "sha256": "6256cd87830833828da6c7144bfd36bf2b1a3f0d99f63547769f163635948995"
+    },
+    "review/final-review-v1/run-normal/cancel-progress/process.json": {
+      "bytes": 93,
+      "sha256": "2c6b9379f7ce2453730491fae7b5a99d3988ad1e60a5174b28f4e2d863b9032e"
+    },
+    "review/final-review-v1/run-normal/cancel-progress/wire.frcp": {
+      "bytes": 217,
+      "sha256": "52d26379994a7fb51f2eec708cd21a5b2dd423c4cd042041aa5563def969faa9"
+    },
+    "review/final-review-v1/run-normal/clock-boundaries.json": {
+      "bytes": 1671,
+      "sha256": "a02b93d906292be939983070deafda6f4dd281f453e16975991b56929babaa7a"
+    },
+    "review/final-review-v1/run-normal/future-malformed/out/book.json": {
+      "bytes": 239,
+      "sha256": "8cf0cc3cd8ac065e27e314ba036771f99191235c1f29bd25a6b63e952e6d016b"
+    },
+    "review/final-review-v1/run-normal/future-malformed/out/summary.json": {
+      "bytes": 648,
+      "sha256": "127c890a1ed646a94144563619c17cc87d0901f3ecccf906d55e2602a405fa91"
+    },
+    "review/final-review-v1/run-normal/future-malformed/out/timeline.jsonl": {
+      "bytes": 177,
+      "sha256": "7b05f62ccb2b68721c86e44d0fbe7cb8f9905747fa366054e4da8c811f7cf580"
+    },
+    "review/final-review-v1/run-normal/future-malformed/process.json": {
+      "bytes": 91,
+      "sha256": "9e9788bd46009d0bbc609502968318a3173b4334365f67806dcf26001e2827a2"
+    },
+    "review/final-review-v1/run-normal/future-malformed/wire.frcp": {
+      "bytes": 195,
+      "sha256": "9250ddacf278ead447d2f45062d910534ddf9daf8130557909dedf3c84ca3d64"
+    },
+    "review/final-review-v1/run-normal/late-output/out/sentinel": {
+      "bytes": 17,
+      "sha256": "57c8dd8a0f98ac9a9b40ff9278a6e8b667fe19161af421b6520888830c1d6b9d"
+    },
+    "review/final-review-v1/run-normal/late-output/process.json": {
+      "bytes": 93,
+      "sha256": "fb03efff051535786964902d742ef4d0a3e8dfa16c5ba17c47ca589b46fc6df7"
+    },
+    "review/final-review-v1/run-normal/late-output/wire.frcp": {
+      "bytes": 33,
+      "sha256": "4ab3f2d977d2448d798c99a223e468772e5610e600c190cf583fec9a85abe43d"
+    },
+    "review/final-review-v1/run-normal/random-schedules.json": {
+      "bytes": 631583,
+      "sha256": "b62c5e1d4efff5f0de48515e533f49eaddebb1d1e7caba7570d3b62bb585ae6b"
+    },
+    "review/final-review-v1/run-normal/results.json": {
+      "bytes": 2202,
+      "sha256": "104e7ce729f2f7adf0b15465182790f28fa46522d711424ea87cd276de45e8d0"
+    },
+    "review/final-review-v1/run-normal/tiny-recovery/observed-requests.json": {
+      "bytes": 815,
+      "sha256": "3cb1a754bb0e7d6198a35adec257169c8ef51ba87baaf4a1bd2b87715e8de784"
+    },
+    "review/final-review-v1/run-normal/tiny-recovery/out/book.json": {
+      "bytes": 672,
+      "sha256": "77fc1acd2ce2f0384958215ff5546ab2a13a0722144efd4a758ae2634ff3b1de"
+    },
+    "review/final-review-v1/run-normal/tiny-recovery/out/summary.json": {
+      "bytes": 574,
+      "sha256": "f64543791a95ee84bdb9ed8677625e6b2805b713f86e9ddcd5a33c9850b6b49e"
+    },
+    "review/final-review-v1/run-normal/tiny-recovery/out/timeline.jsonl": {
+      "bytes": 1446,
+      "sha256": "f32c780136e13e10ad734950a898097eed2d418d0ba9bdf09e09c887f25799b9"
+    },
+    "review/final-review-v1/run-normal/tiny-recovery/process.json": {
+      "bytes": 93,
+      "sha256": "906490d90c7567133de65a26e07309ce535450e5b411d6b40496bbd7060a4a9d"
+    },
+    "review/final-review-v1/run-normal/tiny-recovery/replay/book.json": {
+      "bytes": 672,
+      "sha256": "77fc1acd2ce2f0384958215ff5546ab2a13a0722144efd4a758ae2634ff3b1de"
+    },
+    "review/final-review-v1/run-normal/tiny-recovery/replay/summary.json": {
+      "bytes": 574,
+      "sha256": "516d2153c71d0b2a173cd1ab757283e1a8121f12acfb674ec8a1d292c21ca958"
+    },
+    "review/final-review-v1/run-normal/tiny-recovery/replay/timeline.jsonl": {
+      "bytes": 764,
+      "sha256": "eb18b68f6327d4bd06c1c3e26cb89b0316a9d30fd60f4838bc02f2f1d5d4ab32"
+    },
+    "review/final-review-v1/run-normal/tiny-recovery/wire.frcp": {
+      "bytes": 800,
+      "sha256": "78b9328ad6def0f78a37ea5bf659b217e3b40b68b0c1c102de61dbecf3d73312"
+    },
+    "review/final-review-v1/run-normal/zero-byte-budget/out/book.json": {
+      "bytes": 53,
+      "sha256": "7f05daf1a8e6dade8c0b9f5e2e8c18dff9477d3e8953746592de550929d97de2"
+    },
+    "review/final-review-v1/run-normal/zero-byte-budget/out/summary.json": {
+      "bytes": 659,
+      "sha256": "f2eb0d8084b2637c5b0e544ea4f8fbbf846eaa8b474577636d3b210f46d6e7a7"
+    },
+    "review/final-review-v1/run-normal/zero-byte-budget/out/timeline.jsonl": {
+      "bytes": 88,
+      "sha256": "ed038d0695f541a828816d717dd32b7eac081f0df1519c5159a32aed1d1e0d81"
+    },
+    "review/final-review-v1/run-normal/zero-byte-budget/process.json": {
+      "bytes": 91,
+      "sha256": "4765d70212e4ba2d1611b121bc8b5e0e6db96631f6d6e30491234ae1cfa36a71"
+    },
+    "review/final-review-v1/run-normal/zero-byte-budget/wire.frcp": {
+      "bytes": 8,
+      "sha256": "49af6a6fbbbb92fcf9a381ade90ddd6fe16cd530c8346c558093339ad32e44af"
+    },
+    "review/final-review-v1/run-normal-v2/cancel-progress/out/book.json": {
+      "bytes": 391,
+      "sha256": "ac9bc41fc57d32ca91d178d5ec5fb2abac6a54f22b7bf66bcc1b239019bc4afb"
+    },
+    "review/final-review-v1/run-normal-v2/cancel-progress/out/summary.json": {
+      "bytes": 643,
+      "sha256": "db62e8398a7f26d6fd6a77b66b67ad426fe08f4d5832347ac1366f1306ef3dda"
+    },
+    "review/final-review-v1/run-normal-v2/cancel-progress/out/timeline.jsonl": {
+      "bytes": 535,
+      "sha256": "bbd6f7fe5f00afd19f36877e126265b1c2ac2c8112e506d34f32af807faa1294"
+    },
+    "review/final-review-v1/run-normal-v2/cancel-progress/process.json": {
+      "bytes": 93,
+      "sha256": "2c6b9379f7ce2453730491fae7b5a99d3988ad1e60a5174b28f4e2d863b9032e"
+    },
+    "review/final-review-v1/run-normal-v2/cancel-progress/wire.frcp": {
+      "bytes": 217,
+      "sha256": "52d26379994a7fb51f2eec708cd21a5b2dd423c4cd042041aa5563def969faa9"
+    },
+    "review/final-review-v1/run-normal-v2/clock-boundaries.json": {
+      "bytes": 1671,
+      "sha256": "a02b93d906292be939983070deafda6f4dd281f453e16975991b56929babaa7a"
+    },
+    "review/final-review-v1/run-normal-v2/future-malformed/out/book.json": {
+      "bytes": 239,
+      "sha256": "8cf0cc3cd8ac065e27e314ba036771f99191235c1f29bd25a6b63e952e6d016b"
+    },
+    "review/final-review-v1/run-normal-v2/future-malformed/out/summary.json": {
+      "bytes": 648,
+      "sha256": "127c890a1ed646a94144563619c17cc87d0901f3ecccf906d55e2602a405fa91"
+    },
+    "review/final-review-v1/run-normal-v2/future-malformed/out/timeline.jsonl": {
+      "bytes": 177,
+      "sha256": "26a069eba9fd0f77e6368ff72d9676e2a06c4de335282fe0fd8837e93ee0ffbc"
+    },
+    "review/final-review-v1/run-normal-v2/future-malformed/process.json": {
+      "bytes": 91,
+      "sha256": "9e9788bd46009d0bbc609502968318a3173b4334365f67806dcf26001e2827a2"
+    },
+    "review/final-review-v1/run-normal-v2/future-malformed/wire.frcp": {
+      "bytes": 195,
+      "sha256": "9250ddacf278ead447d2f45062d910534ddf9daf8130557909dedf3c84ca3d64"
+    },
+    "review/final-review-v1/run-normal-v2/late-output/out/sentinel": {
+      "bytes": 17,
+      "sha256": "57c8dd8a0f98ac9a9b40ff9278a6e8b667fe19161af421b6520888830c1d6b9d"
+    },
+    "review/final-review-v1/run-normal-v2/late-output/process.json": {
+      "bytes": 93,
+      "sha256": "fb03efff051535786964902d742ef4d0a3e8dfa16c5ba17c47ca589b46fc6df7"
+    },
+    "review/final-review-v1/run-normal-v2/late-output/wire.frcp": {
+      "bytes": 33,
+      "sha256": "4ab3f2d977d2448d798c99a223e468772e5610e600c190cf583fec9a85abe43d"
+    },
+    "review/final-review-v1/run-normal-v2/random-schedules.json": {
+      "bytes": 631583,
+      "sha256": "b62c5e1d4efff5f0de48515e533f49eaddebb1d1e7caba7570d3b62bb585ae6b"
+    },
+    "review/final-review-v1/run-normal-v2/results.json": {
+      "bytes": 2444,
+      "sha256": "40ba2041fc14fde2f12723c8e532eb654d060c0af3fe16d74683f0dbebbc97dc"
+    },
+    "review/final-review-v1/run-normal-v2/tiny-recovery/observed-requests.json": {
+      "bytes": 815,
+      "sha256": "d0aca358b00018b5dbf1e16ffb43d6e1eefd17cc4096860d09ab093bd256f90d"
+    },
+    "review/final-review-v1/run-normal-v2/tiny-recovery/out/book.json": {
+      "bytes": 672,
+      "sha256": "77fc1acd2ce2f0384958215ff5546ab2a13a0722144efd4a758ae2634ff3b1de"
+    },
+    "review/final-review-v1/run-normal-v2/tiny-recovery/out/summary.json": {
+      "bytes": 574,
+      "sha256": "f64543791a95ee84bdb9ed8677625e6b2805b713f86e9ddcd5a33c9850b6b49e"
+    },
+    "review/final-review-v1/run-normal-v2/tiny-recovery/out/timeline.jsonl": {
+      "bytes": 1440,
+      "sha256": "8e60b0235fa7a07541797a49761272410a5a2845e7a1c8ab94a997a8b4d29666"
+    },
+    "review/final-review-v1/run-normal-v2/tiny-recovery/process.json": {
+      "bytes": 93,
+      "sha256": "906490d90c7567133de65a26e07309ce535450e5b411d6b40496bbd7060a4a9d"
+    },
+    "review/final-review-v1/run-normal-v2/tiny-recovery/replay/book.json": {
+      "bytes": 672,
+      "sha256": "77fc1acd2ce2f0384958215ff5546ab2a13a0722144efd4a758ae2634ff3b1de"
+    },
+    "review/final-review-v1/run-normal-v2/tiny-recovery/replay/summary.json": {
+      "bytes": 574,
+      "sha256": "516d2153c71d0b2a173cd1ab757283e1a8121f12acfb674ec8a1d292c21ca958"
+    },
+    "review/final-review-v1/run-normal-v2/tiny-recovery/replay/timeline.jsonl": {
+      "bytes": 764,
+      "sha256": "eb18b68f6327d4bd06c1c3e26cb89b0316a9d30fd60f4838bc02f2f1d5d4ab32"
+    },
+    "review/final-review-v1/run-normal-v2/tiny-recovery/wire.frcp": {
+      "bytes": 800,
+      "sha256": "78b9328ad6def0f78a37ea5bf659b217e3b40b68b0c1c102de61dbecf3d73312"
+    },
+    "review/final-review-v1/run-normal-v2/zero-byte-budget/out/book.json": {
+      "bytes": 53,
+      "sha256": "7f05daf1a8e6dade8c0b9f5e2e8c18dff9477d3e8953746592de550929d97de2"
+    },
+    "review/final-review-v1/run-normal-v2/zero-byte-budget/out/summary.json": {
+      "bytes": 659,
+      "sha256": "f2eb0d8084b2637c5b0e544ea4f8fbbf846eaa8b474577636d3b210f46d6e7a7"
+    },
+    "review/final-review-v1/run-normal-v2/zero-byte-budget/out/timeline.jsonl": {
+      "bytes": 88,
+      "sha256": "559742853121e4a3e3bfbebf26caaadd793717e9e37d7aeff583f28fc556a080"
+    },
+    "review/final-review-v1/run-normal-v2/zero-byte-budget/process.json": {
+      "bytes": 91,
+      "sha256": "4765d70212e4ba2d1611b121bc8b5e0e6db96631f6d6e30491234ae1cfa36a71"
+    },
+    "review/final-review-v1/run-normal-v2/zero-byte-budget/wire.frcp": {
+      "bytes": 8,
+      "sha256": "49af6a6fbbbb92fcf9a381ade90ddd6fe16cd530c8346c558093339ad32e44af"
+    },
+    "review/final-review-v1/run-sanitized-v2/cancel-progress/out/book.json": {
+      "bytes": 391,
+      "sha256": "ac9bc41fc57d32ca91d178d5ec5fb2abac6a54f22b7bf66bcc1b239019bc4afb"
+    },
+    "review/final-review-v1/run-sanitized-v2/cancel-progress/out/summary.json": {
+      "bytes": 643,
+      "sha256": "db62e8398a7f26d6fd6a77b66b67ad426fe08f4d5832347ac1366f1306ef3dda"
+    },
+    "review/final-review-v1/run-sanitized-v2/cancel-progress/out/timeline.jsonl": {
+      "bytes": 538,
+      "sha256": "6240508f35e601f2c754490d01ee4eab30fbed282c84ec431919fd790a61d8c1"
+    },
+    "review/final-review-v1/run-sanitized-v2/cancel-progress/process.json": {
+      "bytes": 93,
+      "sha256": "2c6b9379f7ce2453730491fae7b5a99d3988ad1e60a5174b28f4e2d863b9032e"
+    },
+    "review/final-review-v1/run-sanitized-v2/cancel-progress/wire.frcp": {
+      "bytes": 217,
+      "sha256": "52d26379994a7fb51f2eec708cd21a5b2dd423c4cd042041aa5563def969faa9"
+    },
+    "review/final-review-v1/run-sanitized-v2/clock-boundaries.json": {
+      "bytes": 1671,
+      "sha256": "a02b93d906292be939983070deafda6f4dd281f453e16975991b56929babaa7a"
+    },
+    "review/final-review-v1/run-sanitized-v2/future-malformed/out/book.json": {
+      "bytes": 239,
+      "sha256": "8cf0cc3cd8ac065e27e314ba036771f99191235c1f29bd25a6b63e952e6d016b"
+    },
+    "review/final-review-v1/run-sanitized-v2/future-malformed/out/summary.json": {
+      "bytes": 648,
+      "sha256": "127c890a1ed646a94144563619c17cc87d0901f3ecccf906d55e2602a405fa91"
+    },
+    "review/final-review-v1/run-sanitized-v2/future-malformed/out/timeline.jsonl": {
+      "bytes": 177,
+      "sha256": "de71795f0bf05f3e14b3c09bd384a4bd781a2a44634aec9fab42b43e7f2ae8da"
+    },
+    "review/final-review-v1/run-sanitized-v2/future-malformed/process.json": {
+      "bytes": 91,
+      "sha256": "9e9788bd46009d0bbc609502968318a3173b4334365f67806dcf26001e2827a2"
+    },
+    "review/final-review-v1/run-sanitized-v2/future-malformed/wire.frcp": {
+      "bytes": 195,
+      "sha256": "9250ddacf278ead447d2f45062d910534ddf9daf8130557909dedf3c84ca3d64"
+    },
+    "review/final-review-v1/run-sanitized-v2/late-output/out/sentinel": {
+      "bytes": 17,
+      "sha256": "57c8dd8a0f98ac9a9b40ff9278a6e8b667fe19161af421b6520888830c1d6b9d"
+    },
+    "review/final-review-v1/run-sanitized-v2/late-output/process.json": {
+      "bytes": 93,
+      "sha256": "fb03efff051535786964902d742ef4d0a3e8dfa16c5ba17c47ca589b46fc6df7"
+    },
+    "review/final-review-v1/run-sanitized-v2/late-output/wire.frcp": {
+      "bytes": 33,
+      "sha256": "4ab3f2d977d2448d798c99a223e468772e5610e600c190cf583fec9a85abe43d"
+    },
+    "review/final-review-v1/run-sanitized-v2/random-schedules.json": {
+      "bytes": 631583,
+      "sha256": "b62c5e1d4efff5f0de48515e533f49eaddebb1d1e7caba7570d3b62bb585ae6b"
+    },
+    "review/final-review-v1/run-sanitized-v2/results.json": {
+      "bytes": 2439,
+      "sha256": "238339ceae758e8a383eb5f6a1cbf084138cec264258b0b8eda478eaf0650ca9"
+    },
+    "review/final-review-v1/run-sanitized-v2/tiny-recovery/observed-requests.json": {
+      "bytes": 815,
+      "sha256": "ab19da89388979840edb506425fcc417c8eb7d6d838815ad088966856932d82f"
+    },
+    "review/final-review-v1/run-sanitized-v2/tiny-recovery/out/book.json": {
+      "bytes": 672,
+      "sha256": "77fc1acd2ce2f0384958215ff5546ab2a13a0722144efd4a758ae2634ff3b1de"
+    },
+    "review/final-review-v1/run-sanitized-v2/tiny-recovery/out/summary.json": {
+      "bytes": 574,
+      "sha256": "f64543791a95ee84bdb9ed8677625e6b2805b713f86e9ddcd5a33c9850b6b49e"
+    },
+    "review/final-review-v1/run-sanitized-v2/tiny-recovery/out/timeline.jsonl": {
+      "bytes": 1450,
+      "sha256": "c5217b2ea77d82885bb2d3db7289989825445585b6a2d503cfe9c937159a940b"
+    },
+    "review/final-review-v1/run-sanitized-v2/tiny-recovery/process.json": {
+      "bytes": 93,
+      "sha256": "906490d90c7567133de65a26e07309ce535450e5b411d6b40496bbd7060a4a9d"
+    },
+    "review/final-review-v1/run-sanitized-v2/tiny-recovery/replay/book.json": {
+      "bytes": 672,
+      "sha256": "77fc1acd2ce2f0384958215ff5546ab2a13a0722144efd4a758ae2634ff3b1de"
+    },
+    "review/final-review-v1/run-sanitized-v2/tiny-recovery/replay/summary.json": {
+      "bytes": 574,
+      "sha256": "516d2153c71d0b2a173cd1ab757283e1a8121f12acfb674ec8a1d292c21ca958"
+    },
+    "review/final-review-v1/run-sanitized-v2/tiny-recovery/replay/timeline.jsonl": {
+      "bytes": 764,
+      "sha256": "eb18b68f6327d4bd06c1c3e26cb89b0316a9d30fd60f4838bc02f2f1d5d4ab32"
+    },
+    "review/final-review-v1/run-sanitized-v2/tiny-recovery/wire.frcp": {
+      "bytes": 800,
+      "sha256": "78b9328ad6def0f78a37ea5bf659b217e3b40b68b0c1c102de61dbecf3d73312"
+    },
+    "review/final-review-v1/run-sanitized-v2/zero-byte-budget/out/book.json": {
+      "bytes": 53,
+      "sha256": "7f05daf1a8e6dade8c0b9f5e2e8c18dff9477d3e8953746592de550929d97de2"
+    },
+    "review/final-review-v1/run-sanitized-v2/zero-byte-budget/out/summary.json": {
+      "bytes": 659,
+      "sha256": "f2eb0d8084b2637c5b0e544ea4f8fbbf846eaa8b474577636d3b210f46d6e7a7"
+    },
+    "review/final-review-v1/run-sanitized-v2/zero-byte-budget/out/timeline.jsonl": {
+      "bytes": 88,
+      "sha256": "da7b3acf78b8195299e729e1136bbb75a95bcb3d72cbde7846b6876116fa0e79"
+    },
+    "review/final-review-v1/run-sanitized-v2/zero-byte-budget/process.json": {
+      "bytes": 91,
+      "sha256": "4765d70212e4ba2d1611b121bc8b5e0e6db96631f6d6e30491234ae1cfa36a71"
+    },
+    "review/final-review-v1/run-sanitized-v2/zero-byte-budget/wire.frcp": {
+      "bytes": 8,
+      "sha256": "49af6a6fbbbb92fcf9a381ade90ddd6fe16cd530c8346c558093339ad32e44af"
+    }
+  }
+}

@@ -1,0 +1,1541 @@
+{
+  "session": "REVIEW0001",
+  "cases": [
+    {
+      "name": "complete_lifecycle",
+      "packets": [
+        "5245564945573030303100000000000000010003000c53000012340123456789ab4f002752000112340123456789ab414c504841202020514e000000644e432020504e4e314e000000014e002752000212340123456789ab4245544120202020514e000000644e432020504e4e314e000000014e",
+        "5245564945573030303100000000000000040004002441000112340123456789ab01020304050607084200000064414c504841202020000186a0002441000112340123456789ab00000000000000004200000028414c504841202020000186a0002846000112340123456789abfedcba98765432105300000050414c5048412020200001870441424344002441000212344e94914effffffffffffffffffff42ffffffff424554412020202077359400",
+        "5245564945573030303100000000000000080003002443000112340123456789abfedcba98765432100000001e11121314151617184e0001869f001342000112340123456789ab1112131415161718002355000112340123456789abfedcba987654321080000000000000010000003c00018768",
+        "52455649455730303031000000000000000b0004001f45000112340123456789ab0102030405060708000000142122232425262728001758000112340123456789ab000000000000000000000028002c50000112340123456789ab00000000000000004200000019414c5048412020200001869f3132333435363738002851000212340123456789ab000000000000000042455441202020200000000041424344454647484f",
+        "52455649455730303031000000000000000f0003001344000112340123456789ab8000000000000001002441000112340123456789ab00000000000000424200000001414c50484120202000000000000c53000012340123456789ab43",
+        "524556494557303030310000000000000012ffff"
+      ],
+      "expected": [
+        {
+          "next_sequence": 4,
+          "high_water": 4,
+          "status": "current",
+          "terminal": null,
+          "error_code": null,
+          "error_sequence": null,
+          "book": {
+            "order_count": 0
+          }
+        },
+        {
+          "next_sequence": 8,
+          "high_water": 8,
+          "status": "current",
+          "terminal": null,
+          "error_code": null,
+          "error_sequence": null,
+          "book": {
+            "order_count": 4
+          }
+        },
+        {
+          "next_sequence": 11,
+          "high_water": 11,
+          "status": "current",
+          "terminal": null,
+          "error_code": null,
+          "error_sequence": null,
+          "book": {
+            "order_count": 4
+          }
+        },
+        {
+          "next_sequence": 15,
+          "high_water": 15,
+          "status": "current",
+          "terminal": null,
+          "error_code": null,
+          "error_sequence": null,
+          "book": {
+            "order_count": 3
+          }
+        },
+        {
+          "next_sequence": 18,
+          "high_water": 18,
+          "status": "current",
+          "terminal": null,
+          "error_code": null,
+          "error_sequence": null,
+          "book": {
+            "order_count": 3
+          }
+        },
+        {
+          "next_sequence": 18,
+          "high_water": 18,
+          "status": "complete",
+          "terminal": 18,
+          "error_code": null,
+          "error_sequence": null,
+          "book": {
+            "order_count": 3
+          }
+        }
+      ]
+    },
+    {
+      "name": "future_discard_pending_end_partial_recovery",
+      "packets": [
+        "5245564945573030303100000000000000010003000c53000012340123456789ab4f002752000112340123456789ab414c504841202020514e000000644e432020504e4e314e000000014e002752000212340123456789ab4245544120202020514e000000644e432020504e4e314e000000014e",
+        "5245564945573030303100000000000000080003002443000112340123456789abfedcba98765432100000001e11121314151617184e0001869f001342000112340123456789ab1112131415161718002355000112340123456789abfedcba987654321080000000000000010000003c00018768",
+        "5245564945573030303100000000000000010003000c53000012340123456789ab4f002752000112340123456789ab414c504841202020514e000000644e432020504e4e314e000000014e002752000212340123456789ab4245544120202020514e000000644e432020504e4e314e000000014e",
+        "5245564945573030303100000000000000040004002441000112340123456789ab01020304050607084200000064414c504841202020000186a0002441000112340123456789ab00000000000000004200000028414c504841202020000186a0002846000112340123456789abfedcba98765432105300000050414c5048412020200001870441424344002441000212344e94914effffffffffffffffffff42ffffffff424554412020202077359400",
+        "524556494557303030310000000000000012ffff",
+        "5245564945573030303100000000000000080003002443000112340123456789abfedcba98765432100000001e11121314151617184e0001869f001342000112340123456789ab1112131415161718002355000112340123456789abfedcba987654321080000000000000010000003c00018768",
+        "52455649455730303031000000000000000b0004001f45000112340123456789ab0102030405060708000000142122232425262728001758000112340123456789ab000000000000000000000028002c50000112340123456789ab00000000000000004200000019414c5048412020200001869f3132333435363738002851000212340123456789ab000000000000000042455441202020200000000041424344454647484f",
+        "52455649455730303031000000000000000f0003001344000112340123456789ab8000000000000001002441000112340123456789ab00000000000000424200000001414c50484120202000000000000c53000012340123456789ab43",
+        "5245564945573030303100000000000000120000",
+        "524556494557303030310000000000000012ffff"
+      ],
+      "expected": [
+        {
+          "next_sequence": 4,
+          "high_water": 4,
+          "status": "current",
+          "terminal": null,
+          "error_code": null,
+          "error_sequence": null
+        },
+        {
+          "next_sequence": 4,
+          "high_water": 11,
+          "status": "gap",
+          "terminal": null,
+          "error_code": null,
+          "error_sequence": null
+        },
+        {
+          "next_sequence": 4,
+          "high_water": 11,
+          "status": "gap",
+          "terminal": null,
+          "error_code": null,
+          "error_sequence": null
+        },
+        {
+          "next_sequence": 8,
+          "high_water": 11,
+          "status": "gap",
+          "terminal": null,
+          "error_code": null,
+          "error_sequence": null
+        },
+        {
+          "next_sequence": 8,
+          "high_water": 18,
+          "status": "gap",
+          "terminal": 18,
+          "error_code": null,
+          "error_sequence": null
+        },
+        {
+          "next_sequence": 11,
+          "high_water": 18,
+          "status": "gap",
+          "terminal": 18,
+          "error_code": null,
+          "error_sequence": null
+        },
+        {
+          "next_sequence": 15,
+          "high_water": 18,
+          "status": "gap",
+          "terminal": 18,
+          "error_code": null,
+          "error_sequence": null
+        },
+        {
+          "next_sequence": 18,
+          "high_water": 18,
+          "status": "complete",
+          "terminal": 18,
+          "error_code": null,
+          "error_sequence": null
+        },
+        {
+          "next_sequence": 18,
+          "high_water": 18,
+          "status": "complete",
+          "terminal": 18,
+          "error_code": null,
+          "error_sequence": null
+        },
+        {
+          "next_sequence": 18,
+          "high_water": 18,
+          "status": "complete",
+          "terminal": 18,
+          "error_code": null,
+          "error_sequence": null
+        }
+      ]
+    },
+    {
+      "name": "overlap_unseen_suffix",
+      "packets": [
+        "5245564945573030303100000000000000010003000c53000012340123456789ab4f002752000112340123456789ab414c504841202020514e000000644e432020504e4e314e000000014e002752000212340123456789ab4245544120202020514e000000644e432020504e4e314e000000014e",
+        "5245564945573030303100000000000000020003002752000112340123456789ab414c504841202020514e000000644e432020504e4e314e000000014e002752000212340123456789ab4245544120202020514e000000644e432020504e4e314e000000014e002441000112340123456789ab01020304050607084200000064414c504841202020000186a0"
+      ],
+      "expected": [
+        {
+          "next_sequence": 4,
+          "high_water": 4,
+          "status": "current",
+          "terminal": null,
+          "error_code": null,
+          "error_sequence": null,
+          "book": {
+            "order_count": 0
+          }
+        },
+        {
+          "next_sequence": 5,
+          "high_water": 5,
+          "status": "current",
+          "terminal": null,
+          "error_code": null,
+          "error_sequence": null,
+          "book": {
+            "order_count": 1
+          }
+        }
+      ]
+    },
+    {
+      "name": "trailing_heartbeat_gap",
+      "packets": [
+        "5245564945573030303100000000000000010003000c53000012340123456789ab4f002752000112340123456789ab414c504841202020514e000000644e432020504e4e314e000000014e002752000212340123456789ab4245544120202020514e000000644e432020504e4e314e000000014e",
+        "5245564945573030303100000000000000050000",
+        "5245564945573030303100000000000000040001002441000112340123456789ab01020304050607084200000064414c504841202020000186a0"
+      ],
+      "expected": [
+        {
+          "next_sequence": 4,
+          "high_water": 4,
+          "status": "current",
+          "terminal": null,
+          "error_code": null,
+          "error_sequence": null
+        },
+        {
+          "next_sequence": 4,
+          "high_water": 5,
+          "status": "gap",
+          "terminal": null,
+          "error_code": null,
+          "error_sequence": null
+        },
+        {
+          "next_sequence": 5,
+          "high_water": 5,
+          "status": "current",
+          "terminal": null,
+          "error_code": null,
+          "error_sequence": null,
+          "book": {
+            "order_count": 1
+          }
+        }
+      ]
+    },
+    {
+      "name": "stale_heartbeat_does_not_regress",
+      "packets": [
+        "5245564945573030303100000000000000010003000c53000012340123456789ab4f002752000112340123456789ab414c504841202020514e000000644e432020504e4e314e000000014e002752000212340123456789ab4245544120202020514e000000644e432020504e4e314e000000014e",
+        "5245564945573030303100000000000000020000"
+      ],
+      "expected": [
+        {
+          "next_sequence": 4,
+          "high_water": 4,
+          "status": "current",
+          "terminal": null,
+          "error_code": null,
+          "error_sequence": null
+        },
+        {
+          "next_sequence": 4,
+          "high_water": 4,
+          "status": "current",
+          "terminal": null,
+          "error_code": null,
+          "error_sequence": null
+        }
+      ]
+    },
+    {
+      "name": "terminal_before_highwater",
+      "packets": [
+        "5245564945573030303100000000000000010003000c53000012340123456789ab4f002752000112340123456789ab414c504841202020514e000000644e432020504e4e314e000000014e002752000212340123456789ab4245544120202020514e000000644e432020504e4e314e000000014e",
+        "5245564945573030303100000000000000080003002443000112340123456789abfedcba98765432100000001e11121314151617184e0001869f001342000112340123456789ab1112131415161718002355000112340123456789abfedcba987654321080000000000000010000003c00018768",
+        "52455649455730303031000000000000000affff"
+      ],
+      "expected": [
+        {
+          "next_sequence": 4,
+          "high_water": 4,
+          "status": "current",
+          "terminal": null,
+          "error_code": null,
+          "error_sequence": null
+        },
+        {
+          "next_sequence": 4,
+          "high_water": 11,
+          "status": "gap",
+          "terminal": null,
+          "error_code": null,
+          "error_sequence": null
+        },
+        {
+          "next_sequence": 4,
+          "high_water": 11,
+          "status": "invalid",
+          "terminal": null,
+          "error_code": "terminal_conflict",
+          "error_sequence": 10
+        }
+      ]
+    },
+    {
+      "name": "terminal_before_accepted",
+      "packets": [
+        "5245564945573030303100000000000000010003000c53000012340123456789ab4f002752000112340123456789ab414c504841202020514e000000644e432020504e4e314e000000014e002752000212340123456789ab4245544120202020514e000000644e432020504e4e314e000000014e",
+        "524556494557303030310000000000000003ffff"
+      ],
+      "expected": [
+        {
+          "next_sequence": 4,
+          "high_water": 4,
+          "status": "current",
+          "terminal": null,
+          "error_code": null,
+          "error_sequence": null
+        },
+        {
+          "next_sequence": 4,
+          "high_water": 4,
+          "status": "invalid",
+          "terminal": null,
+          "error_code": "terminal_conflict",
+          "error_sequence": 3
+        }
+      ]
+    },
+    {
+      "name": "conflicting_terminal",
+      "packets": [
+        "5245564945573030303100000000000000010003000c53000012340123456789ab4f002752000112340123456789ab414c504841202020514e000000644e432020504e4e314e000000014e002752000212340123456789ab4245544120202020514e000000644e432020504e4e314e000000014e",
+        "524556494557303030310000000000000012ffff",
+        "524556494557303030310000000000000011ffff"
+      ],
+      "expected": [
+        {
+          "next_sequence": 4,
+          "high_water": 4,
+          "status": "current",
+          "terminal": null,
+          "error_code": null,
+          "error_sequence": null
+        },
+        {
+          "next_sequence": 4,
+          "high_water": 18,
+          "status": "gap",
+          "terminal": 18,
+          "error_code": null,
+          "error_sequence": null
+        },
+        {
+          "next_sequence": 4,
+          "high_water": 18,
+          "status": "invalid",
+          "terminal": 18,
+          "error_code": "terminal_conflict",
+          "error_sequence": 17
+        }
+      ]
+    },
+    {
+      "name": "data_beyond_pending_terminal",
+      "packets": [
+        "5245564945573030303100000000000000010003000c53000012340123456789ab4f002752000112340123456789ab414c504841202020514e000000644e432020504e4e314e000000014e002752000212340123456789ab4245544120202020514e000000644e432020504e4e314e000000014e",
+        "524556494557303030310000000000000005ffff",
+        "5245564945573030303100000000000000040004002441000112340123456789ab01020304050607084200000064414c504841202020000186a0002441000112340123456789ab00000000000000004200000028414c504841202020000186a0002846000112340123456789abfedcba98765432105300000050414c5048412020200001870441424344002441000212344e94914effffffffffffffffffff42ffffffff424554412020202077359400"
+      ],
+      "expected": [
+        {
+          "next_sequence": 4,
+          "high_water": 4,
+          "status": "current",
+          "terminal": null,
+          "error_code": null,
+          "error_sequence": null
+        },
+        {
+          "next_sequence": 4,
+          "high_water": 5,
+          "status": "gap",
+          "terminal": 5,
+          "error_code": null,
+          "error_sequence": null
+        },
+        {
+          "next_sequence": 4,
+          "high_water": 5,
+          "status": "invalid",
+          "terminal": 5,
+          "error_code": "terminal_conflict",
+          "error_sequence": 4
+        }
+      ]
+    },
+    {
+      "name": "heartbeat_beyond_terminal",
+      "packets": [
+        "5245564945573030303100000000000000010003000c53000012340123456789ab4f002752000112340123456789ab414c504841202020514e000000644e432020504e4e314e000000014e002752000212340123456789ab4245544120202020514e000000644e432020504e4e314e000000014e",
+        "524556494557303030310000000000000004ffff",
+        "5245564945573030303100000000000000050000"
+      ],
+      "expected": [
+        {
+          "next_sequence": 4,
+          "high_water": 4,
+          "status": "current",
+          "terminal": null,
+          "error_code": null,
+          "error_sequence": null
+        },
+        {
+          "next_sequence": 4,
+          "high_water": 4,
+          "status": "complete",
+          "terminal": 4,
+          "error_code": null,
+          "error_sequence": null
+        },
+        {
+          "next_sequence": 4,
+          "high_water": 4,
+          "status": "invalid",
+          "terminal": 4,
+          "error_code": "terminal_conflict",
+          "error_sequence": 5
+        }
+      ]
+    },
+    {
+      "name": "unrepresentable_exclusive_bound",
+      "packets": [
+        "5245564945573030303100000000000000010003000c53000012340123456789ab4f002752000112340123456789ab414c504841202020514e000000644e432020504e4e314e000000014e002752000212340123456789ab4245544120202020514e000000644e432020504e4e314e000000014e",
+        "52455649455730303031ffffffffffffffff0001000c53000012340123456789ab4f"
+      ],
+      "expected": [
+        {
+          "next_sequence": 4,
+          "high_water": 4,
+          "status": "current",
+          "terminal": null,
+          "error_code": null,
+          "error_sequence": null
+        },
+        {
+          "next_sequence": 4,
+          "high_water": 4,
+          "status": "invalid",
+          "terminal": null,
+          "error_code": "counter_overflow",
+          "error_sequence": 18446744073709551615
+        }
+      ]
+    },
+    {
+      "name": "largest_representable_marker",
+      "packets": [
+        "52455649455730303031ffffffffffffffff0000"
+      ],
+      "expected": [
+        {
+          "next_sequence": 1,
+          "high_water": 18446744073709551615,
+          "status": "gap",
+          "terminal": null,
+          "error_code": null,
+          "error_sequence": null
+        }
+      ]
+    },
+    {
+      "name": "sequence_zero",
+      "packets": [
+        "5245564945573030303100000000000000000000"
+      ],
+      "expected": [
+        {
+          "next_sequence": 1,
+          "high_water": 1,
+          "status": "invalid",
+          "terminal": null,
+          "error_code": "mold_header",
+          "error_sequence": 0
+        }
+      ]
+    },
+    {
+      "name": "wrong_session",
+      "packets": [
+        "5845564945573030303100000000000000010003000c53000012340123456789ab4f002752000112340123456789ab414c504841202020514e000000644e432020504e4e314e000000014e002752000212340123456789ab4245544120202020514e000000644e432020504e4e314e000000014e"
+      ],
+      "expected": [
+        {
+          "next_sequence": 1,
+          "high_water": 1,
+          "status": "invalid",
+          "terminal": null,
+          "error_code": "session_mismatch",
+          "error_sequence": 1
+        }
+      ]
+    },
+    {
+      "name": "framing_failure_whole_packet_atomic",
+      "packets": [
+        "5245564945573030303100000000000000010003000c53000012340123456789ab4f002752000112340123456789ab414c504841202020514e000000644e432020504e4e314e000000014e002752000212340123456789ab4245544120202020514e000000644e432020504e4e314e000000014e",
+        "5245564945573030303100000000000000040002002441000112340123456789ab01020304050607084200000064414c504841202020000186a0002441000112340123456789ab00000000000000004200000028414c504841202020000186"
+      ],
+      "expected": [
+        {
+          "next_sequence": 4,
+          "high_water": 4,
+          "status": "current",
+          "terminal": null,
+          "error_code": null,
+          "error_sequence": null
+        },
+        {
+          "next_sequence": 4,
+          "high_water": 4,
+          "status": "invalid",
+          "terminal": null,
+          "error_code": "mold_block",
+          "error_sequence": 4,
+          "book": {
+            "order_count": 0
+          }
+        }
+      ]
+    },
+    {
+      "name": "unknown_final_type_whole_packet_atomic",
+      "packets": [
+        "5245564945573030303100000000000000010003000c53000012340123456789ab4f002752000112340123456789ab414c504841202020514e000000644e432020504e4e314e000000014e002752000212340123456789ab4245544120202020514e000000644e432020504e4e314e000000014e",
+        "5245564945573030303100000000000000040002002441000112340123456789ab01020304050607084200000064414c504841202020000186a000015a"
+      ],
+      "expected": [
+        {
+          "next_sequence": 4,
+          "high_water": 4,
+          "status": "current",
+          "terminal": null,
+          "error_code": null,
+          "error_sequence": null
+        },
+        {
+          "next_sequence": 4,
+          "high_water": 4,
+          "status": "invalid",
+          "terminal": null,
+          "error_code": "unsupported_type",
+          "error_sequence": 4,
+          "book": {
+            "order_count": 0
+          }
+        }
+      ]
+    },
+    {
+      "name": "wrong_final_type_length_whole_packet_atomic",
+      "packets": [
+        "5245564945573030303100000000000000010003000c53000012340123456789ab4f002752000112340123456789ab414c504841202020514e000000644e432020504e4e314e000000014e002752000212340123456789ab4245544120202020514e000000644e432020504e4e314e000000014e",
+        "5245564945573030303100000000000000040002002441000112340123456789ab01020304050607084200000064414c504841202020000186a0000141"
+      ],
+      "expected": [
+        {
+          "next_sequence": 4,
+          "high_water": 4,
+          "status": "current",
+          "terminal": null,
+          "error_code": null,
+          "error_sequence": null
+        },
+        {
+          "next_sequence": 4,
+          "high_water": 4,
+          "status": "invalid",
+          "terminal": null,
+          "error_code": "itch_length",
+          "error_sequence": 4,
+          "book": {
+            "order_count": 0
+          }
+        }
+      ]
+    },
+    {
+      "name": "semantic_failure_preserves_same_packet_prefix",
+      "packets": [
+        "5245564945573030303100000000000000010003000c53000012340123456789ab4f002752000112340123456789ab414c504841202020514e000000644e432020504e4e314e000000014e002752000212340123456789ab4245544120202020514e000000644e432020504e4e314e000000014e",
+        "5245564945573030303100000000000000040002002441000112340123456789ab01020304050607084200000064414c504841202020000186a0001f45000112340123456789ab0102030405060708000000652122232425262728",
+        "5245564945573030303100000000000000040004002441000112340123456789ab01020304050607084200000064414c504841202020000186a0002441000112340123456789ab00000000000000004200000028414c504841202020000186a0002846000112340123456789abfedcba98765432105300000050414c5048412020200001870441424344002441000212344e94914effffffffffffffffffff42ffffffff424554412020202077359400"
+      ],
+      "expected": [
+        {
+          "next_sequence": 4,
+          "high_water": 4,
+          "status": "current",
+          "terminal": null,
+          "error_code": null,
+          "error_sequence": null
+        },
+        {
+          "next_sequence": 5,
+          "high_water": 6,
+          "status": "invalid",
+          "terminal": null,
+          "error_code": "over_reduction",
+          "error_sequence": 5,
+          "book": {
+            "order_count": 1
+          }
+        },
+        {
+          "next_sequence": 5,
+          "high_water": 6,
+          "status": "invalid",
+          "terminal": null,
+          "error_code": "over_reduction",
+          "error_sequence": 5,
+          "book": {
+            "order_count": 1
+          }
+        }
+      ]
+    },
+    {
+      "name": "old_semantically_invalid_payload_not_rechecked",
+      "packets": [
+        "5245564945573030303100000000000000010003000c53000012340123456789ab4f002752000112340123456789ab414c504841202020514e000000644e432020504e4e314e000000014e002752000212340123456789ab4245544120202020514e000000644e432020504e4e314e000000014e",
+        "5245564945573030303100000000000000010001000c5300001234ffffffffffff4f"
+      ],
+      "expected": [
+        {
+          "next_sequence": 4,
+          "high_water": 4,
+          "status": "current",
+          "terminal": null,
+          "error_code": null,
+          "error_sequence": null
+        },
+        {
+          "next_sequence": 4,
+          "high_water": 4,
+          "status": "current",
+          "terminal": null,
+          "error_code": null,
+          "error_sequence": null
+        }
+      ]
+    },
+    {
+      "name": "old_unknown_type_still_rejected",
+      "packets": [
+        "5245564945573030303100000000000000010003000c53000012340123456789ab4f002752000112340123456789ab414c504841202020514e000000644e432020504e4e314e000000014e002752000212340123456789ab4245544120202020514e000000644e432020504e4e314e000000014e",
+        "524556494557303030310000000000000001000100015a"
+      ],
+      "expected": [
+        {
+          "next_sequence": 4,
+          "high_water": 4,
+          "status": "current",
+          "terminal": null,
+          "error_code": null,
+          "error_sequence": null
+        },
+        {
+          "next_sequence": 4,
+          "high_water": 4,
+          "status": "invalid",
+          "terminal": null,
+          "error_code": "unsupported_type",
+          "error_sequence": 1
+        }
+      ]
+    },
+    {
+      "name": "zero_add",
+      "packets": [
+        "5245564945573030303100000000000000010003000c53000012340123456789ab4f002752000112340123456789ab414c504841202020514e000000644e432020504e4e314e000000014e002752000212340123456789ab4245544120202020514e000000644e432020504e4e314e000000014e",
+        "5245564945573030303100000000000000040001002441000112340123456789ab01020304050607084200000000414c504841202020000186a0"
+      ],
+      "expected": [
+        {
+          "next_sequence": 4,
+          "high_water": 4,
+          "status": "current",
+          "terminal": null,
+          "error_code": null,
+          "error_sequence": null
+        },
+        {
+          "next_sequence": 4,
+          "high_water": 5,
+          "status": "invalid",
+          "terminal": null,
+          "error_code": "field_domain",
+          "error_sequence": 4,
+          "book": {
+            "order_count": 0
+          }
+        }
+      ]
+    },
+    {
+      "name": "bad_side",
+      "packets": [
+        "5245564945573030303100000000000000010003000c53000012340123456789ab4f002752000112340123456789ab414c504841202020514e000000644e432020504e4e314e000000014e002752000212340123456789ab4245544120202020514e000000644e432020504e4e314e000000014e",
+        "5245564945573030303100000000000000040001002441000112340123456789ab01020304050607085800000064414c504841202020000186a0"
+      ],
+      "expected": [
+        {
+          "next_sequence": 4,
+          "high_water": 4,
+          "status": "current",
+          "terminal": null,
+          "error_code": null,
+          "error_sequence": null
+        },
+        {
+          "next_sequence": 4,
+          "high_water": 5,
+          "status": "invalid",
+          "terminal": null,
+          "error_code": "field_domain",
+          "error_sequence": 4,
+          "book": {
+            "order_count": 0
+          }
+        }
+      ]
+    },
+    {
+      "name": "price_above_max",
+      "packets": [
+        "5245564945573030303100000000000000010003000c53000012340123456789ab4f002752000112340123456789ab414c504841202020514e000000644e432020504e4e314e000000014e002752000212340123456789ab4245544120202020514e000000644e432020504e4e314e000000014e",
+        "5245564945573030303100000000000000040001002441000112340123456789ab01020304050607084200000064414c50484120202077359401"
+      ],
+      "expected": [
+        {
+          "next_sequence": 4,
+          "high_water": 4,
+          "status": "current",
+          "terminal": null,
+          "error_code": null,
+          "error_sequence": null
+        },
+        {
+          "next_sequence": 4,
+          "high_water": 5,
+          "status": "invalid",
+          "terminal": null,
+          "error_code": "field_domain",
+          "error_sequence": 4,
+          "book": {
+            "order_count": 0
+          }
+        }
+      ]
+    },
+    {
+      "name": "timestamp_at_day_boundary",
+      "packets": [
+        "5245564945573030303100000000000000010003000c53000012340123456789ab4f002752000112340123456789ab414c504841202020514e000000644e432020504e4e314e000000014e002752000212340123456789ab4245544120202020514e000000644e432020504e4e314e000000014e",
+        "5245564945573030303100000000000000040001002441000112344e94914f000001020304050607084200000064414c504841202020000186a0"
+      ],
+      "expected": [
+        {
+          "next_sequence": 4,
+          "high_water": 4,
+          "status": "current",
+          "terminal": null,
+          "error_code": null,
+          "error_sequence": null
+        },
+        {
+          "next_sequence": 4,
+          "high_water": 5,
+          "status": "invalid",
+          "terminal": null,
+          "error_code": "field_domain",
+          "error_sequence": 4,
+          "book": {
+            "order_count": 0
+          }
+        }
+      ]
+    },
+    {
+      "name": "unknown_locate",
+      "packets": [
+        "5245564945573030303100000000000000010003000c53000012340123456789ab4f002752000112340123456789ab414c504841202020514e000000644e432020504e4e314e000000014e002752000212340123456789ab4245544120202020514e000000644e432020504e4e314e000000014e",
+        "5245564945573030303100000000000000040001002441000312340123456789ab01020304050607084200000064414c504841202020000186a0"
+      ],
+      "expected": [
+        {
+          "next_sequence": 4,
+          "high_water": 4,
+          "status": "current",
+          "terminal": null,
+          "error_code": null,
+          "error_sequence": null
+        },
+        {
+          "next_sequence": 4,
+          "high_water": 5,
+          "status": "invalid",
+          "terminal": null,
+          "error_code": "unknown_instrument",
+          "error_sequence": 4,
+          "book": {
+            "order_count": 0
+          }
+        }
+      ]
+    },
+    {
+      "name": "symbol_mismatch",
+      "packets": [
+        "5245564945573030303100000000000000010003000c53000012340123456789ab4f002752000112340123456789ab414c504841202020514e000000644e432020504e4e314e000000014e002752000212340123456789ab4245544120202020514e000000644e432020504e4e314e000000014e",
+        "5245564945573030303100000000000000040001002441000112340123456789ab010203040506070842000000644245544120202020000186a0"
+      ],
+      "expected": [
+        {
+          "next_sequence": 4,
+          "high_water": 4,
+          "status": "current",
+          "terminal": null,
+          "error_code": null,
+          "error_sequence": null
+        },
+        {
+          "next_sequence": 4,
+          "high_water": 5,
+          "status": "invalid",
+          "terminal": null,
+          "error_code": "wrong_instrument",
+          "error_sequence": 4,
+          "book": {
+            "order_count": 0
+          }
+        }
+      ]
+    },
+    {
+      "name": "zero_price_best_bid",
+      "packets": [
+        "5245564945573030303100000000000000010003000c53000012340123456789ab4f002752000112340123456789ab414c504841202020514e000000644e432020504e4e314e000000014e002752000212340123456789ab4245544120202020514e000000644e432020504e4e314e000000014e",
+        "5245564945573030303100000000000000040001002441000112340123456789ab00000000000000424200000001414c50484120202000000000"
+      ],
+      "expected": [
+        {
+          "next_sequence": 4,
+          "high_water": 4,
+          "status": "current",
+          "terminal": null,
+          "error_code": null,
+          "error_sequence": null
+        },
+        {
+          "next_sequence": 5,
+          "high_water": 5,
+          "status": "current",
+          "terminal": null,
+          "error_code": null,
+          "error_sequence": null,
+          "book": {
+            "order_count": 1
+          }
+        }
+      ]
+    },
+    {
+      "name": "directory_idempotent",
+      "packets": [
+        "5245564945573030303100000000000000010003000c53000012340123456789ab4f002752000112340123456789ab414c504841202020514e000000644e432020504e4e314e000000014e002752000212340123456789ab4245544120202020514e000000644e432020504e4e314e000000014e",
+        "5245564945573030303100000000000000040001002752000112340123456789ab414c504841202020514e000000644e432020504e4e314e000000014e"
+      ],
+      "expected": [
+        {
+          "next_sequence": 4,
+          "high_water": 4,
+          "status": "current",
+          "terminal": null,
+          "error_code": null,
+          "error_sequence": null
+        },
+        {
+          "next_sequence": 5,
+          "high_water": 5,
+          "status": "current",
+          "terminal": null,
+          "error_code": null,
+          "error_sequence": null,
+          "book": {
+            "order_count": 0
+          }
+        }
+      ]
+    },
+    {
+      "name": "directory_locate_conflict",
+      "packets": [
+        "5245564945573030303100000000000000010003000c53000012340123456789ab4f002752000112340123456789ab414c504841202020514e000000644e432020504e4e314e000000014e002752000212340123456789ab4245544120202020514e000000644e432020504e4e314e000000014e",
+        "5245564945573030303100000000000000040001002752000112340123456789ab4245544120202020514e000000644e432020504e4e314e000000014e"
+      ],
+      "expected": [
+        {
+          "next_sequence": 4,
+          "high_water": 4,
+          "status": "current",
+          "terminal": null,
+          "error_code": null,
+          "error_sequence": null
+        },
+        {
+          "next_sequence": 4,
+          "high_water": 5,
+          "status": "invalid",
+          "terminal": null,
+          "error_code": "directory_conflict",
+          "error_sequence": 4
+        }
+      ]
+    },
+    {
+      "name": "directory_symbol_conflict",
+      "packets": [
+        "5245564945573030303100000000000000010003000c53000012340123456789ab4f002752000112340123456789ab414c504841202020514e000000644e432020504e4e314e000000014e002752000212340123456789ab4245544120202020514e000000644e432020504e4e314e000000014e",
+        "5245564945573030303100000000000000040001002752000312340123456789ab414c504841202020514e000000644e432020504e4e314e000000014e"
+      ],
+      "expected": [
+        {
+          "next_sequence": 4,
+          "high_water": 4,
+          "status": "current",
+          "terminal": null,
+          "error_code": null,
+          "error_sequence": null
+        },
+        {
+          "next_sequence": 4,
+          "high_water": 5,
+          "status": "invalid",
+          "terminal": null,
+          "error_code": "directory_conflict",
+          "error_sequence": 4
+        }
+      ]
+    },
+    {
+      "name": "wrong_instrument_reduction",
+      "packets": [
+        "5245564945573030303100000000000000010003000c53000012340123456789ab4f002752000112340123456789ab414c504841202020514e000000644e432020504e4e314e000000014e002752000212340123456789ab4245544120202020514e000000644e432020504e4e314e000000014e",
+        "5245564945573030303100000000000000040004002441000112340123456789ab01020304050607084200000064414c504841202020000186a0002441000112340123456789ab00000000000000004200000028414c504841202020000186a0002846000112340123456789abfedcba98765432105300000050414c5048412020200001870441424344002441000212344e94914effffffffffffffffffff42ffffffff424554412020202077359400",
+        "5245564945573030303100000000000000080001001f45000212340123456789ab0102030405060708000000142122232425262728"
+      ],
+      "expected": [
+        {
+          "next_sequence": 4,
+          "high_water": 4,
+          "status": "current",
+          "terminal": null,
+          "error_code": null,
+          "error_sequence": null
+        },
+        {
+          "next_sequence": 8,
+          "high_water": 8,
+          "status": "current",
+          "terminal": null,
+          "error_code": null,
+          "error_sequence": null
+        },
+        {
+          "next_sequence": 8,
+          "high_water": 9,
+          "status": "invalid",
+          "terminal": null,
+          "error_code": "wrong_instrument",
+          "error_sequence": 8,
+          "book": {
+            "order_count": 4
+          }
+        }
+      ]
+    },
+    {
+      "name": "zero_reduction_execute",
+      "packets": [
+        "5245564945573030303100000000000000010003000c53000012340123456789ab4f002752000112340123456789ab414c504841202020514e000000644e432020504e4e314e000000014e002752000212340123456789ab4245544120202020514e000000644e432020504e4e314e000000014e",
+        "5245564945573030303100000000000000040004002441000112340123456789ab01020304050607084200000064414c504841202020000186a0002441000112340123456789ab00000000000000004200000028414c504841202020000186a0002846000112340123456789abfedcba98765432105300000050414c5048412020200001870441424344002441000212344e94914effffffffffffffffffff42ffffffff424554412020202077359400",
+        "5245564945573030303100000000000000080001001f45000112340123456789ab0102030405060708000000002122232425262728"
+      ],
+      "expected": [
+        {
+          "next_sequence": 4,
+          "high_water": 4,
+          "status": "current",
+          "terminal": null,
+          "error_code": null,
+          "error_sequence": null
+        },
+        {
+          "next_sequence": 8,
+          "high_water": 8,
+          "status": "current",
+          "terminal": null,
+          "error_code": null,
+          "error_sequence": null
+        },
+        {
+          "next_sequence": 9,
+          "high_water": 9,
+          "status": "current",
+          "terminal": null,
+          "error_code": null,
+          "error_sequence": null,
+          "book": {
+            "order_count": 4
+          }
+        }
+      ]
+    },
+    {
+      "name": "zero_reduction_nonprintable",
+      "packets": [
+        "5245564945573030303100000000000000010003000c53000012340123456789ab4f002752000112340123456789ab414c504841202020514e000000644e432020504e4e314e000000014e002752000212340123456789ab4245544120202020514e000000644e432020504e4e314e000000014e",
+        "5245564945573030303100000000000000040004002441000112340123456789ab01020304050607084200000064414c504841202020000186a0002441000112340123456789ab00000000000000004200000028414c504841202020000186a0002846000112340123456789abfedcba98765432105300000050414c5048412020200001870441424344002441000212344e94914effffffffffffffffffff42ffffffff424554412020202077359400",
+        "5245564945573030303100000000000000080001002443000112340123456789abfedcba98765432100000000011121314151617184e0001869f"
+      ],
+      "expected": [
+        {
+          "next_sequence": 4,
+          "high_water": 4,
+          "status": "current",
+          "terminal": null,
+          "error_code": null,
+          "error_sequence": null
+        },
+        {
+          "next_sequence": 8,
+          "high_water": 8,
+          "status": "current",
+          "terminal": null,
+          "error_code": null,
+          "error_sequence": null
+        },
+        {
+          "next_sequence": 9,
+          "high_water": 9,
+          "status": "current",
+          "terminal": null,
+          "error_code": null,
+          "error_sequence": null,
+          "book": {
+            "order_count": 4
+          }
+        }
+      ]
+    },
+    {
+      "name": "zero_reduction_cancel",
+      "packets": [
+        "5245564945573030303100000000000000010003000c53000012340123456789ab4f002752000112340123456789ab414c504841202020514e000000644e432020504e4e314e000000014e002752000212340123456789ab4245544120202020514e000000644e432020504e4e314e000000014e",
+        "5245564945573030303100000000000000040004002441000112340123456789ab01020304050607084200000064414c504841202020000186a0002441000112340123456789ab00000000000000004200000028414c504841202020000186a0002846000112340123456789abfedcba98765432105300000050414c5048412020200001870441424344002441000212344e94914effffffffffffffffffff42ffffffff424554412020202077359400",
+        "5245564945573030303100000000000000080001001758000112340123456789ab000000000000000000000000"
+      ],
+      "expected": [
+        {
+          "next_sequence": 4,
+          "high_water": 4,
+          "status": "current",
+          "terminal": null,
+          "error_code": null,
+          "error_sequence": null
+        },
+        {
+          "next_sequence": 8,
+          "high_water": 8,
+          "status": "current",
+          "terminal": null,
+          "error_code": null,
+          "error_sequence": null
+        },
+        {
+          "next_sequence": 9,
+          "high_water": 9,
+          "status": "current",
+          "terminal": null,
+          "error_code": null,
+          "error_sequence": null,
+          "book": {
+            "order_count": 4
+          }
+        }
+      ]
+    },
+    {
+      "name": "zero_reduction_missing_reference",
+      "packets": [
+        "5245564945573030303100000000000000010003000c53000012340123456789ab4f002752000112340123456789ab414c504841202020514e000000644e432020504e4e314e000000014e002752000212340123456789ab4245544120202020514e000000644e432020504e4e314e000000014e",
+        "5245564945573030303100000000000000040001001f45000112340123456789ab0102030405060708000000002122232425262728"
+      ],
+      "expected": [
+        {
+          "next_sequence": 4,
+          "high_water": 4,
+          "status": "current",
+          "terminal": null,
+          "error_code": null,
+          "error_sequence": null
+        },
+        {
+          "next_sequence": 4,
+          "high_water": 5,
+          "status": "invalid",
+          "terminal": null,
+          "error_code": "missing_order",
+          "error_sequence": 4,
+          "book": {
+            "order_count": 0
+          }
+        }
+      ]
+    },
+    {
+      "name": "fill_then_retired_id_reuse",
+      "packets": [
+        "5245564945573030303100000000000000010003000c53000012340123456789ab4f002752000112340123456789ab414c504841202020514e000000644e432020504e4e314e000000014e002752000212340123456789ab4245544120202020514e000000644e432020504e4e314e000000014e",
+        "5245564945573030303100000000000000040001002441000112340123456789ab01020304050607084200000064414c504841202020000186a0",
+        "5245564945573030303100000000000000050001001f45000112340123456789ab0102030405060708000000642122232425262728",
+        "5245564945573030303100000000000000060001002441000112340123456789ab01020304050607084200000064414c504841202020000186a0"
+      ],
+      "expected": [
+        {
+          "next_sequence": 4,
+          "high_water": 4,
+          "status": "current",
+          "terminal": null,
+          "error_code": null,
+          "error_sequence": null
+        },
+        {
+          "next_sequence": 5,
+          "high_water": 5,
+          "status": "current",
+          "terminal": null,
+          "error_code": null,
+          "error_sequence": null,
+          "book": {
+            "order_count": 1
+          }
+        },
+        {
+          "next_sequence": 6,
+          "high_water": 6,
+          "status": "current",
+          "terminal": null,
+          "error_code": null,
+          "error_sequence": null,
+          "book": {
+            "order_count": 0
+          }
+        },
+        {
+          "next_sequence": 6,
+          "high_water": 7,
+          "status": "invalid",
+          "terminal": null,
+          "error_code": "duplicate_order_id",
+          "error_sequence": 6,
+          "book": {
+            "order_count": 0
+          }
+        }
+      ]
+    },
+    {
+      "name": "replace_self",
+      "packets": [
+        "5245564945573030303100000000000000010003000c53000012340123456789ab4f002752000112340123456789ab414c504841202020514e000000644e432020504e4e314e000000014e002752000212340123456789ab4245544120202020514e000000644e432020504e4e314e000000014e",
+        "5245564945573030303100000000000000040004002441000112340123456789ab01020304050607084200000064414c504841202020000186a0002441000112340123456789ab00000000000000004200000028414c504841202020000186a0002846000112340123456789abfedcba98765432105300000050414c5048412020200001870441424344002441000212344e94914effffffffffffffffffff42ffffffff424554412020202077359400",
+        "5245564945573030303100000000000000080001002355000112340123456789abfedcba9876543210fedcba98765432100000003c00018768"
+      ],
+      "expected": [
+        {
+          "next_sequence": 4,
+          "high_water": 4,
+          "status": "current",
+          "terminal": null,
+          "error_code": null,
+          "error_sequence": null
+        },
+        {
+          "next_sequence": 8,
+          "high_water": 8,
+          "status": "current",
+          "terminal": null,
+          "error_code": null,
+          "error_sequence": null
+        },
+        {
+          "next_sequence": 8,
+          "high_water": 9,
+          "status": "invalid",
+          "terminal": null,
+          "error_code": "duplicate_order_id",
+          "error_sequence": 8,
+          "book": {
+            "order_count": 4
+          }
+        }
+      ]
+    },
+    {
+      "name": "replace_live_collision",
+      "packets": [
+        "5245564945573030303100000000000000010003000c53000012340123456789ab4f002752000112340123456789ab414c504841202020514e000000644e432020504e4e314e000000014e002752000212340123456789ab4245544120202020514e000000644e432020504e4e314e000000014e",
+        "5245564945573030303100000000000000040004002441000112340123456789ab01020304050607084200000064414c504841202020000186a0002441000112340123456789ab00000000000000004200000028414c504841202020000186a0002846000112340123456789abfedcba98765432105300000050414c5048412020200001870441424344002441000212344e94914effffffffffffffffffff42ffffffff424554412020202077359400",
+        "5245564945573030303100000000000000080001002355000112340123456789abfedcba987654321001020304050607080000003c00018768"
+      ],
+      "expected": [
+        {
+          "next_sequence": 4,
+          "high_water": 4,
+          "status": "current",
+          "terminal": null,
+          "error_code": null,
+          "error_sequence": null
+        },
+        {
+          "next_sequence": 8,
+          "high_water": 8,
+          "status": "current",
+          "terminal": null,
+          "error_code": null,
+          "error_sequence": null
+        },
+        {
+          "next_sequence": 8,
+          "high_water": 9,
+          "status": "invalid",
+          "terminal": null,
+          "error_code": "duplicate_order_id",
+          "error_sequence": 8,
+          "book": {
+            "order_count": 4
+          }
+        }
+      ]
+    },
+    {
+      "name": "zero_replace_preserves_old",
+      "packets": [
+        "5245564945573030303100000000000000010003000c53000012340123456789ab4f002752000112340123456789ab414c504841202020514e000000644e432020504e4e314e000000014e002752000212340123456789ab4245544120202020514e000000644e432020504e4e314e000000014e",
+        "5245564945573030303100000000000000040004002441000112340123456789ab01020304050607084200000064414c504841202020000186a0002441000112340123456789ab00000000000000004200000028414c504841202020000186a0002846000112340123456789abfedcba98765432105300000050414c5048412020200001870441424344002441000212344e94914effffffffffffffffffff42ffffffff424554412020202077359400",
+        "5245564945573030303100000000000000080001002355000112340123456789abfedcba987654321080000000000000010000000000018768"
+      ],
+      "expected": [
+        {
+          "next_sequence": 4,
+          "high_water": 4,
+          "status": "current",
+          "terminal": null,
+          "error_code": null,
+          "error_sequence": null
+        },
+        {
+          "next_sequence": 8,
+          "high_water": 8,
+          "status": "current",
+          "terminal": null,
+          "error_code": null,
+          "error_sequence": null
+        },
+        {
+          "next_sequence": 8,
+          "high_water": 9,
+          "status": "invalid",
+          "terminal": null,
+          "error_code": "field_domain",
+          "error_sequence": 8,
+          "book": {
+            "order_count": 4
+          }
+        }
+      ]
+    },
+    {
+      "name": "itch_end_then_new_message",
+      "packets": [
+        "5245564945573030303100000000000000010003000c53000012340123456789ab4f002752000112340123456789ab414c504841202020514e000000644e432020504e4e314e000000014e002752000212340123456789ab4245544120202020514e000000644e432020504e4e314e000000014e",
+        "5245564945573030303100000000000000040001000c53000012340123456789ab43",
+        "5245564945573030303100000000000000050001001342000112340123456789ab1112131415161718"
+      ],
+      "expected": [
+        {
+          "next_sequence": 4,
+          "high_water": 4,
+          "status": "current",
+          "terminal": null,
+          "error_code": null,
+          "error_sequence": null
+        },
+        {
+          "next_sequence": 5,
+          "high_water": 5,
+          "status": "current",
+          "terminal": null,
+          "error_code": null,
+          "error_sequence": null
+        },
+        {
+          "next_sequence": 5,
+          "high_water": 6,
+          "status": "invalid",
+          "terminal": null,
+          "error_code": "after_itch_end",
+          "error_sequence": 5
+        }
+      ]
+    },
+    {
+      "name": "live_order_cap",
+      "packets": [
+        "5245564945573030303100000000000000010003000c53000012340123456789ab4f002752000112340123456789ab414c504841202020514e000000644e432020504e4e314e000000014e002752000212340123456789ab4245544120202020514e000000644e432020504e4e314e000000014e",
+        "5245564945573030303100000000000000040004002441000112340123456789ab01020304050607084200000064414c504841202020000186a0002441000112340123456789ab00000000000000004200000028414c504841202020000186a0002846000112340123456789abfedcba98765432105300000050414c5048412020200001870441424344002441000212344e94914effffffffffffffffffff42ffffffff424554412020202077359400"
+      ],
+      "expected": [
+        {
+          "next_sequence": 4,
+          "high_water": 4,
+          "status": "current",
+          "terminal": null,
+          "error_code": null,
+          "error_sequence": null
+        },
+        {
+          "next_sequence": 5,
+          "high_water": 8,
+          "status": "invalid",
+          "terminal": null,
+          "error_code": "resource_limit",
+          "error_sequence": 5,
+          "book": {
+            "order_count": 1
+          }
+        }
+      ],
+      "limits": {
+        "max_orders": 1
+      }
+    },
+    {
+      "name": "seen_id_cap_retains_history",
+      "packets": [
+        "5245564945573030303100000000000000010003000c53000012340123456789ab4f002752000112340123456789ab414c504841202020514e000000644e432020504e4e314e000000014e002752000212340123456789ab4245544120202020514e000000644e432020504e4e314e000000014e",
+        "5245564945573030303100000000000000040001002441000112340123456789ab01020304050607084200000064414c504841202020000186a0",
+        "5245564945573030303100000000000000050001001f45000112340123456789ab0102030405060708000000642122232425262728",
+        "5245564945573030303100000000000000060001002441000112340123456789ab00000000000000004200000028414c504841202020000186a0"
+      ],
+      "expected": [
+        {
+          "next_sequence": 4,
+          "high_water": 4,
+          "status": "current",
+          "terminal": null,
+          "error_code": null,
+          "error_sequence": null
+        },
+        {
+          "next_sequence": 5,
+          "high_water": 5,
+          "status": "current",
+          "terminal": null,
+          "error_code": null,
+          "error_sequence": null
+        },
+        {
+          "next_sequence": 6,
+          "high_water": 6,
+          "status": "current",
+          "terminal": null,
+          "error_code": null,
+          "error_sequence": null,
+          "book": {
+            "order_count": 0
+          }
+        },
+        {
+          "next_sequence": 6,
+          "high_water": 7,
+          "status": "invalid",
+          "terminal": null,
+          "error_code": "resource_limit",
+          "error_sequence": 6,
+          "book": {
+            "order_count": 0
+          }
+        }
+      ],
+      "limits": {
+        "max_ids": 1
+      }
+    },
+    {
+      "name": "instrument_cap",
+      "packets": [
+        "5245564945573030303100000000000000010003000c53000012340123456789ab4f002752000112340123456789ab414c504841202020514e000000644e432020504e4e314e000000014e002752000212340123456789ab4245544120202020514e000000644e432020504e4e314e000000014e"
+      ],
+      "expected": [
+        {
+          "next_sequence": 3,
+          "high_water": 4,
+          "status": "invalid",
+          "terminal": null,
+          "error_code": "resource_limit",
+          "error_sequence": 3,
+          "book": {
+            "order_count": 0
+          }
+        }
+      ],
+      "limits": {
+        "max_instruments": 1
+      }
+    },
+    {
+      "name": "replacement_at_live_cap",
+      "packets": [
+        "5245564945573030303100000000000000010003000c53000012340123456789ab4f002752000112340123456789ab414c504841202020514e000000644e432020504e4e314e000000014e002752000212340123456789ab4245544120202020514e000000644e432020504e4e314e000000014e",
+        "5245564945573030303100000000000000040001002846000112340123456789abfedcba98765432105300000050414c5048412020200001870441424344",
+        "5245564945573030303100000000000000050001002355000112340123456789abfedcba987654321080000000000000010000003c00018768"
+      ],
+      "expected": [
+        {
+          "next_sequence": 4,
+          "high_water": 4,
+          "status": "current",
+          "terminal": null,
+          "error_code": null,
+          "error_sequence": null
+        },
+        {
+          "next_sequence": 5,
+          "high_water": 5,
+          "status": "current",
+          "terminal": null,
+          "error_code": null,
+          "error_sequence": null,
+          "book": {
+            "order_count": 1
+          }
+        },
+        {
+          "next_sequence": 6,
+          "high_water": 6,
+          "status": "current",
+          "terminal": null,
+          "error_code": null,
+          "error_sequence": null,
+          "book": {
+            "order_count": 1
+          }
+        }
+      ],
+      "limits": {
+        "max_orders": 1
+      }
+    },
+    {
+      "name": "empty_message",
+      "packets": [
+        "52455649455730303031000000000000000100010000"
+      ],
+      "expected": [
+        {
+          "next_sequence": 1,
+          "high_water": 1,
+          "status": "invalid",
+          "terminal": null,
+          "error_code": "itch_length",
+          "error_sequence": 1
+        }
+      ]
+    },
+    {
+      "name": "trailing_bytes",
+      "packets": [
+        "5245564945573030303100000000000000010003000c53000012340123456789ab4f002752000112340123456789ab414c504841202020514e000000644e432020504e4e314e000000014e002752000212340123456789ab4245544120202020514e000000644e432020504e4e314e000000014e00"
+      ],
+      "expected": [
+        {
+          "next_sequence": 1,
+          "high_water": 1,
+          "status": "invalid",
+          "terminal": null,
+          "error_code": "mold_trailing",
+          "error_sequence": 1
+        }
+      ]
+    },
+    {
+      "name": "heartbeat_has_bytes",
+      "packets": [
+        "524556494557303030310000000000000001000000"
+      ],
+      "expected": [
+        {
+          "next_sequence": 1,
+          "high_water": 1,
+          "status": "invalid",
+          "terminal": null,
+          "error_code": "mold_trailing",
+          "error_sequence": 1
+        }
+      ]
+    },
+    {
+      "name": "short_header",
+      "packets": [
+        "52455649455730303031"
+      ],
+      "expected": [
+        {
+          "next_sequence": 1,
+          "high_water": 1,
+          "status": "invalid",
+          "terminal": null,
+          "error_code": "mold_header",
+          "error_sequence": null
+        }
+      ]
+    }
+  ]
+}

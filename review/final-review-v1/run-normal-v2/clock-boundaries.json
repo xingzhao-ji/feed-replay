@@ -1,0 +1,82 @@
+[
+  {
+    "expected": "1",
+    "high_water_next": "18",
+    "end_next": null,
+    "status": "Gap",
+    "live_fresh": false,
+    "quote_usable": false,
+    "error": null,
+    "error_sequence": null,
+    "book": {
+      "order_count": 0,
+      "seen_id_count": 0,
+      "instruments": []
+    },
+    "itch_end_seen": false,
+    "requests": [
+      {
+        "first": "1",
+        "count": 17,
+        "hex": "5245564945573030303100000000000000010011"
+      }
+    ]
+  },
+  {
+    "expected": "1",
+    "high_water_next": "18",
+    "end_next": null,
+    "status": "Gap",
+    "live_fresh": false,
+    "quote_usable": false,
+    "error": null,
+    "error_sequence": null,
+    "book": {
+      "order_count": 0,
+      "seen_id_count": 0,
+      "instruments": []
+    },
+    "itch_end_seen": false,
+    "requests": [
+      {
+        "first": "1",
+        "count": 17,
+        "hex": "5245564945573030303100000000000000010011"
+      }
+    ]
+  },
+  {
+    "expected": "1",
+    "high_water_next": "18",
+    "end_next": null,
+    "status": "RecoveryFailed",
+    "live_fresh": false,
+    "quote_usable": false,
+    "error": "recovery_exhausted",
+    "error_sequence": "1",
+    "book": {
+      "order_count": 0,
+      "seen_id_count": 0,
+      "instruments": []
+    },
+    "itch_end_seen": false,
+    "requests": []
+  },
+  {
+    "expected": "1",
+    "high_water_next": "18",
+    "end_next": null,
+    "status": "RecoveryFailed",
+    "live_fresh": false,
+    "quote_usable": false,
+    "error": "recovery_exhausted",
+    "error_sequence": "1",
+    "book": {
+      "order_count": 0,
+      "seen_id_count": 0,
+      "instruments": []
+    },
+    "itch_end_seen": false,
+    "requests": []
+  }
+]
