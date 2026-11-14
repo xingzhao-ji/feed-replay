@@ -9,7 +9,7 @@ import pytest
 from test_codec import ROOT,VECTORS
 from reference import reference_sequence
 from test_session import CASES,packet,marker
-BINARY=Path(os.environ.get('FEED_BINARY',Path(os.environ.get('FEED_CACHE',Path.home()/'.cache/job-apps-runtime/feed-replay'))/'build/feed_replay'))
+BINARY=Path(os.environ.get('FEED_BINARY',Path(os.environ.get('FEED_CACHE',Path.home()/'.cache/feed-replay'))/'build/feed_replay'))
 
 def capture(path,packets,flags=0):
  with path.open('wb') as f:

@@ -13,7 +13,7 @@ Eight measured pairs per interval after one warmup pair. Table ranges retain the
 
 The 50,000 updates start with 2,048 live orders over eight instruments. Query interval 1 cycles all instruments; frozen intervals 32/256 query instrument1. Thus cross-interval differences combine query frequency with instrument selection; do not treat this as a pure causal estimate of query frequency. Output is synthetic displayed depth only. No exchange traffic, cold-start, network or production latency is measured by this table.
 
-Environment: Apple M4 Pro, macOS-27.0.1-arm64-arm-64bit, Apple clang version 21.0.0 (clang-2100.3.34.2); flags `-std=c++20 -O2 -Wall -Wextra -Werror`. 14 logical CPUs; start/end 1/5/15-minute load averages [3.91064453125, 4.3447265625, 5.1552734375] / [3.91064453125, 4.3447265625, 5.1552734375]. No CPU pinning or exclusive-host guarantee. The parent coordinated other portfolio benchmark work outside this short window. All paired observations, warmups, source hashes and timestamps are in [benchmark.json](../evidence/benchmark.json).
+Environment: Apple M4 Pro, macOS-27.0.1-arm64-arm-64bit, Apple clang version 21.0.0 (clang-2100.3.34.2); flags `-std=c++20 -O2 -Wall -Wextra -Werror`. 14 logical CPUs; start/end 1/5/15-minute load averages [3.91064453125, 4.3447265625, 5.1552734375] / [3.91064453125, 4.3447265625, 5.1552734375]. No CPU pinning or exclusive-host guarantee. Other benchmark work on the host was scheduled outside this short window. All paired observations, warmups, source hashes and timestamps are in [benchmark.json](../evidence/benchmark.json).
 
 Separate parser-only phase: decode 52,056 messages from already resident raw packets, including frame/type/field checks and decoded-result construction; exclude file I/O. Eight measured passes after one warmup: median 0.704 ms, range 0.700–0.708 ms. These values cannot be added to the book table to predict end-to-end service latency.
 
@@ -80,4 +80,4 @@ The complete 28 UDP test cases also include option rejection and competing captu
 
 Whole packet structural admission and message-by-message semantic acceptance are different boundaries. The fixtures challenge both. Every offline report and completed historical snapshot sets freshness/usability false; observed high water cannot prove that unseen traffic was never lost. Hard caps intentionally fail a session/report rather than evict history, clip quantities or publish a successful partial result.
 
-No full ITCH compatibility, authenticated feed, live exchange deployment, trading execution, operational reliability, personal mastery or employer endorsement is established. Final independent source/execution review remains pending.
+No full ITCH compatibility, authenticated feed, live exchange deployment, trading execution or operational reliability is established.

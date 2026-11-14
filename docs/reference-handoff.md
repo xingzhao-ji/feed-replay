@@ -1,16 +1,16 @@
 # Independent fixture/reference handoff
 
-Status: contract for a fresh author; **do not use future C++ product code to produce expected behavior**. Read design.md plus the cached official ITCH/Mold tables. Report any mismatch before freezing files. The parent will approve design after fresh review; the independent fixture/reference must then be complete and hash-frozen before C++ implementation begins.
+Status: contract for the independent reference author; **do not use future C++ product code to produce expected behavior**. Read design.md plus the cached official ITCH/Mold tables. Report any mismatch before freezing files. The independent fixture/reference must be complete and hash-frozen before C++ implementation begins.
 
 ## Deliverables and interfaces
 
-The independent author owns future `review/` (including `review/literal_fixtures.json`, `review/reference.py`, independent tests and provenance). The implementation author owns C++ and its tests. This planning task creates docs only; the parent assigns actual reference authorship.
+The independent author owns future `review/` (including `review/literal_fixtures.json`, `review/reference.py`, independent tests and provenance). The implementation author owns C++ and its tests.
 
 1. `review/literal_fixtures.json`: list of `{name, layer, hex, expected}`. `layer` is `itch` or `mold`. Fixtures may declare any exact ten-byte session (the independent author uses `REVIEW0001`; `FRLAB00001` is only a demo example). Hex is literal, hand-authored bytes, with no runtime C++ encoder dependency. Expected includes either exact normalized fields/spans or the stable error category; explanatory notes cite table offsets. Include all 12 supported types. Hand-check at least one complete multi-message datagram and one request.
 2. `review/lifecycle.json`: typed event array plus **literal hand-checked** states/quotes for a small two-instrument lifecycle; the independent reference can expand comparison coverage but cannot replace these hand-checked anchors.
 3. `review/sequence-cases.json`: ordered datagram hex inputs, injected times and terminal assertions (`expected`, `high_water_next`, optional `end_next`, status, request sequence/count, accepted-prefix book). These pin boundary decisions before implementation.
 4. `review/reference.py`: `decode_itch(data: bytes) -> dict`, `decode_mold(data: bytes) -> dict`, and `ReferenceBook.apply(event: dict) -> None`, `ReferenceBook.snapshot(depth: int=5) -> dict`. It uses Python integer/byte operations and a simple order dictionary, recomputing levels by scanning; no C++ subprocess/library calls or copied implementation helper. Semantic errors raise `ReferenceError(code: str)`. A pure `reference_sequence(datagrams: list[bytes]) -> dict` models offline prefix/high-water/end semantics independently; actual UDP timer/socket behavior is checked separately.
-5. `review/test_reference.py`: literal anchors and independently derived invariants. Freeze a manifest of all reference/golden source bytes before implementation, and document authorship/spec hashes. Do not infer personal/employer endorsement.
+5. `review/test_reference.py`: literal anchors and independently derived invariants. Freeze a manifest of all reference/golden source bytes before implementation, and document authorship/spec hashes.
 
 ## Normalized JSON contract
 
@@ -41,7 +41,7 @@ Stable error categories: `mold_header`, `mold_block`, `mold_trailing`, `unsuppor
 - Heartbeat/end reveals missing tail; end precedes final recovery; stale end below accepted/observed high-water; conflicting ends; data beyond known end; identical repeated end; sequence/count overflow. End only completes when the entire prefix is present.
 - Limits tested with lower configurable test caps (not million-entry fixtures), but production hard bounds remain those in design. No golden corpus should approach the runtime/storage budget.
 
-The fresh author should challenge this contract rather than conform to a mistake. Root resolves source-backed disagreements before implementation; approved fixture changes retain an explicit provenance note.
+The reference author should challenge this contract rather than conform to a mistake. Approved fixture changes retain an explicit provenance note.
 
 The independent author may organize the proposed lifecycle/sequence records inside a single indexed fixture JSON instead of separate files; preserve the declared normalized adapter and publish exact paths in review provenance.
 

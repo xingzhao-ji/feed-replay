@@ -2,13 +2,13 @@
 
 A C++20 Nasdaq ITCH displayed-book reconstructor with actual loopback MoldUDP64 recovery. It preserves the last valid message prefix, detects missing tail data from heartbeats/end markers, requests missing sequences, and makes incomplete or invalid books explicit.
 
-The project adds exchange wire-format, order lifecycle, loss recovery and measured data-structure tradeoffs to a general systems portfolio. It is an AI-assisted artifact with independent protocol fixtures/review; it does not establish the owner's personal mastery or a job prerequisite by itself.
+The project covers exchange wire-format, order lifecycle, loss recovery and measured data-structure tradeoffs, checked against independently authored protocol fixtures.
 
 ## Executed evidence
 
 - **140 product tests** pass normally and with ASan/UBSan on the core probe, receiver/CLI and benchmark binaries; **10 independently authored reference tests** pass separately.
 - **28 actual UDP subprocess tests** cover loss/recovery, partial replies, duplicates/overlap, pinned invalid traffic, kernel truncation, failed recovery, cancellation, foreign/duplicate flood deadlines, hard bounds and competing capture creation. These are finite local drills, not a reliability estimate.
-- The independently frozen corpus has 17 literal messages, 17 hand-checked lifecycle states, 48 packet scenarios, 533 ITCH truncation boundaries and 116 Mold truncation boundaries. C++ implementation started only after root verified that freeze.
+- The independently frozen corpus has 17 literal messages, 17 hand-checked lifecycle states, 48 packet scenarios, 533 ITCH truncation boundaries and 116 Mold truncation boundaries. C++ implementation started only after that freeze was verified.
 - A frozen synthetic study applies 52,056 messages: eight directories, 2,048 initial orders, then 50,000 updates. Every update's selected quote and the complete final book match the independent Python map reference.
 
 | Quote query interval | Indexed median, ms | Scan median, ms | Interpretation in this workload |
@@ -17,9 +17,9 @@ The project adds exchange wire-format, order lifecycle, loss recovery and measur
 | Every 32 updates | 5.914 | 14.275 | Query savings still exceed level maintenance. |
 | Every 256 updates | 5.817 | 4.545 | Scanning wins when quotes are sparse. |
 
-Eight measured pairs per interval, alternating order, following one warmup pair. All samples are retained. The timed region includes update validation, mutations, identical queries and result storage, and excludes decoding, preload, allocation of result capacity, output checks and serialization. Both engines share admission/lifecycle code; only the indexed engine maintains price levels. This is a warm synthetic microbenchmark on one Apple M4 Pro host, not production latency. The sparse schedules query instrument 1 because the frozen locate formula is `index % 8 + 1`; the every-update schedule cycles all eight instruments. No outcome-driven retuning was done.
+Eight measured pairs per interval, alternating order, following one warmup pair. All samples are retained. The timed region includes update validation, mutations, identical queries and result storage, and excludes decoding, preload, allocation of result capacity, output checks and serialization. Both engines share admission/lifecycle code; only the indexed engine maintains price levels. This is a warm synthetic microbenchmark on one Apple M4 Pro host, not production latency. The benchmark harness records expected compiler flags literally; a differently configured future build must generate or verify its actual build metadata before relying on that label. The sparse schedules query instrument 1 because the frozen locate formula is `index % 8 + 1`; the every-update schedule cycles all eight instruments. No outcome-driven retuning was done.
 
-Read [the measured report](docs/results.md), [shareable HTML report](evidence/report.html), [all benchmark samples](evidence/benchmark.json), [frozen workload](evidence/workload/manifest.json), and [verification artifacts](evidence/verification-20261023T212630Z/manifest.json). [Evidence index](evidence/index.json) binds source, binaries and artifacts. The [final independent review](review/final-independent-review.md) and [acceptance addendum](docs/acceptance-addendum.md) accept the declared local/synthetic subset scope; historical measurements remain unchanged.
+Read [the measured report](docs/results.md), [shareable HTML report](evidence/report.html), [all benchmark samples](evidence/benchmark.json), [frozen workload](evidence/workload/manifest.json), and [verification artifacts](evidence/verification-20261023T212630Z/manifest.json). [Evidence index](evidence/index.json) binds source, binaries and artifacts.
 
 ## Run it
 
@@ -34,12 +34,12 @@ make verify PYTHON=python
 make sanitize PYTHON=python
 ```
 
-`verify` executes the frozen reference and all product checks, retaining a new timestamped evidence directory with actual UDP captures, reports and observed request bytes. Build/runtime caches stay under `~/.cache/job-apps-runtime/feed-replay` (override `CACHE` and `FEED_CACHE` consistently). The guard checks allocated cache size below 200 MiB and host free space above 2 GiB before/during commands. The cache may need scoped cleanup after many repeated verification runs; the guard fails rather than deleting unrelated files.
+`verify` executes the frozen reference and all product checks, retaining a new timestamped evidence directory with actual UDP captures, reports and observed request bytes. Build/runtime caches stay under `~/.cache/feed-replay` (override `CACHE` and `FEED_CACHE` consistently). The guard checks allocated cache size below 200 MiB and host free space above 2 GiB before/during commands. The cache may need scoped cleanup after many repeated verification runs; the guard fails rather than deleting unrelated files.
 
 Replay the included workload into a **new** output directory:
 
 ```sh
-~/.cache/job-apps-runtime/feed-replay/build/feed_replay replay \
+~/.cache/feed-replay/build/feed_replay replay \
   --capture evidence/workload/workload.frcp --session BENCH00001 \
   --output /tmp/feed-replay-example --depth 5 --include-orders 1
 ```
@@ -47,7 +47,7 @@ Replay the included workload into a **new** output directory:
 For a receiver with separately bound local peers:
 
 ```sh
-~/.cache/job-apps-runtime/feed-replay/build/feed_replay listen \
+~/.cache/feed-replay/build/feed_replay listen \
   --listen-port 41001 --source-port 41002 --recovery-port 41003 \
   --session REVIEW0001 --capture /tmp/feed-new.frcp \
   --output /tmp/feed-new-report --depth 5
@@ -77,11 +77,12 @@ This is a declared subset and synthetic environment. Halt/tradability eligibilit
 ## Source and review map
 
 - [Design and official Nasdaq citations](docs/design.md): exact fields, length/domain decisions and omitted semantics.
-- [Implementation plan](docs/implementation-plan.md), [root approval](docs/root-design-review.md), [RED/GREEN ledger](docs/progress.md).
 - [Independent fixture provenance/adapters](review/README.md), [design review](review/protocol-design-review.md), [freeze](review/freeze-v1.json). These files were authored before production code and were not edited to match it.
 - [Codec](src/codec.cpp) → [indexed lifecycle/levels](src/indexed_book.cpp) / [scan query](src/scan_book.cpp) → [sequence/deadlines](src/session.cpp) → [UDP shell](src/udp.cpp).
 - [Capture](src/capture.cpp), [publication](src/report.cpp), [CLI](src/main.cpp), [paired harness](src/benchmark.cpp).
 
 ## Public export
 
-[PUBLICATION.md](PUBLICATION.md) documents preserved source identities, normalized historical evidence, privacy exclusions and the limited publication verification. This AI-assisted artifact does not establish sole human authorship or personal mastery. No project license grant is added by the export.
+[PUBLICATION.md](PUBLICATION.md) documents preserved source identities, normalized historical evidence, privacy exclusions and the limited publication verification. No project license grant is added by the export.
+
+Built with AI coding tools (Claude Code and Codex CLI); I reviewed and tested the result.

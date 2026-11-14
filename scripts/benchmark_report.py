@@ -9,7 +9,7 @@ import subprocess
 import time
 
 ROOT=Path(__file__).resolve().parents[1]
-CACHE=Path(os.environ.get('FEED_CACHE',Path.home()/'.cache/job-apps-runtime/feed-replay'))
+CACHE=Path(os.environ.get('FEED_CACHE',Path.home()/'.cache/feed-replay'))
 
 
 def sha(path):return hashlib.sha256(path.read_bytes()).hexdigest()

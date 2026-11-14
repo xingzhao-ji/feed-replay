@@ -1,6 +1,6 @@
 PYTHON ?= python3
 CXX := clang++
-CACHE ?= $(HOME)/.cache/job-apps-runtime/feed-replay
+CACHE ?= $(HOME)/.cache/feed-replay
 BUILD := $(CACHE)/build
 FLAGS := -std=c++20 -O2 -Wall -Wextra -Werror -Iinclude
 GUARD := python3 scripts/guard.py

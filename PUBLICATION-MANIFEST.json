@@ -1344,13 +1344,13 @@
       "new_sha256": "bfe7de929990be97c2e21b643838c0cc14047bd39a92f80f79f7c90e72428460",
       "original_sha256": "c021a0381adb1a455f5b6491e92ba79536d9892fcae56f87ffbff95dc7368759",
       "path": "docs/acceptance-addendum.md",
-      "reason": "Public export: normalize private paths, remove private application comparisons and make standalone documentation commands portable; no protocol/numerical outcomes changed"
+      "reason": "Public export: normalize private paths, remove private workflow notes and make standalone documentation commands portable; no protocol/numerical outcomes changed"
     },
     {
       "new_sha256": "fd54dde765864ce44ae4e821bd0e8121844bb798967c87393e59e4aba1042d77",
       "original_sha256": "5260605cce834b71ccfd196feb4204e7a8d40512f800d888b53d8cdd68057d2b",
       "path": "docs/design.md",
-      "reason": "Public export: normalize private paths, remove private application comparisons and make standalone documentation commands portable; no protocol/numerical outcomes changed"
+      "reason": "Public export: normalize private paths, remove private workflow notes and make standalone documentation commands portable; no protocol/numerical outcomes changed"
     },
     {
       "new_sha256": "948cc101abf51daeed882111479afbc98f73082ac8156ad7f2818b851113fcaf",
@@ -1362,13 +1362,13 @@
       "new_sha256": "60928d6adc0376094bb9baeb2c80ba31806e13fada6b561eb2f75f3049771f0f",
       "original_sha256": "caa81e90b02e75cf60ffdd9b3245b3a796740b38c332a4c2fa0a00e6f5c59b92",
       "path": "evidence/logs/benchmark-red.log",
-      "reason": "Public export: normalize private paths, remove private application comparisons and make standalone documentation commands portable; no protocol/numerical outcomes changed"
+      "reason": "Public export: normalize private paths, remove private workflow notes and make standalone documentation commands portable; no protocol/numerical outcomes changed"
     },
     {
       "new_sha256": "06d74426d1bea11fa69afc9f47bc42bb920211b301d444a10272be03958e1519",
       "original_sha256": "0a02eec961f94bf98f77bbb805283bec0fe9df7a537b36084f75633e82079e7e",
       "path": "evidence/logs/book-red.log",
-      "reason": "Public export: normalize private paths, remove private application comparisons and make standalone documentation commands portable; no protocol/numerical outcomes changed"
+      "reason": "Public export: normalize private paths, remove private workflow notes and make standalone documentation commands portable; no protocol/numerical outcomes changed"
     },
     {
       "new_sha256": "496b67b424c5936650dfe5b7bb330098668c7bf3b26348534d2570acfb9af7c1",
@@ -1380,19 +1380,19 @@
       "new_sha256": "531cdd5c1b62556562aa83ef7235e4f1cf5c270e320b62e7fe50babf0c282d6e",
       "original_sha256": "9a85dbff852f73591102c56464bbd7e0c0459c57543fee86ca1dbfd81fc5720f",
       "path": "evidence/logs/codec-red.log",
-      "reason": "Public export: normalize private paths, remove private application comparisons and make standalone documentation commands portable; no protocol/numerical outcomes changed"
+      "reason": "Public export: normalize private paths, remove private workflow notes and make standalone documentation commands portable; no protocol/numerical outcomes changed"
     },
     {
       "new_sha256": "dc8ad429ac5008852416c68bd37dddfc0488ef271956455e14c72eb5b27ae37e",
       "original_sha256": "e3f7bcdf242255cf5179b522cc625c46030970cd91f63f9a55cd3286b38c82e0",
       "path": "evidence/logs/final-sanitized.log",
-      "reason": "Public export: normalize private paths, remove private application comparisons and make standalone documentation commands portable; no protocol/numerical outcomes changed"
+      "reason": "Public export: normalize private paths, remove private workflow notes and make standalone documentation commands portable; no protocol/numerical outcomes changed"
     },
     {
       "new_sha256": "a65a2b400965dc3fb3bfb0f56967fbbcbb823b7f4585a1f3cad5c0029ea35913",
       "original_sha256": "086777fc931b42c2cae5d4a01c03e62ccb0f04bcf36e5c4bba0650efb4942f78",
       "path": "evidence/logs/session-red.log",
-      "reason": "Public export: normalize private paths, remove private application comparisons and make standalone documentation commands portable; no protocol/numerical outcomes changed"
+      "reason": "Public export: normalize private paths, remove private workflow notes and make standalone documentation commands portable; no protocol/numerical outcomes changed"
     },
     {
       "new_sha256": "fb1d4edd88f95c2e97bcc3dc7940a97cfdfd1a2073836dbb43925aaaea05c4d9",
@@ -1404,19 +1404,19 @@
       "new_sha256": "9b3ef55d4bde6806c8d438220bd0b2b552d2fa6421ed1e4300115ed45aa816b7",
       "original_sha256": "aee3b40969c80c2283c899221423f71bba16048fc6ad32804b01e0b1f8a85fae",
       "path": "evidence/verification-20261023T212630Z/manifest.json",
-      "reason": "Public export: normalize private paths, remove private application comparisons and make standalone documentation commands portable; no protocol/numerical outcomes changed"
+      "reason": "Public export: normalize private paths, remove private workflow notes and make standalone documentation commands portable; no protocol/numerical outcomes changed"
     },
     {
       "new_sha256": "d60d1e03d595b1987c1af237d481f6abc1c2cbcc6c107c60244db56e335553ea",
       "original_sha256": "c79140da60a85544abf80fb8ae063344a0a6f6ba82ceb0b88092740a99a35aeb",
       "path": "review/final-independent-review.md",
-      "reason": "Public export: normalize private paths, remove private application comparisons and make standalone documentation commands portable; no protocol/numerical outcomes changed"
+      "reason": "Public export: normalize private paths, remove private workflow notes and make standalone documentation commands portable; no protocol/numerical outcomes changed"
     },
     {
       "new_sha256": "29fbe847041f31ffbf3becd7215b2b7c6d6fa42347d4306e824155e326bd8fb8",
       "original_sha256": "104e7ce729f2f7adf0b15465182790f28fa46522d711424ea87cd276de45e8d0",
       "path": "review/final-review-v1/run-normal/results.json",
-      "reason": "Public export: normalize private paths, remove private application comparisons and make standalone documentation commands portable; no protocol/numerical outcomes changed"
+      "reason": "Public export: normalize private paths, remove private workflow notes and make standalone documentation commands portable; no protocol/numerical outcomes changed"
     },
     {
       "new_sha256": "c8af38a8a18f51e4b69a17a51d10fc8fba07b55127a5b4cd542a6d946b2eb063",

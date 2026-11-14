@@ -7,7 +7,7 @@ import subprocess
 import sys
 import time
 
-CACHE = Path(os.environ.get("FEED_CACHE", Path.home() / ".cache/job-apps-runtime/feed-replay"))
+CACHE = Path(os.environ.get("FEED_CACHE", Path.home() / ".cache/feed-replay"))
 LIMIT = 200 * 1024**2
 FLOOR = 2 * 1024**3
 

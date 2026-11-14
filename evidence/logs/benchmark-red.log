@@ -10,7 +10,7 @@ ____ test_exact_engine_queries_and_final_state_equal_independent_reference _____
 E       AssertionError: benchmark not implemented
 E         
 E       assert 1 == 0
-E        +  where 1 = CompletedProcess(args=['<CACHE_ROOT>/build/feed_benchmark', '--check', '/User...sktop/job-apps/projects/feed-replay/evidence/workload'], returncode=1, stdout='', stderr='benchmark not implemented\n').returncode
+E        +  where 1 = CompletedProcess(args=['<CACHE_ROOT>/build/feed_benchmark', '--check', '<PROJECT_ROOT>/evidence/workload'], returncode=1, stdout='', stderr='benchmark not implemented\n').returncode
 
 tests/test_benchmark.py:16: AssertionError
 =========================== short test summary info ============================

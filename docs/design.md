@@ -1,19 +1,19 @@
 # Feed Replay design
 
-Status: approved and implemented contract, 2026-10-23. Root and the fresh protocol reviewer approved this design; root independently verified the reference freeze before authorizing production implementation. Final independent execution review remains pending. The user already authorized routine portfolio builds; this is an internal engineering gate, not a new user-permission request.
+Status: approved and implemented contract, 2026-10-23. The design was reviewed and the reference freeze was verified before production implementation began.
 
 ## Intent, sources and approach
 
 Build a bounded C++20 displayed-order-book reconstructor for a declared Nasdaq ITCH 5.0 subset, transported over actual loopback UDP with MoldUDP64 message-gap detection and re-request recovery. This adds exchange protocol/domain correctness beyond eventstore-cpp and Strata. Synthetic evidence does not establish personal market-microstructure expertise.
 
-The selected approach is a small stateful protocol receiver with independently checked book semantics. File-only parsing would omit the recovery/currentness behavior that adds value; a full-feed decoder, matching engine or order-entry gateway would broaden the project without supporting this particular claim. The parent explicitly selected C++20, real UDP and this subset; the concrete admission/timeout choices below are engineering defaults for review.
+The selected approach is a small stateful protocol receiver with independently checked book semantics. File-only parsing would omit the recovery/currentness behavior that adds value; a full-feed decoder, matching engine or order-entry gateway would broaden the project without supporting this particular claim.
 
 Primary basis, read from the downloaded official PDFs/text and checked against rendered tables:
 
 - [Nasdaq TotalView-ITCH 5.0](https://www.nasdaqtrader.com/content/technicalsupport/specifications/dataproducts/NQTVITCHSpecification.pdf), data types and §§1.1, 1.2.1, 1.3–1.5. Cached PDF SHA-256 `45e0531d1b4b3beb886e9618b2ab824a5aa9bda3a99c0dff03509306e68aacc3`.
 - [MoldUDP64 v1.00](https://www.nasdaqtrader.com/content/technicalsupport/specifications/dataproducts/moldudp64.pdf), downstream/header/message-block/heartbeat/end/request sections. Cached PDF SHA-256 `96cdd02b8728a441cb970d1371a96e73c01e1edaffb2891d43667e2a0ad8add5`.
 
-Originals remain in `~/.cache/job-apps-runtime/protocol-specs/`; do not vendor the PDFs. This implementation is not full ITCH conformance: trading actions, halt/eligibility information, auctions, statistics, match corrections, snapshots, multicast deployment and other message types are outside scope. Quotes describe reconstructed displayed orders, not tradability, best execution or a matching engine. Unknown types invalidate processing; they are never silently skipped.
+Originals remain in a local cache; do not vendor the PDFs. This implementation is not full ITCH conformance: trading actions, halt/eligibility information, auctions, statistics, match corrections, snapshots, multicast deployment and other message types are outside scope. Quotes describe reconstructed displayed orders, not tradability, best execution or a matching engine. Unknown types invalidate processing; they are never silently skipped.
 
 ## Wire and field contract
 
@@ -101,7 +101,7 @@ Silence threshold is 1,500 ms. Only newly accepted messages or a valid heartbeat
 | Published JSON/timeline/summary total | 8 MiB; fail, never silently truncate |
 | Runtime cache / host free floor | <200 MiB allocated / >2 GiB |
 
-Use resource guard before/during long builds/runs. Everything new is under `projects/feed-replay` or `~/.cache/job-apps-runtime/feed-replay`; reuse existing Clang/Python. No dependency installation is planned. No cloud, external feed, trading account/order, credential use or external submission occurs.
+Use resource guard before/during long builds/runs. Everything new is under `feed-replay/` or its runtime cache; reuse existing Clang/Python. No dependency installation is planned. No cloud, external feed, trading account/order, credential use or external submission occurs.
 
 Private capture format `FRCP0001`: eight magic bytes, followed by records of flags `u8` (bit0=`MSG_TRUNC`, other bits zero), payload length `u32` big-endian, then payload bytes (0–65,507). Capture only pinned-peer datagrams, including malformed/truncated records; unrelated-peer evidence is in bounded audit counters. Reject truncated record/file, unknown flags, cap overflow or trailing partial record. Offline replay processes recorded arrival order and reconstructs prefix/gap/end semantics; it does not claim to reproduce wall-clock freshness/retry timing. EOF without terminal completion is explicitly incomplete with `quote_usable=false`, even if gap-free relative to observed high-water. Offline replay never emits `CurrentObserved` or `live_fresh=true`; use `ReplayPrefix`, `Incomplete` or `Complete` with explicit offline scope. Live socket drills are the timing/source-filtering evidence.
 
@@ -111,14 +111,10 @@ IDs, nanoseconds, sequences and aggregate quantities are decimal strings in JSON
 
 ## Verification and measurement
 
-Before production code, a fresh agent reads the official tables and independently authors literal hex fixtures plus a Python order-map/scan reference under the handoff contract in `reference-handoff.md`. The C++ author must not generate those expected bytes/results from the implementation. Golden artifacts/hash ledger are frozen before it exists; later corrections need explicit source-backed review.
+The C++ author must not generate those expected bytes/results from the implementation. Golden artifacts/hash ledger are frozen before it exists; later corrections need explicit source-backed review.
 
 Evidence must include every-event reference comparison, adversarial semantic/packet boundaries, sanitizer runs and bounded seeded decoder mutations. Actual sender/receiver/re-request processes must cover middle/final loss, heartbeat-only exposed loss, reordering/overlap/duplicates, partial recovery responses, repeated/conflicting ends, wrong session/peer, kernel truncation, interrupted recovery and exhausted deadlines. Require either exact reference state with honest flags or explicit incomplete/invalid failure; retained timelines show requests and accepted cursors.
 
 Benchmark uses one frozen decoded workload: eight instruments, 2,048 initially live orders, 50,000 following lifecycle events, deterministic seed 20261023, fixed best-quote queries (depth 0, preserving best quotes) after every 1/32/256 events. Generate/validate/freeze it before timings. Both engines get identical events, same query instrument/depth, same validation, exact query outputs and observation flags. The timed book phase excludes parsing/file I/O and includes updates plus the identical quote-query/storage work; preallocate identical result storage. Offline benchmark observations are valid-prefix/gap-free but `live_fresh=false`, never masquerading as live quotes. Compare full output sequences and final sorted books outside the timer, not only a checksum. Reuse bounded in-memory output buffers for each pair rather than retaining per-repetition query vectors. Every-event correctness comparisons use streams of at most 4,096 events/128 live orders, consuming one full snapshot at a time; never persist 50,000 full-book snapshots. The larger benchmark is reference-checked at every scheduled quote (every event for frequency 1) and at final full state. Benchmark budgets apply separately per experiment: at most 100,000 decoded updates, 64 MiB input, 64 MiB total query-result buffers; all timing samples are retained in a small report. These are separate from the live receive/message counters and remain under the same 200 MiB allocated disk-cache cap.
 
 One untimed warmup pair, eight measured pairs per query frequency, alternating engine order AB/BA. Preserve every sample, median and distribution; no result-based resampling or minimum-only speedup. Measure decoder-only and loopback fault/recovery separately and label their scopes. No speed claim before execution, and no production latency/trading-performance extrapolation. Scientific plots/tables may use the already isolated plotting runtime if needed; no new plotting dependency is required for acceptance.
-
-## Approval boundaries and open review calls
-
-Root and fresh reviewer must review: the whole-packet type/length preflight versus ordered field/semantic failure distinction; opaque non-book R metadata; S lifecycle scope; zero-quantity project restriction; terminal-bound contradictions; request/silence clocks; and the fairness/bounds of the independent reference and benchmark. These are explicit decisions, not implementation blanks. After approval, implementation can proceed autonomously using the plan. No qualification is marked closed from this design alone.

@@ -9,7 +9,7 @@ import pytest
 ROOT=Path(__file__).resolve().parents[1]
 sys.path.insert(0,str(ROOT/'review'))
 from reference import decode_itch,decode_mold,ReferenceError
-PROBE=Path(os.environ.get('FEED_PROBE',Path(os.environ.get('FEED_CACHE',Path.home()/'.cache/job-apps-runtime/feed-replay'))/'build/probe'))
+PROBE=Path(os.environ.get('FEED_PROBE',Path(os.environ.get('FEED_CACHE',Path.home()/'.cache/feed-replay'))/'build/probe'))
 VECTORS=json.loads((ROOT/'review/literal_vectors.json').read_text())['messages']
 ANCHORS=json.loads((ROOT/'review/mold_anchors.json').read_text())
 
